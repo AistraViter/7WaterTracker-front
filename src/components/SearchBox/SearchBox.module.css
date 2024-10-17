@@ -1,0 +1,29 @@
+.searchBox {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 40px;
+}
+
+.searchBox input {
+  box-sizing: border-box;
+  width: 320px;
+  height: 40px;
+  border: 2px solid rgb(131, 131, 131);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+.searchBox label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  color: black;
+}
+
+@media (min-width: 768px) {
+  .searchBox input {
+    width: 400px;
+  }
+}

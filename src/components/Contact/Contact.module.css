@@ -1,0 +1,48 @@
+.contactContainer {
+  box-sizing: border-box;
+  width: 320px;
+  padding: 12px;
+
+  border: 2px solid black;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.contactContainer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.contactContainer p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  color: black;
+  margin: 0;
+  text-indent: -32px; /* Негативний відступ для першого рядка */
+  padding-left: 32px; /* Компенсація для решти тексту */
+
+
+}
+
+.iconUser {
+  margin-right: 8px;
+}
+
+.iconPhone {
+  margin-right: 8px;
+  transform: rotate(100deg);
+}
+
+.contactContainer button {
+  width: auto;
+  height: 32px;
+  padding: 8px 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  border: 2px solid rgb(131, 131, 131);
+  border-radius: 4px;
+}

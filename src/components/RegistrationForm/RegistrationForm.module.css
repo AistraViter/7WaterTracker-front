@@ -1,0 +1,58 @@
+.registerForm {
+  box-sizing: border-box;
+  max-width: 320px;
+  padding: 12px;
+  border: 2px solid black;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.registerForm input {
+  box-sizing: border-box;
+  width: 280px;
+  height: 40px;
+  border: 2px solid rgb(131, 131, 131);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+.registerForm label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  color: black;
+  margin: 0;
+}
+
+.registerForm button {
+  width: 140px;
+  height: 40px;
+  padding: 8px 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  border: 2px solid rgb(131, 131, 131);
+  border-radius: 4px;
+}
+
+.registerForm span {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: rgb(255, 0, 166);
+}
+
+@media (min-width: 768px) {
+  .registerForm {
+    max-width: 400px;
+    width: 400px;
+    padding: 40px;
+  }
+  .registerForm input {
+    width: 360px;
+  }
+}

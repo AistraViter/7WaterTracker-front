@@ -1,0 +1,58 @@
+.contactForm {
+  box-sizing: border-box;
+  max-width: 320px;
+  padding: 20px;
+  border: 2px solid black;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.contactForm input {
+  box-sizing: border-box;
+  width: 280px;
+  height: 40px;
+  border: 2px solid rgb(131, 131, 131);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+.contactForm label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  color: black;
+  margin: 0;
+}
+
+.contactForm button {
+  width: 140px;
+  height: 40px;
+  padding: 8px 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  border: 2px solid rgb(131, 131, 131);
+  border-radius: 4px;
+}
+
+.contactForm span {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: rgb(255, 0, 166);
+}
+
+@media (min-width: 768px) {
+
+  .contactForm {
+    max-width: 400px;
+    width: 400px;
+  }
+  .contactForm input {
+    width: 360px;
+  }
+}

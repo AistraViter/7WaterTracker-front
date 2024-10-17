@@ -1,0 +1,41 @@
+.navigation,
+.authNav,
+.userMenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 12px;
+}
+.userMenu p,
+.userMenu a {
+  margin: 0;
+  padding: 0;
+}
+
+.link,
+.userMenu {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+}
+.link:hover,
+.userMenu a:hover {
+  text-decoration: underline;
+}
+.active,
+.userMenu a:active {
+  color: rgb(255, 0, 166);
+}
+
+@media (max-width: 767px) {
+  .navigation,
+  .authNav,
+  .userMenu {
+    flex-direction: column;
+    gap: 24px;
+    align-items: baseline;
+  }
+}

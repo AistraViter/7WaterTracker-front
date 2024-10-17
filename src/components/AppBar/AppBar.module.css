@@ -1,0 +1,19 @@
+.header {
+    background-color: #f8f8f8;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 16px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+  }
+
+ 
+  @media (max-width: 767px) {
+  .header {
+    flex-direction: column;
+    gap: 24px;
+  }
+}
