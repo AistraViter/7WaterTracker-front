@@ -5,3 +5,12 @@
 //можна в Header вставляти окремі компоненти, наприклад з Logo та UserLogo зробити компонент UserMenu
 
 //Header як appBar в попередніх дз
+
+export default function Header (){
+
+    return (
+        <header>
+          
+        </header>
+    )
+}
