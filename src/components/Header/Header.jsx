@@ -11,13 +11,14 @@ import { selectIsLoggedIn, selectUser } from '../../redux/auth/slice';
 import Logo from "../Logo/Logo";
 import UserAuth from "../UserAuth/UserAuth";
 import UserLogo from "../UserLogo/UserLogo";
+import css from "../Header/Header.module.css"
 
 export default function Header() {
     const isAuthenticated = useSelector(selectIsLoggedIn);
     const user = useSelector(selectUser);
 
     return (
-        <header className="header">
+        <header className={css.header}>
             <Logo />
             <nav>
                 {isAuthenticated ? (
