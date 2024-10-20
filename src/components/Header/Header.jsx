@@ -6,11 +6,21 @@
 
 //Header як appBar в попередніх дз
 
-export default function Header (){
+import Logo from "../Logo/Logo";
+import UserAuth from "../UserAuth/UserAuth";
+import UserLogo from "../UserLogo/UserLogo";
 
+export default function Header({ isAuthenticated, user, handleLogout }) {
     return (
-        <header>
-          
+        <header className="header">
+            <Logo />
+            <nav>
+                {isAuthenticated ? (
+                    <UserLogo user={user} handleLogout={handleLogout} />
+                ) : (
+                    <UserAuth />
+                )}
+            </nav>
         </header>
-    )
+    );
 }
