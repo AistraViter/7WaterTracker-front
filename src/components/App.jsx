@@ -6,9 +6,11 @@ import { SharedLayout } from "../components/SharedLayout/SharedLayout.jsx"
 
 import css from "./App.module.css"
 
-const HomePage = lazy(() => import("../pages/HomePage/HomePage.jsx"))
+
+const HomePage = lazy(()=> import ("../pages/HomePage/HomePage.jsx"))
 const SignUpPage = lazy(() => import("../pages/SignupPage/SignupPage.jsx"))
-{/* писати маршрути нижче */ }
+const SigninPage = lazy(() => import("../pages/SigninPage/SigninPage.jsx"));  
+{/* писати маршрути нижче */}
 
 const NotFoundPage = lazy(() => import("../pages/NotFoundPage/NotFoundPage.jsx"))
 
@@ -20,9 +22,11 @@ export default function App() {
     <div className={css.app}>
       {/* замінимо на Loader пізніше  */}
       <Suspense fallback={<div>Loading...</div>}>
-        <Routes path="/" element={<SharedLayout isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} user={user} />}>
+
+        <Routes path="/" element={<SharedLayout />}>
           <Route path="/home" element={<HomePage />}></Route>
           <Route path="/signup" element={<SignUpPage />}></Route>
+          <Route path="/signin" element={<SigninPage />}></Route>
           {/* писати маршрути нижче */}
 
           <Route path="*" element={<NotFoundPage />} />
