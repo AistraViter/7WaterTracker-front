@@ -7,7 +7,7 @@
 //Header як appBar в попередніх дз
 
 import { useSelector } from 'react-redux';
-import { selectIsLoggedIn, selectUser } from '../../redux/auth/slice';
+import { selectUser, selectIsLoggedIn } from '../../redux/auth/selectors';
 import Logo from "../Logo/Logo";
 import UserAuth from "../UserAuth/UserAuth";
 import UserLogo from "../UserLogo/UserLogo";

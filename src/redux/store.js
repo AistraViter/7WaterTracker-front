@@ -19,11 +19,22 @@ const authPersistConfig = {
     storage,
     whitelist: ['token'],
   }
+
+  const userPersistConfig = {
+    key: 'user',
+    storage,
+  }
+
+  const waterPersistConfig = {
+    key: 'water',
+    storage,
+  }
+  
 export const store = configureStore({
     reducer: {
         auth: persistReducer(authPersistConfig, authReducer),
-        user: persistReducer(userReducer),
-        water: persistReducer(waterReducer)
+        user: persistReducer(userPersistConfig, userReducer),
+        water: persistReducer(waterPersistConfig, waterReducer)
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

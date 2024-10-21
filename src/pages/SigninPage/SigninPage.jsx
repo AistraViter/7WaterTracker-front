@@ -38,7 +38,7 @@ export default function SignInPage() {
   // Функция для отправки данных формы
   const handleSignin = async (formData) => {
     try {
-      const response = await fetch("http://localhost:3000/api/auth/signin", {
+      const response = await fetch("http://localhost:3000/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
