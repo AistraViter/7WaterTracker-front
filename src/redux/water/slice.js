@@ -1,14 +1,20 @@
-
-
-
 import { createSlice } from "@reduxjs/toolkit";
-import { getWaterNotes, postWaterNote, updateWaterNote, deleteWaterNote } from "./operations.js";
+import { 
+  getWaterNotes, 
+  postWaterNote, 
+  updateWaterNote, 
+  deleteWaterNote,
+  getWaterToday,
+  getWaterMonth
+ } from "./operations.js";
 const waterSlice = createSlice({
     name: 'water',
     initialState: {
-        waterNotes: [],
+        notes: [ ], // для зберігання даних про воду
+        monthlyData: [ ], // для зберігання даних за місяць
+        percentage: 0, // для зберігання проценту спожитої води за сьогодні
         loading: false,
-        error: null
+        error: null,
     },
     extraReducers: (builder) => {
       builder
@@ -48,9 +54,9 @@ const waterSlice = createSlice({
       .addCase(updateWaterNote.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        const index = state.waterNotes.findIndex(note => note._id === action.payload._id);
+        const index = state.notes.findIndex(note => note._id === action.payload._id);
         if (index !== -1) {
-          state.waterNotes[index] = action.payload;
+          state.notes[index] = action.payload;
         }
       })
       .addCase(updateWaterNote.rejected, (state, action) => {
@@ -65,9 +71,38 @@ const waterSlice = createSlice({
       .addCase(deleteWaterNote.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.waterNotes = state.waterNotes.filter(note => note._id !== action.payload);
+        state.notes = state.notes.filter(note => note._id !== action.payload);
       })
       .addCase(deleteWaterNote.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Обробка запиту на отримання записів про воду за сьогодні
+      .addCase(getWaterToday.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getWaterToday.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.notes = action.payload.notes; // Оновлюємо записи про воду
+        state.percentage = action.payload.percentage; // Виводимо відсотки
+      })
+      .addCase(getWaterToday.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Обробка запиту на отримання записів про воду за місяць
+      .addCase(getWaterMonth.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getWaterMonth.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.monthlyData = action.payload;
+      })
+      .addCase(getWaterMonth.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })

@@ -51,3 +51,30 @@ export const getWaterNotes = createAsyncThunk(
       }
     }
   );
+
+  export const getWaterToday = createAsyncThunk(
+    'water/getWaterToday',
+    async (_, thunkAPI) => {
+      try {
+        const response = await axios.get(`/water/today`);
+        return response.data.data; // приходить в об'єкт data: {}
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.response?.data?.message || 'Failed to get a water note for today');
+      }
+    }
+  );
+
+  export const getWaterMonth = createAsyncThunk(
+    'water/getWaterMonth',
+    async ({ month, year }, thunkAPI) => {
+      try {
+        const response = await axios.get(`/water/month`, {
+          params: { month, year }
+        });
+        return response.data.data; // приходить в об'єкт data: {}
+  
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.response?.data?.message || 'Failed to get a water note for month');
+      }
+    }
+  );
