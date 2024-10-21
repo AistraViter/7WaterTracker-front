@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f0f2f5;
 font-family: "Roboto", sans-serif;
 font-size: 18px;
 }
@@ -19,6 +18,16 @@ font-size: 18px;
     color: #EF5050;
     display: flex;
     font-size: 14px;
+    margin-top: 4px;
+}
+
+.inputError{
+    border: 1px solid #EF5050 !important;
+    color: #EF5050 !important;
+}
+
+.inputError::placeholder{
+    color: #EF5050 !important;
 }
 
 .labelfirst{
@@ -34,6 +43,7 @@ font-size: 18px;
     border: 1px solid rgba(215, 227, 255, 1);
     color: #9EBBFF;
     margin-top: 8px;
+  padding-right: 40px; 
 }
 
 .input::placeholder{
@@ -53,6 +63,7 @@ font-size: 18px;
     font-family: inherit;
     background-color: #407BFF;
     color: #FFFFFF;
+    box-shadow: 0 4px 8px rgba(64, 123, 225, 0.34);
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -61,6 +72,21 @@ font-size: 18px;
 }
 
 .addBtn:hover {
-    background-color: rgb(118, 118, 207);
+    box-shadow: 0 4px 14px rgba(64, 123, 225, 0.54);
     color: white;
 }
+
+.passwordWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordToggleIcon {
+  position: absolute;
+  right: 10px; 
+  top: 60%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+

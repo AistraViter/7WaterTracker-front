@@ -4,6 +4,12 @@
   height: 100vh;
   margin: 0 auto;
   border: 2px solid blue; /*для тестування*/
+  background-image: url("/src/pages/SignupPage/image/circlesMobile.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-position-y: 90px;
+  background-size: auto;
 }
 
 @media (min-width: 768px) {
