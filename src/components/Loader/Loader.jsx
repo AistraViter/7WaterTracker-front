@@ -1,7 +1,11 @@
 import { Hearts } from "react-loader-spinner";
+<<<<<<< Updated upstream
 
 import css from './Loader.module.css';
 
+=======
+import css from './Loader.module.css';
+>>>>>>> Stashed changes
 export default function Loader({ loader }) {
     return (<Hearts
         visible={loader}
