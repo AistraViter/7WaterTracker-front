@@ -16,6 +16,9 @@
   .app {
     width: 768px;
     padding: 0 32px;
+  background-image: url("/src/pages/SignupPage/image/circlesTablet.png");
+  background-position-y: 0;
+    
   }
   
 }
@@ -24,6 +27,7 @@
   .app {
     width: 1440px;
     padding: 0 112px;
+    
   }
   
 }

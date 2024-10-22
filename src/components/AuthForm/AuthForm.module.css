@@ -30,6 +30,10 @@ font-size: 18px;
     color: #EF5050 !important;
 }
 
+.inputError + .passwordToggleIcon svg path {
+  stroke:  #EF5050; 
+}
+
 .labelfirst{
     margin-top: 16px;
 }
