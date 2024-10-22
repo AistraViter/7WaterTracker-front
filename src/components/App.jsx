@@ -6,7 +6,7 @@ import { SharedLayout } from "../components/SharedLayout/SharedLayout.jsx"
 
 import css from "./App.module.css"
 
-import Loader from '../Loader/Loader.jsx';
+//import Loader from '../Loader/Loader.jsx';
 
 const HomePage = lazy(()=> import ("../pages/HomePage/HomePage.jsx"))
 const SignUpPage = lazy(()=> import ("../pages/SignupPage/SignupPage.jsx"))
