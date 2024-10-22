@@ -18,7 +18,6 @@ export default function App() {
 
   return (
     <div className={css.app}>
-       <Loader loader={loader} />
         {/* замінимо на Loader пізніше  */}
         <Suspense fallback={<div>Loading...</div>}> 
         <Routes path="/" element={<SharedLayout />}>
