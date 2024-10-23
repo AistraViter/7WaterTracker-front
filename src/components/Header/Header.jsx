@@ -6,17 +6,20 @@
 
 //Header як appBar в попередніх дз
 
-import { useSelector } from "react-redux";
-import { selectUser, selectIsLoggedIn } from "../../redux/auth/selectors";
 import Logo from "../Logo/Logo";
 import UserAuth from "../UserAuth/UserAuth";
 import UserLogo from "../UserLogo/UserLogo";
 import css from "../Header/Header.module.css";
 
 export default function Header() {
-  const isAuthenticated = useSelector(selectIsLoggedIn);
-  const user = useSelector(selectUser);
-
+  const isAuthenticated = true;
+  const user = {
+    name: "Ivan",
+    avatar:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4YreOWfDX3kK-QLAbAL4ufCPc84ol2MA8Xg&s",
+    email: "vasya@228gmail.com",
+  };
+  console.log(isAuthenticated, "isAuthenticated");
   return (
     <header className={css.header}>
       <Logo />
