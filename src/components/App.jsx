@@ -3,6 +3,7 @@ import { lazy, Suspense } from 'react';
 import { SharedLayout } from "../components/SharedLayout/SharedLayout.jsx"
 import { PrivateRoute } from "../components/PrivateRoute/PrivateRoute.jsx"
 import { RestrictedRoute} from "../components/RestrictedRoute/RestrictedRoute.jsx"
+import Loader from "../components/Loader/Loader.jsx";
 
 import css from "./App.module.css"
 
@@ -19,7 +20,7 @@ export default function App() {
   return (
     <div className={css.app}>
       {/* замінимо на Loader пізніше  */}
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader loader={true} />}>
         <Routes>
           <Route path="/" element={<SharedLayout />}>
           <Route path="/welcome" element={<WelcomePage />}></Route>
