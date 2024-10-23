@@ -15,12 +15,12 @@ const UserLogoModal = () => {
   };
 
   const handleLogoutClick = () => {
-    setIsLogoutModalOpen(true); // Открываем модальное окно для подтверждения логаута
+    setIsLogoutModalOpen(true);
   };
 
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
-      setIsLogoutModalOpen(false); // Закрываем модальное окно, если клик вне его (опционально)
+      setIsLogoutModalOpen(false);
     }
   };
 
