@@ -33,3 +33,7 @@
 <path fill="#fff" d="M9.847 17.112c-0.261 0.108-0.374 0.507-0.251 0.892s0.434 0.61 0.695 0.503 0.374-0.507 0.252-0.892c-0.123-0.385-0.434-0.61-0.695-0.503z"></path>
 <path fill="#8baeff" d="M8.968 19.634c-0.124 0.090-0.139 0.311-0.034 0.492s0.291 0.255 0.415 0.165 0.139-0.311 0.034-0.492c-0.105-0.181-0.291-0.255-0.415-0.165z"></path>
 </svg>
+<!-- іконка закриття модальних вікон  -->
+<symbol id="icon-outline" viewBox="0 0 32 32">
+<path fill="none" stroke="#407bff" style="stroke: var(--color1, #407bff)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M8 24l16-16M8 8l16 16"></path>
+</symbol>
