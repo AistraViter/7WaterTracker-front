@@ -1,0 +1,184 @@
+/* Styles for mobile (320px) */
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 40px;
+    box-sizing: border-box;
+}
+
+.firstBlockh {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.h1 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.14286;
+    color: #2f2f2f;
+    margin: 0;
+}
+
+.h2 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.25;
+    color: #2f2f2f;
+    width: 80%;
+    margin: 0;
+}
+
+/* Second Block */
+
+.secondBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.h3 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.11111;
+    color: #2f2f2f;
+}
+
+.benefits {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    gap: 20px;
+}
+
+.benefitItem {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    gap: 8px;
+    /* width: 216px; */
+    height: 32px;
+}
+
+.benefitItem svg {
+    width: 32px;
+    height: 32px;
+}
+
+.benefitItem p {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.25;
+    color: #2f2f2f;
+}
+
+.link {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 8px 30px;
+    width: 280px;
+    height: 36px;
+    box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+    background-color: #407bff;
+}
+
+/* Media Queries for Tablet (768px) */
+@media (min-width: 768px) {
+    .section {
+        width: 100%;
+        margin-bottom: 60px;
+    }
+
+    .benefits {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .h1 {
+        font-size: 36px;
+        line-height: 1.16667;
+    }
+
+    .h2 {
+        font-size: 26px;
+        line-height: 1.23077;
+    }
+
+    .h3 {
+        font-size: 18px;
+        line-height: 1.11111;
+    }
+
+    .benefitItem p {
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .benefitItem svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .linkButton {
+        font-size: 18px;
+        line-height: 1.33333;
+
+        border-radius: 10px;
+        padding: 10px 30px;
+        width: 336px;
+        height: 44px;
+    }
+}
+
+/* Media Queries for Desktop (1440px) */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1440px;
+    }
+
+    .benefits {
+        justify-content: center;
+        gap: 30px;
+        flex-direction: column;
+    }
+
+    .h1 {
+        font-size: 36px;
+        line-height: 1.16667;
+    }
+
+    .h2 {
+        font-size: 26px;
+        line-height: 1.23077;
+    }
+
+    .h3 {
+        font-size: 18px;
+        line-height: 1.11111;
+    }
+
+    .benefitItem {
+        font-size: 16px;
+        line-height: 1.25;
+    }
+    .linkButton {
+        font-size: 18px;
+        line-height: 1.33333;
+
+        border-radius: 10px;
+        padding: 10px 30px;
+        width: 384px;
+        height: 44px;
+    }
+}
