@@ -1,8 +1,10 @@
-.logo {
-    width: 102px;
-    height: 48px;
-    top: 580px;
-    left: 40px;
-    gap: 0px;
-    opacity: 0px;
+.logo {}
+
+.text {
+    display: flex;
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #407BFF;
 }
