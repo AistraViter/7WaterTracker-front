@@ -20,7 +20,7 @@ export default function App() {
   return (
     <div className={css.app}>
       {/* замінимо на Loader пізніше  */}
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<Loader loader={true} />}>
         <Routes>
           <Route path="/" element={<SharedLayout />}>
           <Route path="/welcome" element={<WelcomePage />}></Route>
