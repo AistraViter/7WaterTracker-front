@@ -1,0 +1,97 @@
+/* @media (min-width: 768px) {
+}
+
+@media (min-width: 1440px) {
+} */
+
+.top {
+  display: flex;
+  gap: 66px;
+}
+.title {
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 30px;
+  text-align: left;
+  color: #2f2f2f;
+}
+
+.month {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: center;
+  color: #407bff;
+}
+
+.monthheader {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.navbutton {
+  width: 14px;
+  height: 14px;
+  font-size: 9px;
+}
+
+.monthstatstable {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 26px;
+  padding: 0px;
+  margin: 0px;
+  justify-content: space-between;
+}
+
+.daynumber {
+  border-radius: 20px;
+  background-color: #ffffff;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.daynumber:hover {
+  box-shadow: 0px 2px 4px 0px #407bff4d;
+}
+
+.number {
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: center;
+  color: #2f2f2f;
+}
+
+.progresspercentage {
+  font-family: Roboto;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 16px;
+  text-align: center;
+  color: #9ebbff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notAchieved .daynumber {
+  border: 1px solid #ff9d43;
+}
+.daycell {
+  width: 10%;
+  flex: 0 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
