@@ -1,0 +1,103 @@
+.signupContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  background-image: url("/src/pages/SignupPage/image/circlesMobile.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-position-y: -6%;
+  background-size: auto;
+  margin: 0 -20px;
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  width: 280px;
+  max-height: 396px;
+  position: relative;
+  z-index: 2;
+}
+
+.title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #407bff;
+}
+
+.navLink:hover {
+  color: #ff9d43;
+}
+
+.bottle {
+  max-width: 280px;
+  position: absolute;
+  bottom: -48%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .signupContainer {
+    height: auto;
+    align-items: start;
+    padding: 40px 32px;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-image: url("/src/pages/SignupPage/image/circlesTablet.png");
+    background-position-y: -90%;
+    margin: 0 -32px;
+  }
+
+  .bottle {
+    max-width: 660px;
+    position: absolute;
+    bottom: -27%;
+    left: 57%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+
+  .formWrapper {
+    width: 336px;
+    max-height: 404px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .signupContainer {
+    height: auto;
+    align-items: start;
+    padding: 140px 198px 196px 0;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-image: url("/src/pages/SignupPage/image/circlesDesktop.png");
+    background-position-y: 0%;
+    margin: 0 -112px;
+  }
+
+  .bottle {
+    max-width: 916px;
+    position: absolute;
+    bottom: 0%;
+    left: 32%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+
+  .formWrapper {
+    width: 384px;
+    max-height: 404px;
+  }
+}
