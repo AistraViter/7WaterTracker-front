@@ -44,7 +44,7 @@ export default function SignInPage() {
   // Функция для отправки данных формы
   const handleSignin = async (formData) => {
     try {
-      const response = await fetch("https://7-water-tracker-front.vercel.app/auth/login", {
+      const response = await fetch("https://sevenwatertracker-back-1.onrender.com/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
