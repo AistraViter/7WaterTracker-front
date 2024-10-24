@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {TodayListModal} from "../TodayListModal/TodayListModal.jsx";
+import TodayListModal from "../TodayListModal/TodayListModal.jsx";
 import css from "./WaterRatioPanel.module.css";
 
 const WaterRatioPanel = () => {
