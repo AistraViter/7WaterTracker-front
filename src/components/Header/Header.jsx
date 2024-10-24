@@ -20,7 +20,9 @@ export default function Header() {
   return (
     <header className={css.header}>
       <Logo />
-      <nav>{isAuthenticated ? <UserLogo user={user} /> : <UserAuth />}</nav>
+      <nav className={css.nav}>
+        {isAuthenticated ? <UserLogo user={user} /> : <UserAuth />}
+      </nav>
     </header>
   );
 }
