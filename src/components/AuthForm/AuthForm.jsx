@@ -6,6 +6,8 @@ import { signup, signin } from "../../redux/auth/operations.js";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import css from "./AuthForm.module.css";
 import * as Yup from "yup";
+import { notification } from "antd";
+
 
 export default function AuthForm({ isSignUp, onSuccess }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -42,27 +44,60 @@ export default function AuthForm({ isSignUp, onSuccess }) {
 
     if (isSignUp) {
       if (password !== repeatPassword) {
-        console.error("Passwords do not match");
+        notification.error({
+          message: "Error",
+          description: "Passwords do not match",
+        });
         return;
       }
       const requestBody = { email, password };
       dispatch(signup(requestBody))
         .then((response) => {
-          console.log("Registration successful:", response);
+          if (response.error) {
+            if (response.payload === "Request failed with status code 409") {
+              notification.error({
+                message: "Error",
+                description: "User with this email already exists.",
+              });
+              return;
+            }
+            notification.error({
+              message: "Error",
+              description: "Registration failed",
+            });
+            return;
+          }
+
+          notification.success({
+            message: "Success",
+            description: "Registration successful",
+          });
           if (onSuccess) onSuccess();
         })
         .catch((error) => {
-          console.error("Registration failed:", error);
+          console.log(error);
+          notification.error({
+            message: "Error",
+            description: "Registration failed",
+          });
         });
     } else {
-      const requestBody = { email, password }; 
+      const requestBody = { email, password };
       dispatch(signin(requestBody))
         .then((response) => {
-          console.log("Login successful:", response);
+          console.log(response);
+          notification.success({
+            message: "Success",
+            description: "Login successful",
+          });
           if (onSuccess) onSuccess();
         })
         .catch((error) => {
-          console.error("Login failed:", error);
+          console.log(error);
+          notification.error({
+            message: "Error",
+            description: "Login failed",
+          });
         });
     }
   };
