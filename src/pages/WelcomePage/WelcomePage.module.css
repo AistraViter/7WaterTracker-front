@@ -1,0 +1,41 @@
+.mainContainer {
+    box-sizing: border-box;
+    align-items: center;
+    margin-top: 24px;
+}
+
+body {
+    background-image: url("/public/images/BkgMobile.png");
+    background-size: contain;
+    background-position: bottom center; /* Sticks the image to the bottom and centers it */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Media Queries for Tablet (768px) */
+@media (min-width: 768px) {
+    .mainContainer {
+        margin-top: 40px;
+    }
+
+    body {
+        background-image: url("/public/images/BkgTablet.png");
+        background-size: auto; /* Keeps the image at its original size */
+        background-position: bottom center; /* Sticks the image to the bottom and centers it */
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+}
+
+/* Media Queries for Desktop (1440px) */
+@media (min-width: 1440px) {
+    .mainContainer {
+        display: flex;
+        flex-direction: row;
+        /* gap: 80px; */
+        margin-top: 80px;
+    }
+    body {
+        background-image: url("/public/images/BkgWeb.png");
+    }
+}

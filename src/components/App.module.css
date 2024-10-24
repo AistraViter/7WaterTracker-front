@@ -9,6 +9,7 @@
   .app {
     width: 768px;
     padding: 0 32px;
+    
   }
 }
 
@@ -16,6 +17,7 @@
   .app {
     width: 1440px;
     padding: 0 112px;
+    
   }
 }
 

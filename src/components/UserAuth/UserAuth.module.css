@@ -1,0 +1,9 @@
+.singin {
+    display: flex;
+
+}
+
+.userAuth {
+    display: flex;
+    align-items: center;
+}
