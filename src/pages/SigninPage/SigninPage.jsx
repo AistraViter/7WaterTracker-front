@@ -1,8 +1,14 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import DocumentTitle from "../../components/DocumentTitle";
+import bottleMobile from "./image/bottleMobile.png";
+import bottleTablet from "./image/bottleTablet.png";
+import bottleDesktop from "./image/bottleDesktop.png";
+import bottleMobileRetina from "./image/bottleMobile2x.png";
+import bottleTabletRetina from "./image/bottleTablet2x.png";
+import bottleDesktopRetina from "./image/bottleDesktop2x.png";
+
 import css from "./SigninPage.module.css"; // Импорт стилей для страницы
-import icon111 from "./images/icon111.png";
 
 
 export default function SignInPage() {
@@ -81,6 +87,10 @@ export default function SignInPage() {
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
+
+
+
+    const imageSrc = useState(bottleMobile);
 
   return (
     <div className={css.signinContainer}>
@@ -182,8 +192,25 @@ export default function SignInPage() {
             Sign Up
           </Link>
         </div>
-        <img src={icon111} alt="Custom Icon" className="customIcon" />
       </div>
+      <picture>
+        <source
+          media="(min-width: 1440px) and (-webkit-min-device-pixel-ratio: 1.5), (min-width: 1440px) and (min-resolution: 1.5dppx)"
+          srcSet={bottleDesktopRetina}
+        />
+        <source media="(min-width: 1440px)" srcSet={bottleDesktop} />
+        <source
+          media="(min-width: 768px) and (-webkit-min-device-pixel-ratio: 1.5), (min-width: 768px) and (min-resolution: 1.5dppx)"
+          srcSet={bottleTabletRetina}
+        />
+        <source media="(min-width: 768px)" srcSet={bottleTablet} />
+        <source
+          media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx)"
+          srcSet={bottleMobileRetina}
+        />
+        <source srcSet={bottleMobile} />
+        <img src={imageSrc} alt="Bottle Icon" className={css.bottle} />
+      </picture>
     </div>
   );
 }
