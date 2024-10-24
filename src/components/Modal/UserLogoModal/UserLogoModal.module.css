@@ -7,9 +7,10 @@
   border: none;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.2);
-  position: fixed;
-  top: 48px;
-  right: 22px;
+  position: absolute;
+  bottom: -4px;
+  position: absolute;
+  transform: translateY(100%);
   z-index: 2;
 }
 
@@ -45,14 +46,11 @@
 
 @media screen and (min-width: 768px) {
   .dropdownMenu {
-    top: 56px;
-    right: 34px;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .dropdownMenu {
-    top: 56px;
-    right: 114px;
+    bottom: -2px;
   }
 }
