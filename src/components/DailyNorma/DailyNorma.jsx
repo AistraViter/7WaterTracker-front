@@ -1,5 +1,6 @@
 import { useState } from "react";
 import css from "./DailyNorma.module.css";
+import DailyNormaModal from "../DailyNormaModal/DailyNormaModal.jsx";
 
 const DailyNorma = () => {
   const [dailyNorm, setDailyNorm] = useState(1.5); // Default value: 1.5 liters
@@ -9,6 +10,14 @@ const DailyNorma = () => {
     setIsModalOpen(true); // Open the modal when the "Edit" button is clicked
   };
 
+  const handleSave = (newNorm) => {
+    setDailyNorm(newNorm);
+    setIsModalOpen(false); // Close the modal after saving the new value
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false); // Close the modal without saving
+  };
   return (
     <div className={css.dailynorma}>
       <h3 className={css.title}>My daily norma</h3>

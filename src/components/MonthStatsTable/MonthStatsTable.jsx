@@ -13,7 +13,6 @@ const MonthStatsTable = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
 
-  // Масив з назвами місяців
   const monthNames = [
     "January",
     "February",
@@ -29,7 +28,6 @@ const MonthStatsTable = () => {
     "December",
   ];
 
-  // Отримання днів у місяці
   const daysInMonth = getDaysInMonth(
     currentDate.getMonth(),
     currentDate.getFullYear()
@@ -68,13 +66,17 @@ const MonthStatsTable = () => {
         <h2 className={css.title}>Month</h2>
         <div className={css.monthheader}>
           <button className={css.navbutton} onClick={handlePrevMonth}>
-            P
+            <svg width="24" height="24" className={css.leftarrow}>
+              <use href="/public/sprite.svg#icon-leftarrow" />
+            </svg>
           </button>
           <h2 className={css.month}>
             {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
           </h2>
           <button className={css.navbutton} onClick={handleNextMonth}>
-            N
+            <svg width="24" height="24" className={css.rightarrow}>
+              <use href="/public/sprite.svg#icon-rightarrow" />
+            </svg>
           </button>
         </div>
       </div>
