@@ -30,7 +30,7 @@
   display: flex;
   gap: 38px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .glassicon {
@@ -38,6 +38,7 @@
   height: 26px;
   margin: 0px;
   text-align: center;
+  stroke: #407bff;
 }
 
 .con1 {
@@ -68,6 +69,7 @@
   font-weight: 500;
   line-height: 20px;
   text-align: left;
+  align-items: center;
 }
 
 .amount {
@@ -91,15 +93,15 @@
 .edit {
   width: 16px;
   height: 16px;
-  font-size: 12px;
-  text-align: center;
+  border: none;
+  background-color: transparent;
 }
 
 .delete {
   width: 16px;
   height: 16px;
-  font-size: 12px;
-  text-align: center;
+  border: none;
+  background-color: transparent;
 }
 
 /* Кастомізація скролу */
@@ -116,4 +118,22 @@
   background-color: #d7e3ff; /* фон для скрол-треку */
   width: 2px;
   border-radius: 8px;
+}
+
+.editicon {
+  margin: 0px;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  transform: translate(-50%, -15%);
+  align-self: center;
+}
+
+.deleteicon {
+  margin: 0px;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  transform: translate(-50%, -15%);
+  align-self: center;
 }

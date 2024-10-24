@@ -26,7 +26,7 @@ const WaterRatioPanel = () => {
           lineHeight: "20px",
           textAlign: "center",
           color: "#407bff",
-        } // Change to your desired milestone style
+        }
       : {
           fontFamily: "Roboto",
           fontSize: "12px",
@@ -34,37 +34,36 @@ const WaterRatioPanel = () => {
           lineHeight: "16px",
           textAlign: "center",
           color: "#407bff",
-        }; // Change to your desired non-milestone style
+        };
   };
 
   return (
     <div className={css.waterratiopanel}>
       <h3 className={css.title}>Today</h3>
       <div className={css.data}>
-        {/* Контейнер прогрес-бару */}
         <div className={css.progressBarContainer}>
-          {/* Сам прогрес */}
           <div className={css.progressBar} style={{ width: `${ratio}%` }}></div>
 
-          {/* Вертикальні лінії (milestones) */}
           <div className={css.milestones}>
             <div className={css.milestone} style={getMilestoneStyle(0)}>
-              | 0%
+              <span className={css.line}>|</span> 0%
             </div>
             <div className={css.milestone} style={getMilestoneStyle(50)}>
-              | 50%
+              <span className={css.line}>|</span> 50%
             </div>
             <div className={css.milestone} style={getMilestoneStyle(100)}>
-              | 100%
+              <span className={css.line}>|</span> 100%
             </div>
           </div>
 
-          {/* Кружок */}
           <div className={css.circle} style={{ left: `${ratio}%` }}></div>
         </div>
       </div>
 
       <button onClick={handleAddWater} className={css.btn}>
+        <svg width="24" height="24" className={css.plusicon}>
+          <use href="/public/sprite.svg#icon-add" />
+        </svg>
         Add Water
       </button>
       {isModalOpen && (

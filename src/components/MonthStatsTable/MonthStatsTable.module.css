@@ -35,7 +35,8 @@
 .navbutton {
   width: 14px;
   height: 14px;
-  font-size: 9px;
+  border: none;
+  background-color: transparent;
 }
 
 .monthstatstable {
@@ -94,4 +95,17 @@
   flex-direction: column;
   align-content: center;
   align-items: center;
+}
+
+.leftarrow {
+  width: 14px;
+  height: 14px;
+  position: relative;
+  transform: translate(-51%, -23%);
+}
+.rightarrow {
+  width: 14px;
+  height: 14px;
+  position: relative;
+  transform: translate(-51%, -23%);
 }

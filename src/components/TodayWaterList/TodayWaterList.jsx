@@ -32,21 +32,38 @@ const TodayWaterList = () => {
         {waterEntries.map((entry, index) => (
           <li key={index} className={css.listitem}>
             <div className={css.con1}>
-              <p className={css.glassicon}>T</p>
+              <p className={css.glassicon}>
+                <svg width="24" height="24" className={css.glassicon}>
+                  <use href="/public/icons.svg#icon-glass" />
+                </svg>
+              </p>
               <div className={css.numbers}>
                 <span className={css.amount}>{entry.amount} ml</span>{" "}
                 <span className={css.time}>{entry.time}</span>
               </div>
             </div>
             <div className={css.btns}>
-              <button className={css.edit}>E</button>
-              <button className={css.delete}>D</button>
+              <button className={css.edit}>
+                <svg width="16" height="16" className={css.editicon}>
+                  <use href="/public/sprite.svg#icon-edit" />
+                </svg>
+              </button>
+              <button className={css.delete}>
+                <svg width="16" height="16" className={css.deleteicon}>
+                  <use href="/public/sprite.svg#icon-delete" />
+                </svg>
+              </button>
             </div>
           </li>
         ))}
       </ul>
       <button onClick={handleAddWater} className={css.add}>
-        <span className={css.addicon}>+</span>
+        <svg width="16" height="16">
+          <use
+            href="/public/sprite.svg#icon-smallplus"
+            className={css.addicon}
+          />
+        </svg>
         Add Water
       </button>
       {isModalOpen && <TodayListModal closeModal={closeModal} />}{" "}
