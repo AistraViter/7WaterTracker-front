@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 import css from "../Logo/Logo.module.css";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
 export default function Logo() {
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
   return (
-    <div className={css.logo}>
-      <Link to="/">
+    <div>
+      <Link to={isLoggedIn ? "/home" : "/welcome"} className={css.logo}>
         <svg
           width="40"
           height="48"
@@ -158,7 +163,7 @@ export default function Logo() {
             </clipPath>
           </defs>
         </svg>
-        <h1 className={css.text}>TRACKER OF WATER</h1>
+        <p className={css.text}>Tracker of water</p>
       </Link>
     </div>
   );

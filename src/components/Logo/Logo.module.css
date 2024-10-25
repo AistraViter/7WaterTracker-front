@@ -1,10 +1,16 @@
-.logo {}
+.logo {
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+}
 
 .text {
     display: flex;
-    font-family: var(--font-family);
+    font-family: "Roboto", sans-serif;
     font-weight: 700;
     font-size: 12px;
     text-transform: uppercase;
     color: #407BFF;
+    width: 62px;
+    padding: 10px 0 10px 4px;
 }
