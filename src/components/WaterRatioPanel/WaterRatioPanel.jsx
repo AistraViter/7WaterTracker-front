@@ -41,13 +41,12 @@ const WaterRatioPanel = () => {
     <div className={css.waterratiopanel}>
       <h3 className={css.title}>Today</h3>
 
-
       <div className={css.container}>
         <div className={css.data}>
           <div className={css.progressBarContainer}>
             <div
               className={css.progressBar}
-              style={{ width: `${ratio}%` }}
+              style={{ width: `${waterPercantage}%` }}
             ></div>
 
             <div className={css.milestones}>
@@ -62,24 +61,22 @@ const WaterRatioPanel = () => {
               </div>
             </div>
 
+            <div
+              className={css.circle}
+              style={{ left: `${waterPercantage}%` }}
+            ></div>
+          </div>
+        </div> {/* Закриваючий тег для блоку data */}
 
-          <div
-            className={css.circle}
-            style={{ left: `${waterPercantage}%` }}
-          ></div>
+        <button onClick={handleAddWater} className={css.btn}>
+          <svg width="24" height="24" className={css.plusicon}>
+            <use href="/sprite.svg#icon-add" />
+          </svg>
+          Add Water
+        </button>
 
-        </div>
-
-
-      <button onClick={handleAddWater} className={css.btn}>
-        <svg width="24" height="24" className={css.plusicon}>
-          <use href="/sprite.svg#icon-add" />
-        </svg>
-        Add Water
-      </button>
-
-      <TodayWaterList isOpen={isModalOpen} onCloseRequest={closeModal} />
-
+        <TodayWaterList isOpen={isModalOpen} onCloseRequest={closeModal} />
+      </div> {/* Закриваючий тег для блоку container */}
     </div>
   );
 };
