@@ -25,7 +25,6 @@
   }
 
   .homepage {
-    width: 768px;
     margin: 0px 0px;
   }
 
@@ -40,8 +39,5 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 23px 28px;
-  }
-  .homepage {
-    width: 1440px;
   }
 }

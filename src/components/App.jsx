@@ -1,8 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { refresh } from "../redux/auth/operations.js";
-import { selectIsRefreshing } from "../redux/auth/selectors.js";
+// import { useDispatch, useSelector } from "react-redux";
+// import { useEffect } from "react";
+// import { refresh } from "../redux/auth/operations.js";
+// import { selectIsRefreshing } from "../redux/auth/selectors.js";
 import { lazy, Suspense } from "react";
 import { SharedLayout } from "../components/SharedLayout/SharedLayout.jsx";
 import { PrivateRoute } from "../components/PrivateRoute/PrivateRoute.jsx";
@@ -22,16 +22,14 @@ const NotFoundPage = lazy(() =>import("../pages/NotFoundPage/NotFoundPage.jsx"))
 
 export default function App() {
 
-  const dispatch = useDispatch();
-  const isRefreshing = useSelector(selectIsRefreshing);
+  // const dispatch = useDispatch();
+  // const isRefreshing = useSelector(selectIsRefreshing);
 
-  useEffect(() => {
-    dispatch(refresh());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(refresh());
+  // }, [dispatch]);
 
-  return isRefreshing ? (
-    <Loader />
-  ) : (
+  return (
     <div className={css.app}>
       <Suspense fallback={<Loader loader={true} />}>
         <Routes>
