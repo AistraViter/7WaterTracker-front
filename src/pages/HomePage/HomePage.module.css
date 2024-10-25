@@ -4,11 +4,20 @@
 @media (min-width: 1440px) {
 } */
 
+body {
+  background-image: url("/public/img/mobile/BackgroundMob.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 23px 28px;
+}
+
 .homepage {
   width: 320px;
   padding: 0 20px;
   height: 100vh;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .stats {
@@ -22,6 +31,12 @@
 }
 
 @media (min-width: 768px) {
+  body {
+    background-image: url("/public/img/tablet/BackgroundTab.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 23px 28px;
+  }
 }
 
 @media (min-width: 1440px) {
