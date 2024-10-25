@@ -2,6 +2,8 @@ import { useState } from "react";
 import TodayListModal from "../TodayListModal/TodayListModal.jsx";
 import css from "./TodayWaterList.module.css";
 
+import EditWaterAmountModal from '../Modal/EditWaterAmountModal/EditWaterAmountModal.jsx'
+
 const TodayWaterList = () => {
   const [waterEntries, setWaterEntries] = useState([
     { amount: 250, time: "7:00 AM" },
@@ -15,7 +17,9 @@ const TodayWaterList = () => {
     { amount: 200, time: "2:00 PM" },
   ]);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // for EditWaterAmountModal
+
 
   const handleAddWater = () => {
     setIsModalOpen(true);
@@ -30,6 +34,9 @@ const TodayWaterList = () => {
       prevEntries.filter((_, index) => index !== indexToDelete)
     );
   };
+
+  const openEditWaterModal = () => setIsEditModalOpen(true);
+  const closeEditWaterModal = () => setIsEditModalOpen(false);
 
   return (
     <div className={css.todaywaterlist}>
@@ -49,7 +56,7 @@ const TodayWaterList = () => {
               </div>
             </div>
             <div className={css.btns}>
-              <button className={css.edit}>
+              <button className={css.edit} onClick={openEditWaterModal}>
                 <svg width="16" height="16" className={css.editicon}>
                   <use href="/public/sprite.svg#icon-edit" />
                 </svg>
@@ -72,7 +79,11 @@ const TodayWaterList = () => {
         </svg>
         Add Water
       </button>
-      {isModalOpen && <TodayListModal closeModal={closeModal} />}
+      {isModalOpen && <TodayListModal closeModal={closeModal} />}{" "}
+      {/* Render modal if open */}
+      {/* EditWaterAmountModal*/}
+      {isEditModalOpen && <EditWaterAmountModal isOpen={isEditModalOpen} onClose={closeEditWaterModal} />}
+
     </div>
   );
 };
