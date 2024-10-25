@@ -40,13 +40,34 @@ export const signin = createAsyncThunk(
     async (credentials, thunkAPI) => {
         try {
             const response = await axios.post("/auth/login", credentials);
-            setAuthHeader(response.data.token)
-            return response.data
+            setAuthHeader(response.data.data.accessToken)
+            return response.data.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
         }
     }
   )
+
+  export const refresh = createAsyncThunk(
+    "auth/refresh",
+    async (_, thunkAPI) => {
+      const reduxState = thunkAPI.getState(); 
+      setAuthHeader(reduxState.auth.token); 
+      try {
+        const response = await axios.post("/auth/refresh");
+        return response.data.data;
+      } catch (error) {
+        clearAuthHeader(); // Очистити заголовок на випадок помилки
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    },
+    {
+      condition: (_, thunkAPI) => {
+        const { auth } = thunkAPI.getState();
+        return auth.token !== null;
+      },
+    }
+  );  
 
   export const logout = createAsyncThunk(
     'auth/logout',

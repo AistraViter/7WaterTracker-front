@@ -18,11 +18,13 @@ export default function Header() {
   const user = useSelector(selectUser);
 
   return (
-    <header className={css.header}>
+    <header>
+      <div className={css.container}>
       <Logo />
       <nav className={css.nav}>
         {isAuthenticated ? <UserLogo user={user} /> : <UserAuth />}
       </nav>
+      </div>
     </header>
   );
 }
