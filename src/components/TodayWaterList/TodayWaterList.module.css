@@ -196,3 +196,11 @@
   width: 2px;
   border-radius: 8px;
 }
+
+@media (min-width: 768px) {
+  .listitem {
+    gap: 390px;
+    justify-content: space-between;
+    padding-right: 5px;
+  }
+}

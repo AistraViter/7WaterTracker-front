@@ -40,38 +40,45 @@ const WaterRatioPanel = () => {
   return (
     <div className={css.waterratiopanel}>
       <h3 className={css.title}>Today</h3>
-      <div className={css.data}>
-        <div className={css.progressBarContainer}>
-          <div className={css.progressBar} style={{ width: `${ratio}%` }}></div>
 
-          <div className={css.milestones}>
-            <div className={css.milestone} style={getMilestoneStyle(0)}>
-              <span className={css.line}>|</span> 0%
+      <div className={css.container}>
+        <div className={css.data}>
+          <div className={css.progressBarContainer}>
+            <div
+              className={css.progressBar}
+              style={{ width: `${ratio}%` }}
+            ></div>
+
+            <div className={css.milestones}>
+              <div className={css.milestone} style={getMilestoneStyle(0)}>
+                <span className={css.line}>|</span> 0%
+              </div>
+              <div className={css.milestone} style={getMilestoneStyle(50)}>
+                <span className={css.line}>|</span> 50%
+              </div>
+              <div className={css.milestone} style={getMilestoneStyle(100)}>
+                <span className={css.line}>|</span> 100%
+              </div>
             </div>
-            <div className={css.milestone} style={getMilestoneStyle(50)}>
-              <span className={css.line}>|</span> 50%
-            </div>
-            <div className={css.milestone} style={getMilestoneStyle(100)}>
-              <span className={css.line}>|</span> 100%
-            </div>
+
+            <div className={css.circle} style={{ left: `${ratio}%` }}></div>
           </div>
-
-          <div className={css.circle} style={{ left: `${ratio}%` }}></div>
         </div>
-      </div>
 
-      <button onClick={handleAddWater} className={css.btn}>
-        <svg width="24" height="24" className={css.plusicon}>
-          <use href="/public/sprite.svg#icon-add" />
-        </svg>
-        Add Water
-      </button>
-      {isModalOpen && (
-        <TodayListModal
-          closeModal={closeModal}
-          setWaterConsumed={setWaterConsumed}
-        />
-      )}
+        <button onClick={handleAddWater} className={css.btn}>
+          <svg width="24" height="24" className={css.plusicon}>
+            <use href="/public/sprite.svg#icon-add" />
+          </svg>
+          Add Water
+        </button>
+
+        {isModalOpen && (
+          <TodayListModal
+            closeModal={closeModal}
+            setWaterConsumed={setWaterConsumed}
+          />
+        )}
+      </div>
     </div>
   );
 };

@@ -11,6 +11,11 @@
   margin-bottom: 40px;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
 .title {
   font-family: Roboto;
   font-size: 18px;
@@ -32,6 +37,7 @@
 .progressBarContainer {
   position: relative;
   width: 100%;
+  max-width: 320px;
   height: 8px;
   background-color: #d7e3ff;
   border-radius: 5px;
@@ -129,4 +135,16 @@
 .line {
   color: #d7e3ff;
   width: 8px;
+}
+
+@media (min-width: 768px) {
+  .progressBarContainer {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .progressBarContainer {
+    max-width: 1440px;
+  }
 }

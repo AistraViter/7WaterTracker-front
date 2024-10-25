@@ -37,7 +37,25 @@ body {
     background-repeat: no-repeat;
     background-position: 23px 28px;
   }
+
+  .homepage {
+    width: 768px;
+    margin: 0px 0px;
+  }
+
+  .stats {
+    padding: 32px 24px;
+  }
 }
 
 @media (min-width: 1440px) {
+  body {
+    background-image: url("/public/img/desctop/BackgroundDesc.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 23px 28px;
+  }
+  .homepage {
+    width: 1440px;
+  }
 }
