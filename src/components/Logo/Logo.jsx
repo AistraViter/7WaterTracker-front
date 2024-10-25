@@ -4,7 +4,7 @@ import css from "../Logo/Logo.module.css";
 export default function Logo() {
   return (
     <div className={css.logo}>
-      <Link to="/">
+      <Link to="/" className={css.logoLink}>
         <svg
           width="40"
           height="48"

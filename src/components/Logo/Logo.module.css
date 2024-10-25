@@ -1,10 +1,22 @@
-.logo {}
+/* .logo {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+} */
 
 .text {
-    display: flex;
-    font-family: var(--font-family);
-    font-weight: 700;
-    font-size: 12px;
-    text-transform: uppercase;
-    color: #407BFF;
+  max-width: 58px;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #407bff;
+}
+
+.logoLink {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
