@@ -79,7 +79,7 @@ const TodayWaterList = () => {
         </svg>
         Add Water
       </button>
-      {isModalOpen && <TodayListModal closeModal={closeModal} />}{" "}
+      {isModalOpen && <TodayListModal closeModal={closeModal} />}
       {/* Render modal if open */}
       {/* EditWaterAmountModal*/}
       {isEditModalOpen && <EditWaterAmountModal isOpen={isEditModalOpen} onClose={closeEditWaterModal} />}

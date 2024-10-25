@@ -1,5 +1,5 @@
 import { useState } from "react";
-import TodayWaterList from "../TodayListModal/TodayListModal.jsx";
+import EditWaterAmountModal from "../Modal/EditWaterAmountModal/EditWaterAmountModal.jsx";
 import { useSelector } from "react-redux";
 import { selectWaterPercentage } from "../../redux/water/selectors.js";
 
@@ -75,7 +75,7 @@ const WaterRatioPanel = () => {
           Add Water
         </button>
 
-        <TodayWaterList isOpen={isModalOpen} onCloseRequest={closeModal} />
+        <EditWaterAmountModal isOpen={isModalOpen} onCloseRequest={closeModal} />
       </div> {/* Закриваючий тег для блоку container */}
     </div>
   );

@@ -18,7 +18,7 @@
 
 @media (min-width: 768px) {
   body {
-    background-image: url("/public/img/tablet/BackgroundTab.png");
+    background-image: url("./image/tablet/BackgroundTab.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 23px 28px;
@@ -35,7 +35,7 @@
 
 @media (min-width: 1440px) {
   body {
-    background-image: url("/public/img/desctop/BackgroundDesc.png");
+    background-image: url("./image/desctop/BackgroundDesc.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 23px 28px;
