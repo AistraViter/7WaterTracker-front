@@ -29,7 +29,7 @@
     font-size: 24px;
     line-height: 1.25;
     color: #2f2f2f;
-    width: 80%;
+    width: 100%;
     margin: 0;
 }
 
@@ -81,7 +81,6 @@
 
 .link {
     display: inline-block;
-    width: 100%;
     text-align: center;
     color: #ffffff;
     text-decoration: none;
@@ -91,6 +90,17 @@
     height: 36px;
     box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
     background-color: #407bff;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.link:hover {
+    box-shadow: 0 8px 16px 0 rgba(64, 123, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.link:active {
+    box-shadow: 0 2px 4px 0 rgba(64, 123, 255, 0.3);
+    transform: translateY(1px);
 }
 
 /* Media Queries for Tablet (768px) */
@@ -134,7 +144,6 @@
         font-size: 18px;
         line-height: 1.33333;
 
-        border-radius: 10px;
         padding: 10px 30px;
         width: 336px;
         height: 44px;
@@ -143,8 +152,9 @@
 
 /* Media Queries for Desktop (1440px) */
 @media (min-width: 1440px) {
-    .container {
-        max-width: 1440px;
+    .section {
+        width: 100%;
+        margin: 0;
     }
 
     .benefits {
@@ -156,6 +166,7 @@
     .h1 {
         font-size: 36px;
         line-height: 1.16667;
+        width: 100%;
     }
 
     .h2 {
@@ -176,8 +187,6 @@
         font-size: 18px;
         line-height: 1.33333;
 
-        border-radius: 10px;
-        padding: 10px 30px;
         width: 384px;
         height: 44px;
     }
