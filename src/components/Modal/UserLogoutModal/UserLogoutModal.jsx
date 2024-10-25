@@ -1,6 +1,6 @@
 import ModalContainer from "../ModalContainer/ModalContainer";
 import { useDispatch, useSelector } from "react-redux";
-import { logOut } from "../../../redux/auth/operations";
+import { logout } from "../../../redux/auth/operations";
 import css from "./UserLogoutModal.module.css";
 import { selectLogOutModal } from "../../../redux/modal/selectors";
 import { closeModal } from "../../../redux/modal/slice";
@@ -29,7 +29,7 @@ export default function UserLogoutModal() {
           <button
             className={css.buttonLogout}
             onClick={() => {
-              dispatch(logOut());
+              dispatch(logout());
               dispatch(closeModal());
             }}
           >

@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
 export default function Logo() {
-
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   return (

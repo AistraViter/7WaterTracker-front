@@ -3,30 +3,31 @@ import { HiCog6Tooth } from "react-icons/hi2";
 import { HiOutlineLogout } from "react-icons/hi";
 import css from "./UserLogoModal.module.css";
 // import UserLogoutModal from "../UserLogoutModal/UserLogoutModal";
-import SettingModal from "../SettingModal/SettingModal";
+// import SettingModal from "../SettingModal/SettingModal";
 
 const UserLogoModal = () => {
   const modalRef = useRef(null);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
-
-  const onClose = () => {
-    setIsSettingsModalOpen(false);
-  };
+  const [isDropdownOpen, setIsDropdownOpen] = useState(true);
 
   const handleLogoutClick = () => {
     setIsLogoutModalOpen(true);
   };
 
+  const handleSettingsClick = () => {
+    setIsSettingsModalOpen(true);
+  };
+
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
-      setIsLogoutModalOpen(false);
+      setIsDropdownOpen(false);
     }
   };
 
   const handleKeyDown = (event) => {
     if (event.key === "Escape") {
-      setIsLogoutModalOpen(false);
+      setIsDropdownOpen(false);
     }
   };
 
@@ -42,25 +43,25 @@ const UserLogoModal = () => {
 
   return (
     <>
-      <div className={css.dropdownMenu} ref={modalRef}>
-        <button
-          className={css.settingsBtn}
-          onClick={() => setIsSettingsModalOpen(true)}
-        >
-          <HiCog6Tooth className={css.settingsIcon} />
-          Settings
-        </button>
-        <button className={css.logoutBtn} onClick={handleLogoutClick}>
-          <HiOutlineLogout className={css.logoutIcon} />
-          Log out
-        </button>
-      </div>
-      {isLogoutModalOpen && (
-        <>
-          {/* Коли модалка логаута буде працювати - вставити UserLogoutModal */}
-        </>
+      {isDropdownOpen && (
+        <div className={css.dropdownMenu} ref={modalRef}>
+          <button className={css.settingsBtn} onClick={handleSettingsClick}>
+            <HiCog6Tooth className={css.settingsIcon} />
+            Settings
+          </button>
+          <button className={css.logoutBtn} onClick={handleLogoutClick}>
+            <HiOutlineLogout className={css.logoutIcon} />
+            Log out
+          </button>
+        </div>
       )}
-      {isSettingsModalOpen && <SettingModal onCloseModal={() => onClose()} />}
+      {isSettingsModalOpen && <div>Settings modal</div>}
+      {/* компонент SettingModal містить редірект на домашню сторінку.  */}
+      {isLogoutModalOpen && <div>Logout modal</div>}
+      {/* в консолі
+      помилка Uncaught SyntaxError: The requested module
+      '/src/redux/auth/operations.js?t=1729871944280' does not provide an export
+      named 'logOut' (at UserLogoutModal.jsx:3:10) */}
     </>
   );
 };
