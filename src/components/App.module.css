@@ -2,7 +2,6 @@
   width: 320px;
   padding: 0 20px;
   margin: 0 auto;
-  border: 2px solid red; /* для тестування*/
   min-height: 100vh; /* Мінімум висота вікна, але може збільшуватись */
   max-height: 300vh; 
 }

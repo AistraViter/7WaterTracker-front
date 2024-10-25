@@ -47,7 +47,7 @@ const TodayWaterList = () => {
             <div className={css.con1}>
               <p className={css.glassicon}>
                 <svg width="24" height="24" className={css.glassicon}>
-                  <use href="/public/sprite.svg#icon-glass" />
+                  <use href="/sprite.svg#icon-glass" />
                 </svg>
               </p>
               <div className={css.numbers}>
@@ -58,7 +58,7 @@ const TodayWaterList = () => {
             <div className={css.btns}>
               <button className={css.edit} onClick={openEditWaterModal}>
                 <svg width="16" height="16" className={css.editicon}>
-                  <use href="/public/sprite.svg#icon-edit" />
+                  <use href="/sprite.svg#icon-edit" />
                 </svg>
               </button>
               <button
@@ -66,7 +66,7 @@ const TodayWaterList = () => {
                 onClick={() => handleDelete(index)}
               >
                 <svg width="16" height="16" className={css.deleteicon}>
-                  <use href="/public/sprite.svg#icon-delete" />
+                  <use href="/sprite.svg#icon-delete" />
                 </svg>
               </button>
             </div>
@@ -75,7 +75,7 @@ const TodayWaterList = () => {
       </ul>
       <button onClick={handleAddWater} className={css.add}>
         <svg width="16" height="16" className={css.addicon}>
-          <use href="/public/sprite.svg#icon-smallplus" />
+          <use href="/sprite.svg#icon-smallplus" />
         </svg>
         Add Water
       </button>
