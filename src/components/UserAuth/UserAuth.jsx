@@ -8,7 +8,7 @@ export default function UserAuth() {
             <Link to="/signin" className={css.link}>
                 <p className={css.signup}>Sign in</p>
                 <svg className={css.icon} width="28" height="28">
-                    <use href="../../../public/user-logo.svg#icon-outline"></use>
+                    <use href="/user-logo.svg#icon-outline"></use>
                 </svg>
             </Link>
         </div>
