@@ -1,0 +1,139 @@
+/* @media (min-width: 768px) {
+}
+
+@media (min-width: 1440px) {
+} */
+
+.title {
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 30px;
+  text-align: left;
+  color: #2f2f2f;
+  margin-top: 0px;
+  margin-bottom: 16px;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0px 5px 0px 0px;
+  margin: 0px;
+  color: #407bff;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.listitem {
+  padding: 12px 0px;
+  border-bottom: 1px solid #d7e3ff;
+  display: flex;
+  gap: 38px;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.glassicon {
+  width: 26px;
+  height: 26px;
+  margin: 0px;
+  text-align: center;
+  stroke: #407bff;
+}
+
+.con1 {
+  display: flex;
+  gap: 12px;
+}
+
+.numbers {
+  display: flex;
+  gap: 12px;
+}
+
+.btns {
+  display: flex;
+  gap: 18px;
+}
+
+.add {
+  margin-top: 12px;
+  margin-bottom: 0;
+  display: flex;
+  gap: 8px;
+  border: none;
+  background: none;
+  color: #407bff;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
+  align-items: center;
+}
+
+.amount {
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: #407bff;
+}
+
+.time {
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: #2f2f2f;
+}
+
+.edit {
+  width: 16px;
+  height: 16px;
+  border: none;
+  background-color: transparent;
+}
+
+.delete {
+  width: 16px;
+  height: 16px;
+  border: none;
+  background-color: transparent;
+}
+
+/* Кастомізація скролу */
+.list::-webkit-scrollbar {
+  width: 4px; /* ширина скролу */
+}
+
+.list::-webkit-scrollbar-thumb {
+  background-color: #9ebbff; /* кольоровий скрол як на макеті */
+  border-radius: 8px; /* закруглені краї */
+}
+
+.list::-webkit-scrollbar-track {
+  background-color: #d7e3ff; /* фон для скрол-треку */
+  width: 2px;
+  border-radius: 8px;
+}
+
+.editicon {
+  margin: 0px;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  transform: translate(-50%, -15%);
+  align-self: center;
+}
+
+.deleteicon {
+  margin: 0px;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  transform: translate(-50%, -15%);
+  align-self: center;
+}

@@ -2,25 +2,31 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  padding: 20px;
-  background-color: #f8f9fa;
+   position: relative;
+   background-image: url("/src/pages/SignupPage/image/circlesMobile.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-position-y: -6%;
+  background-size: auto;
+  margin: 0 -20px;
 }
 
 /* Обертка формы и заголовка */
 .formWrapper {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 400px;
-  background-color: #fff; /* Белый фон для формы */
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для формы */
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  width: 280px;
+  max-height: 396px;
+  position: relative;
+  z-index: 2;
 }
 
 /* Заголовок формы */
 h1 {
+    margin: 0;
   font-size: 26px;
   margin-bottom: 16px;
   text-align: left;
@@ -84,6 +90,15 @@ h1 {
 
 .passwordToggleIcon:active svg path {
   stroke: #003366; /* Цвет при клике */
+}
+
+.bottle {
+  max-width: 280px;
+  position: absolute;
+  bottom: -48%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
 }
 
 /* Поля ввода */
@@ -156,29 +171,56 @@ h1 {
   color: #0056b3; /* Цвет ссылки при наведении */
 }
 
-/* Позиционирование изображения внизу родителя */
-/* .customIcon {
+@media (min-width: 768px) {
+  .signinContainer {
+    height: auto;
+    align-items: start;
+    padding: 40px 32px;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-image: url("/src/pages/SignupPage/image/circlesTablet.png");
+    background-position-y: -90%;
+    margin: 0 -32px;
+  }
 
-} */
+  .bottle {
+    max-width: 660px;
+    position: absolute;
+    bottom: -27%;
+    left: 57%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
 
-/* Мобильная адаптация */
-@media (max-width: 768px) {
   .formWrapper {
-    padding: 15px;
-  }
-
-  h1 {
-    font-size: 22px;
-  }
-
-  .submitBtn {
-    font-size: 14px;
-    padding: 8px 16px;
+    width: 336px;
+    max-height: 404px;
   }
 }
 
-
 @media (min-width: 1440px) {
-  
-  
+  .signinContainer {
+    height: auto;
+    align-items: start;
+    padding: 140px 198px 196px 0;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-image: url("/src/pages/SignupPage/image/circlesDesktop.png");
+    background-position-y: 0%;
+    margin: 0 -112px;
+  }
+
+  .bottle {
+    max-width: 916px;
+    position: absolute;
+    bottom: 0%;
+    left: 32%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+
+  .formWrapper {
+    width: 384px;
+    max-height: 404px;
+  }
 }
