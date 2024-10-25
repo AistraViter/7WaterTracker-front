@@ -1,5 +1,12 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { signin } from "../../redux/auth/operations";
+import {
+  selectIsLoggedIn,
+  selectLoading,
+  selectError,
+} from "../../redux/auth/selectors";
 import DocumentTitle from "../../components/DocumentTitle";
 import bottleMobile from "./image/bottleMobile.png";
 import bottleTablet from "./image/bottleTablet.png";
@@ -7,9 +14,7 @@ import bottleDesktop from "./image/bottleDesktop.png";
 import bottleMobileRetina from "./image/bottleMobile2x.png";
 import bottleTabletRetina from "./image/bottleTablet2x.png";
 import bottleDesktopRetina from "./image/bottleDesktop2x.png";
-
-import css from "./SigninPage.module.css"; // Импорт стилей для страницы
-
+import css from "./SigninPage.module.css";
 
 export default function SignInPage() {
   const [formData, setFormData] = useState({
@@ -17,11 +22,19 @@ export default function SignInPage() {
     password: "",
   });
   const [errors, setErrors] = useState({});
-  const [error, setError] = useState(null);
-  const [showPassword, setShowPassword] = useState(false); // Состояние для видимости пароля
+  const [showPassword, setShowPassword] = useState(false);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Функция для проверки валидности полей формы
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
+
+  if (isLoggedIn) {
+    navigate("/home");
+  }
+
   const validateForm = (data) => {
     const errors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -41,37 +54,6 @@ export default function SignInPage() {
     return errors;
   };
 
-  // Функция для отправки данных формы
-  const handleSignin = async (formData) => {
-    try {
-      const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem("token", data.accessToken); // Сохраняем токен
-        navigate("/home"); // Перенаправляем на защищенную страницу
-      } else {
-        const errorData = await response.json();
-        setError(errorData.message || "Authorization error");
-      }
-    } catch (err) {
-      setError("Network error");
-    }
-  };
-
-  // Функция для обработки изменений в полях формы
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  // Функция для отправки формы
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validateForm(formData);
@@ -79,18 +61,18 @@ export default function SignInPage() {
       setErrors(validationErrors);
     } else {
       setErrors({});
-      handleSignin(formData); // Отправляем данные на сервер
+      dispatch(signin(formData));
     }
   };
 
-  // Функция для переключения видимости пароля
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
-
-
-
-    const imageSrc = useState(bottleMobile);
 
   return (
     <div className={css.signinContainer}>
@@ -98,11 +80,8 @@ export default function SignInPage() {
 
       <div className={css.formWrapper}>
         <h1>Sign In</h1>
-        {error && <p className={css.error}>{error}</p>}{" "}
-        {/* Сообщение об ошибке */}
-        {/* Форма авторизации */}
+        {error && <p className={css.error}>{error}</p>}
         <form onSubmit={handleSubmit} className={css.authForm}>
-          {/* Поле для ввода email */}
           <div className={css.formGroup}>
             <label className={css.label}>Enter your email</label>
             <input
@@ -111,24 +90,25 @@ export default function SignInPage() {
               value={formData.email}
               onChange={handleChange}
               placeholder="E-mail"
-              className={`${css.inputField} ${errors.email ? css.invalid : ""}`} // Добавляем класс ошибки
+              className={`${css.inputField} ${
+                errors.email ? css.inputError : ""
+              }`}
             />
             {errors.email && <p className={css.error}>{errors.email}</p>}
           </div>
 
-          {/* Поле для ввода пароля с глазком */}
           <div className={css.formGroup}>
             <label className={css.label}>Enter your password</label>
             <div className={css.passwordWrapper}>
               <input
-                type={showPassword ? "text" : "password"} // Переключение типа поля
+                type={showPassword ? "text" : "password"}
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Password"
                 className={`${css.inputField} ${
-                  errors.password ? css.invalid : ""
-                }`} // Добавляем класс ошибки
+                  errors.password ? css.inputError : ""
+                }`}
               />
               <span
                 onClick={togglePasswordVisibility}
@@ -177,22 +157,18 @@ export default function SignInPage() {
             {errors.password && <p className={css.error}>{errors.password}</p>}
           </div>
 
-          {/* Кнопка для отправки формы */}
-          <button type="submit" className={css.submitBtn}>
-            Sign In
+          <button type="submit" className={css.submitBtn} disabled={loading}>
+            {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
-        {/* Навигационные ссылки */}
+
         <div className={css.navigationLinks}>
-          {/* Ссылки для навигации */}
-          <Link to="/forgot-password" className={css.navLink}>
-            Forgot your password?
-          </Link>
           <Link to="/signup" className={css.navLink}>
             Sign Up
           </Link>
         </div>
       </div>
+
       <picture>
         <source
           media="(min-width: 1440px) and (-webkit-min-device-pixel-ratio: 1.5), (min-width: 1440px) and (min-resolution: 1.5dppx)"
@@ -209,7 +185,7 @@ export default function SignInPage() {
           srcSet={bottleMobileRetina}
         />
         <source srcSet={bottleMobile} />
-        <img src={imageSrc} alt="Bottle Icon" className={css.bottle} />
+        <img src={bottleMobile} alt="Bottle Icon" className={css.bottle} />
       </picture>
     </div>
   );

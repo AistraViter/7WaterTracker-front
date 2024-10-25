@@ -24,18 +24,23 @@ export const signup = createAsyncThunk(
     }
   )
 
-  export const signin = createAsyncThunk(
-    'auth/signin',
-    async (credentials, thunkAPI) => {
-        try {
-            const response = await axios.post("/auth/login", credentials);
-            setAuthHeader(response.data.token)
-            return response.data
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error.message);
-        }
+  // Авторизация пользователя
+export const signin = createAsyncThunk(
+  'auth/signin',
+  async (credentials, thunkAPI) => {
+    try {
+      const response = await axios.post("/auth/login", credentials);
+      setAuthHeader(response.data.token);
+      return response.data;
+    } catch (error) {
+      // Обработка ошибки 401 (Unauthorized)
+      if (error.response && error.response.status === 401) {
+        return thunkAPI.rejectWithValue("Invalid email or password.");
+      }
+      return thunkAPI.rejectWithValue(error.message || "An error has occurred.");
     }
-  )
+  }
+);
 
   export const logout = createAsyncThunk(
     'auth/logout',
