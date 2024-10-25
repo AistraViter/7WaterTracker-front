@@ -5,10 +5,11 @@
 // ✔ TodayWaterList
 // ✔ MonthStatsTable
 import DocumentTitle from "../../components/DocumentTitle";
-import DailyNorma from "../../components/DailyNorma/DailyNorma.jsx";
+
 import WaterRatioPanel from "../../components/WaterRatioPanel/WaterRatioPanel.jsx";
 import TodayWaterList from "../../components/TodayWaterList/TodayWaterList.jsx";
 import MonthStatsTable from "../../components/MonthStatsTable/MonthStatsTable.jsx";
+import DailyNorma from "../../components/DailyNorma/DailyNorma.jsx";
 import css from "./HomePage.module.css";
 
 const HomePage = () => {

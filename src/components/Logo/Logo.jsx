@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 import css from "../Logo/Logo.module.css";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
 export default function Logo() {
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
   return (
-    <div className={css.logo}>
-      <Link to="/">
+    <div>
+      <Link to={isLoggedIn ? "/home" : "/welcome"} className={css.logo}>
         <svg
           width="40"
           height="48"
@@ -12,7 +17,7 @@ export default function Logo() {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g clip-path="url(#clip0_139_533)">
+          <g clipPath="url(#clip0_139_533)">
             <path
               d="M15.8199 7.31807C16.4933 6.78833 17.3441 7.93599 17.4338 8.99549C17.5235 10.055 16.5821 12.4385 13.9374 13.0564C11.2927 13.6743 10.9788 15.3075 11.0685 16.2786C11.1582 17.2498 10.71 18.3091 9.76852 18.0886C8.82708 17.8682 8.73754 16.4112 9.58926 15.0421C10.441 13.6729 12.5921 12.4378 12.9512 11.6872C13.3103 10.9367 13.0409 10.0541 13.758 9.74513C14.475 9.43617 15.4166 10.2306 15.3269 10.9817C15.3269 10.9817 16.0441 10.2756 15.9544 9.2161C15.8956 8.52058 15.482 7.58438 15.8199 7.31807Z"
               fill="#9EBBFF"
@@ -158,7 +163,7 @@ export default function Logo() {
             </clipPath>
           </defs>
         </svg>
-        <h1 className={css.text}>TRACKER OF WATER</h1>
+        <p className={css.text}>Tracker of water</p>
       </Link>
     </div>
   );

@@ -12,30 +12,62 @@ const clearAuthHeader = () => {
     };
 
 export const signup = createAsyncThunk(
-    'auth/signup',
+  "auth/signup",
+  async (credentials, thunkAPI) => {
+    try {
+      const response = await axios.post("/auth/register", credentials);
+      setAuthHeader(response.data.data.accessToken);
+      return response.data.data;
+    } catch (error) {
+      if (error.response && error.response.status === 409) {
+        console.info("Conflict error (409):", error.response.data.data.message); 
+        return thunkAPI.rejectWithValue({
+          message: error.response.data.data.message,
+          ignoreError: true,
+        });
+      } else {
+        console.error("Registration failed:", error.message); 
+        return thunkAPI.rejectWithValue(
+          "Registration failed. Please try again."
+        );
+      }
+    }
+  }
+);
+
+export const signin = createAsyncThunk(
+    'auth/signin',
     async (credentials, thunkAPI) => {
         try {
-            const response = await axios.post('/auth/register', credentials);
-            setAuthHeader(response.data.token)
-            return response.data
+            const response = await axios.post("/auth/login", credentials);
+            setAuthHeader(response.data.data.accessToken)
+            return response.data.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
         }
     }
   )
 
-  export const signin = createAsyncThunk(
-    'auth/signin',
-    async (credentials, thunkAPI) => {
-        try {
-            const response = await axios.post("/auth/login", credentials);
-            setAuthHeader(response.data.token)
-            return response.data
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error.message);
-        }
+  export const refresh = createAsyncThunk(
+    "auth/refresh",
+    async (_, thunkAPI) => {
+      const reduxState = thunkAPI.getState(); 
+      setAuthHeader(reduxState.auth.token); 
+      try {
+        const response = await axios.post("/auth/refresh");
+        return response.data.data;
+      } catch (error) {
+        clearAuthHeader(); // Очистити заголовок на випадок помилки
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    },
+    {
+      condition: (_, thunkAPI) => {
+        const { auth } = thunkAPI.getState();
+        return auth.token !== null;
+      },
     }
-  )
+  );  
 
   export const logout = createAsyncThunk(
     'auth/logout',
