@@ -49,25 +49,18 @@ export const signin = createAsyncThunk(
   )
 
   export const refresh = createAsyncThunk(
-    "auth/refresh",
+    'auth/refresh',
     async (_, thunkAPI) => {
-      const reduxState = thunkAPI.getState(); 
-      setAuthHeader(reduxState.auth.token); 
       try {
         const response = await axios.post("/auth/refresh");
-        return response.data.data;
+        setAuthHeader(response.data.data.accessToken); 
+        return response.data.data; 
       } catch (error) {
-        clearAuthHeader(); // Очистити заголовок на випадок помилки
         return thunkAPI.rejectWithValue(error.message);
       }
-    },
-    {
-      condition: (_, thunkAPI) => {
-        const { auth } = thunkAPI.getState();
-        return auth.token !== null;
-      },
     }
-  );  
+  );
+  
 
   export const logout = createAsyncThunk(
     'auth/logout',
