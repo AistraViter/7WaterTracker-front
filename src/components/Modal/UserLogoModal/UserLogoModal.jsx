@@ -3,7 +3,7 @@ import { HiCog6Tooth } from "react-icons/hi2";
 import { HiOutlineLogout } from "react-icons/hi";
 import css from "./UserLogoModal.module.css";
 // import UserLogoutModal from "../UserLogoutModal/UserLogoutModal";
-import SettingModal from "../SettingModal/SettingModal";
+// import SettingModal from "../SettingModal/SettingModal";
 
 const UserLogoModal = () => {
   const modalRef = useRef(null);
@@ -55,10 +55,9 @@ const UserLogoModal = () => {
           </button>
         </div>
       )}
-      {isSettingsModalOpen && <SettingModal />}
-      {/* компонент <SettingModal /> пустий. Всередині нього відмалював div для
-      перевірки. */}
-      {/* {isLogoutModalOpen && <UserLogoutModal />} */}
+      {isSettingsModalOpen && <div>Settings modal</div>}
+      {/* компонент SettingModal містить редірект на домашню сторінку.  */}
+      {isLogoutModalOpen && <div>Logout modal</div>}
       {/* в консолі
       помилка Uncaught SyntaxError: The requested module
       '/src/redux/auth/operations.js?t=1729871944280' does not provide an export

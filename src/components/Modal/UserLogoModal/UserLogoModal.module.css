@@ -8,7 +8,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.2);
   position: absolute;
-  top: 51px;
+  top: 64px;
   right: 20px;
   z-index: 2;
 }
@@ -45,14 +45,13 @@
 
 @media screen and (min-width: 768px) {
   .dropdownMenu {
-    top: 55px;
     right: 32px;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .dropdownMenu {
-    top: 51px;
+    top: 68px;
     right: 112px;
   }
 }
