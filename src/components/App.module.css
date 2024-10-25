@@ -1,26 +1,18 @@
 .app {
   width: 320px;
   padding: 0 20px;
-  height: 100vh;
   margin: 0 auto;
-  border: 2px solid blue; /*для тестування*/
-  background-image: url("/src/pages/SignupPage/image/circlesMobile.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-position-y: 90px;
-  background-size: auto;
+  border: 2px solid red; /* для тестування*/
+  min-height: 100vh; /* Мінімум висота вікна, але може збільшуватись */
+  max-height: 300vh; 
 }
 
 @media (min-width: 768px) {
   .app {
     width: 768px;
     padding: 0 32px;
-  background-image: url("/src/pages/SignupPage/image/circlesTablet.png");
-  background-position-y: 0;
     
   }
-  
 }
 
 @media (min-width: 1440px) {
@@ -29,10 +21,9 @@
     padding: 0 112px;
     
   }
-  
 }
 
- /* доступні шрифти */
+/* доступні шрифти */
 
 /* .robotoRegular {
   font-family: "Roboto", sans-serif;
