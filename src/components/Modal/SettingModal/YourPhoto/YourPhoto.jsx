@@ -5,7 +5,7 @@ import myCustomStyles from "../SettingModal.module.css";
 
 const YourPhoto = ({ avatar, isSubmitBlocked, handleAvatarChange }) => {
   const fileInputId = useId();
-  const defaultImage = "../../../../../public/image/defaultUser.png";
+  const defaultImage = "/public/image/defaultUser.png";
 
   return (
     <div className={myCustomStyles["photo-group"]}>
@@ -33,7 +33,7 @@ const YourPhoto = ({ avatar, isSubmitBlocked, handleAvatarChange }) => {
                   isSubmitBlocked && css["blocked-upload"]
                 )}
               >
-                <use href="../../../../../public/icon.svg#icon-up" />
+                <use href="/public/icon.svg#icon-up" />
               </svg>
               Upload a photo
             </label>

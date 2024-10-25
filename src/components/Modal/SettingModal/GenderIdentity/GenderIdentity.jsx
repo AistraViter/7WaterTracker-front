@@ -1,5 +1,5 @@
 import RadioPair from "../RadioChoise/RadioChoise";
-import css from "../../SettingModal/SettingModal";
+import css from "../../SettingModal/SettingModal.module.css";
 
 const GenderIdentity = () => {
   return (
