@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { HiCog6Tooth } from "react-icons/hi2";
 import { HiOutlineLogout } from "react-icons/hi";
 import css from "./UserLogoModal.module.css";
 // import UserLogoutModal from "../UserLogoutModal/UserLogoutModal";
+import SettingModal from "../SettingModal/SettingModal";
 
 const UserLogoModal = () => {
-  const navigate = useNavigate();
   const modalRef = useRef(null);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
 
-  const navigateToPath = (path) => {
-    navigate(`/${path}`);
+  const onClose = () => {
+    setIsSettingsModalOpen(false);
   };
 
   const handleLogoutClick = () => {
@@ -45,7 +45,7 @@ const UserLogoModal = () => {
       <div className={css.dropdownMenu} ref={modalRef}>
         <button
           className={css.settingsBtn}
-          onClick={() => navigateToPath("settings")}
+          onClick={() => setIsSettingsModalOpen(true)}
         >
           <HiCog6Tooth className={css.settingsIcon} />
           Settings
@@ -56,10 +56,11 @@ const UserLogoModal = () => {
         </button>
       </div>
       {isLogoutModalOpen && (
-        <div>
-          Коли модалка логаута буде працювати - замінити на UserLogoutModal
-        </div>
+        <>
+          {/* Коли модалка логаута буде працювати - вставити UserLogoutModal */}
+        </>
       )}
+      {isSettingsModalOpen && <SettingModal onCloseModal={() => onClose()} />}
     </>
   );
 };

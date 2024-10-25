@@ -3,7 +3,7 @@
 import { useNavigate, Link } from "react-router-dom";
 import DocumentTitle from "../../components/DocumentTitle";
 import css from "./SignupPage.module.css";
-import { useState } from "react";
+import { useSelector } from "react-redux";
 import bottleMobile from "./image/bottleMobile.png";
 import bottleTablet from "./image/bottleTablet.png";
 import bottleDesktop from "./image/bottleDesktop.png";
@@ -14,12 +14,17 @@ import AuthForm from "../../components/AuthForm/AuthForm";
 
 export default function SignUpPage() {
   const navigate = useNavigate();
+ const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  const handleSignupSuccess = () => {
-    navigate("/home");
-  };
+ const handleSignupSuccess = () => {
+   navigate("/home");
+ };
 
-  const imageSrc = useState(bottleMobile);
+ if (isLoggedIn) {
+   navigate("/home");
+ }
+  
+  const imageSrc = bottleMobile;
 
   return (
     <div className={css.signupContainer}>

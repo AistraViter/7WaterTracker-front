@@ -2,11 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signin } from "../../redux/auth/operations";
-import {
-  selectIsLoggedIn,
-  selectLoading,
-  selectError,
-} from "../../redux/auth/selectors";
+import { selectIsLoggedIn, selectLoading, selectError } from "../../redux/auth/selectors";
 import DocumentTitle from "../../components/DocumentTitle";
 import bottleMobile from "./image/bottleMobile.png";
 import bottleTablet from "./image/bottleTablet.png";
@@ -14,7 +10,7 @@ import bottleDesktop from "./image/bottleDesktop.png";
 import bottleMobileRetina from "./image/bottleMobile2x.png";
 import bottleTabletRetina from "./image/bottleTablet2x.png";
 import bottleDesktopRetina from "./image/bottleDesktop2x.png";
-import css from "./SigninPage.module.css";
+import css from "./SigninPage.module.css"; 
 
 export default function SignInPage() {
   const [formData, setFormData] = useState({
@@ -26,6 +22,14 @@ export default function SignInPage() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
+
+  if (isLoggedIn) {
+    navigate("/home");
+  }
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const loading = useSelector(selectLoading);
@@ -34,6 +38,7 @@ export default function SignInPage() {
   if (isLoggedIn) {
     navigate("/home");
   }
+
 
   const validateForm = (data) => {
     const errors = {};
@@ -61,7 +66,8 @@ export default function SignInPage() {
       setErrors(validationErrors);
     } else {
       setErrors({});
-      dispatch(signin(formData));
+
+      dispatch(signin(formData)); 
     }
   };
 
@@ -93,6 +99,7 @@ export default function SignInPage() {
               className={`${css.inputField} ${
                 errors.email ? css.inputError : ""
               }`}
+
             />
             {errors.email && <p className={css.error}>{errors.email}</p>}
           </div>
@@ -109,8 +116,9 @@ export default function SignInPage() {
                 className={`${css.inputField} ${
                   errors.password ? css.inputError : ""
                 }`}
+
               />
-              <span
+               <span
                 onClick={togglePasswordVisibility}
                 className={css.passwordToggleIcon}
               >
@@ -163,6 +171,10 @@ export default function SignInPage() {
         </form>
 
         <div className={css.navigationLinks}>
+
+          <Link to="/forgot-password" className={css.navLink}>
+            Forgot your password?
+          </Link>
           <Link to="/signup" className={css.navLink}>
             Sign Up
           </Link>

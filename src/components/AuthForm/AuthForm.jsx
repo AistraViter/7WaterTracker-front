@@ -51,36 +51,29 @@ export default function AuthForm({ isSignUp, onSuccess }) {
         return;
       }
       const requestBody = { email, password };
-      dispatch(signup(requestBody))
-        .then((response) => {
-          if (response.error) {
-            if (response.payload === "Request failed with status code 409") {
-              notification.error({
-                message: "Error",
-                description: "User with this email already exists.",
-              });
-              return;
-            }
+      dispatch(signup(requestBody)).then((response) => {
+        if (response.error) {
+          if (response.payload?.ignoreError) {
             notification.error({
               message: "Error",
-              description: "Registration failed",
+              description: response.payload.message,
             });
-            return;
+          } else {
+            console.error(response.error);
+            notification.error({
+              message: "Error",
+              description: response.payload || "Registration failed",
+            });
           }
-
+        } else {
           notification.success({
             message: "Success",
             description: "Registration successful",
           });
           if (onSuccess) onSuccess();
-        })
-        .catch((error) => {
-          console.log(error);
-          notification.error({
-            message: "Error",
-            description: "Registration failed",
-          });
-        });
+        }
+      });
+
     } else {
       const requestBody = { email, password };
       dispatch(signin(requestBody))

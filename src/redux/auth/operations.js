@@ -12,17 +12,28 @@ const clearAuthHeader = () => {
     };
 
 export const signup = createAsyncThunk(
-    'auth/signup',
-    async (credentials, thunkAPI) => {
-        try {
-            const response = await axios.post('/auth/register', credentials);
-            setAuthHeader(response.data.token)
-            return response.data
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error.message);
-        }
+  "auth/signup",
+  async (credentials, thunkAPI) => {
+    try {
+      const response = await axios.post("/auth/register", credentials);
+      setAuthHeader(response.data.data.accessToken);
+      return response.data.data;
+    } catch (error) {
+      if (error.response && error.response.status === 409) {
+        console.info("Conflict error (409):", error.response.data.data.message); 
+        return thunkAPI.rejectWithValue({
+          message: error.response.data.data.message,
+          ignoreError: true,
+        });
+      } else {
+        console.error("Registration failed:", error.message); 
+        return thunkAPI.rejectWithValue(
+          "Registration failed. Please try again."
+        );
+      }
     }
-  )
+  }
+);
 
   // Авторизация пользователя
 export const signin = createAsyncThunk(
@@ -30,17 +41,32 @@ export const signin = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const response = await axios.post("/auth/login", credentials);
-      setAuthHeader(response.data.token);
-      return response.data;
+      setAuthHeader(response.data.data.accessToken)
+      return response.data.data;
     } catch (error) {
       // Обработка ошибки 401 (Unauthorized)
       if (error.response && error.response.status === 401) {
         return thunkAPI.rejectWithValue("Invalid email or password.");
       }
       return thunkAPI.rejectWithValue(error.message || "An error has occurred.");
+
     }
   }
 );
+
+  export const refresh = createAsyncThunk(
+    'auth/refresh',
+    async (_, thunkAPI) => {
+      try {
+        const response = await axios.post("/auth/refresh");
+        setAuthHeader(response.data.data.accessToken); 
+        return response.data.data; 
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
+  );
+  
 
   export const logout = createAsyncThunk(
     'auth/logout',
