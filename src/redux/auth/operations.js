@@ -40,13 +40,23 @@ export const signin = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const response = await axios.post("/auth/login", credentials);
-      setAuthHeader(response.data.token);
-      return response.data;
+      setAuthHeader(response.data.data.accessToken);
+      return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
+export const refresh = createAsyncThunk("auth/refresh", async (_, thunkAPI) => {
+  try {
+    const response = await axios.post("/auth/refresh");
+    setAuthHeader(response.data.data.accessToken);
+    return response.data.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
 
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {

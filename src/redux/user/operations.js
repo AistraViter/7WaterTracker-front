@@ -5,7 +5,7 @@ export const getUserInfo = createAsyncThunk(
     "user/getUser",
     async (_, thunkAPI) => {
       try {
-        const response = await axios.get('/user');
+        const response = await axios.get('/user/info');
         return response.data.data; // приходить в об'єкт data
       } catch (error) {
         return thunkAPI.rejectWithValue(error.response?.data?.message || 'Failed to get user');
@@ -17,7 +17,7 @@ export const getUserInfo = createAsyncThunk(
     'user/updateUser',
     async (newInfo, thunkAPI) => {
       try {
-        const response = await axios.put('/user', newInfo);
+        const response = await axios.put('/user/info', newInfo);
         return response.data.data; // приходить в об'єкт data
       } catch (error) {
         return thunkAPI.rejectWithValue(error.response?.data?.message || 'Failed to update user');

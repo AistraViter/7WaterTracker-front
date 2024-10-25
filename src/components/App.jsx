@@ -1,31 +1,42 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { refresh } from "../redux/auth/operations.js";
+import { selectIsRefreshing } from "../redux/auth/selectors.js";
 import { lazy, Suspense } from "react";
 import { SharedLayout } from "../components/SharedLayout/SharedLayout.jsx";
-// import { PrivateRoute } from "../components/PrivateRoute/PrivateRoute.jsx";
+import { PrivateRoute } from "../components/PrivateRoute/PrivateRoute.jsx";
 import { RestrictedRoute } from "../components/RestrictedRoute/RestrictedRoute.jsx";
 import Loader from "../components/Loader/Loader.jsx";
 
+
 import css from "./App.module.css";
+
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage.jsx"));
 const SignUpPage = lazy(() => import("../pages/SignupPage/SignupPage.jsx"));
 const SignInPage = lazy(() => import("../pages/SigninPage/SigninPage.jsx"));
 const WelcomePage = lazy(() => import("../pages/WelcomePage/WelcomePage.jsx"));
-{
-  /* писати маршрути нижче */
-}
 
-const NotFoundPage = lazy(() =>
-  import("../pages/NotFoundPage/NotFoundPage.jsx")
-);
+const NotFoundPage = lazy(() =>import("../pages/NotFoundPage/NotFoundPage.jsx"));
 
 export default function App() {
-  return (
+
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
+
+  useEffect(() => {
+    dispatch(refresh());
+  }, [dispatch]);
+
+  return isRefreshing ? (
+    <Loader />
+  ) : (
     <div className={css.app}>
-      {/* замінимо на Loader пізніше  */}
       <Suspense fallback={<Loader loader={true} />}>
         <Routes>
           <Route path="/" element={<SharedLayout />}>
+          <Route index element={<Navigate to="/welcome" replace />} />
             <Route path="/welcome" element={<WelcomePage />}></Route>
             <Route
               path="/signup"
@@ -45,8 +56,15 @@ export default function App() {
                 />
               }
             ></Route>
-            {/* <Route path="/home" element={<PrivateRoute redirectTo="/signin" component={<HomePage />} />}></Route> */}
-            <Route path="/home" element={<HomePage />}></Route>
+            <Route 
+            path="/home" 
+             element={
+                <PrivateRoute 
+                  redirectTo="/signin" 
+                  component={<HomePage />} 
+                  />
+                }
+            ></Route>
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
