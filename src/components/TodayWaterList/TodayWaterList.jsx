@@ -3,7 +3,7 @@ import TodayListModal from "../TodayListModal/TodayListModal.jsx";
 import css from "./TodayWaterList.module.css";
 
 const TodayWaterList = () => {
-  const waterEntries = [
+  const [waterEntries, setWaterEntries] = useState([
     { amount: 250, time: "7:00 AM" },
     { amount: 220, time: "11:00 AM" },
     { amount: 200, time: "2:00 PM" },
@@ -13,16 +13,22 @@ const TodayWaterList = () => {
     { amount: 250, time: "7:00 AM" },
     { amount: 220, time: "11:00 AM" },
     { amount: 200, time: "2:00 PM" },
-  ];
+  ]);
 
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddWater = () => {
-    setIsModalOpen(true); // Open modal on button click
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); // Function to close modal
+    setIsModalOpen(false);
+  };
+
+  const handleDelete = (indexToDelete) => {
+    setWaterEntries((prevEntries) =>
+      prevEntries.filter((_, index) => index !== indexToDelete)
+    );
   };
 
   return (
@@ -34,7 +40,7 @@ const TodayWaterList = () => {
             <div className={css.con1}>
               <p className={css.glassicon}>
                 <svg width="24" height="24" className={css.glassicon}>
-                  <use href="/public/icons.svg#icon-glass" />
+                  <use href="/public/sprite.svg#icon-glass" />
                 </svg>
               </p>
               <div className={css.numbers}>
@@ -48,7 +54,10 @@ const TodayWaterList = () => {
                   <use href="/public/sprite.svg#icon-edit" />
                 </svg>
               </button>
-              <button className={css.delete}>
+              <button
+                className={css.delete}
+                onClick={() => handleDelete(index)}
+              >
                 <svg width="16" height="16" className={css.deleteicon}>
                   <use href="/public/sprite.svg#icon-delete" />
                 </svg>
@@ -58,16 +67,12 @@ const TodayWaterList = () => {
         ))}
       </ul>
       <button onClick={handleAddWater} className={css.add}>
-        <svg width="16" height="16">
-          <use
-            href="/public/sprite.svg#icon-smallplus"
-            className={css.addicon}
-          />
+        <svg width="16" height="16" className={css.addicon}>
+          <use href="/public/sprite.svg#icon-smallplus" />
         </svg>
         Add Water
       </button>
-      {isModalOpen && <TodayListModal closeModal={closeModal} />}{" "}
-      {/* Render modal if open */}
+      {isModalOpen && <TodayListModal closeModal={closeModal} />}
     </div>
   );
 };

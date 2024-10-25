@@ -5,6 +5,7 @@ import DailyNormaModal from "../Modal/DailyNormaModal/DailyNormaModal";
 
 import css from "./DailyNorma.module.css";
 
+
 const DailyNorma = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dailyNorm = useSelector(selectUserDailyNorm);
