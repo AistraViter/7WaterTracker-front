@@ -1,6 +1,6 @@
 import { useState } from "react";
 import css from "./DailyNorma.module.css";
-import DailyNormaModal from "../DailyNormaModal/DailyNormaModal.jsx";
+import DailyNormaModal from "../Modal/DailyNormaModal/DailyNormaModal.jsx";
 
 const DailyNorma = () => {
   const [dailyNorm, setDailyNorm] = useState(1.5); // Default value: 1.5 liters
