@@ -6,7 +6,7 @@
 }
 
 body {
-    background-image: url("/public/images/BkgMobile.png");
+    background-image: url("/images/BkgMobile.png");
     background-size: contain;
     background-position: bottom center; /* Sticks the image to the bottom and centers it */
     background-repeat: no-repeat;
@@ -20,7 +20,7 @@ body {
     }
 
     body {
-        background-image: url("/public/images/BkgTablet.png");
+        background-image: url("/images/BkgTablet.png");
         background-size: auto; /* Keeps the image at its original size */
         background-position: bottom center; /* Sticks the image to the bottom and centers it */
         background-repeat: no-repeat;
@@ -42,6 +42,6 @@ body {
     }
 
     body {
-        background-image: url("/public/images/BkgWeb.png");
+        background-image: url("/images/BkgWeb.png");
     }
 }
