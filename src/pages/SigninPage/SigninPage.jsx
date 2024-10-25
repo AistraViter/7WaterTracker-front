@@ -31,9 +31,6 @@ export default function SignInPage() {
     navigate("/home");
   }
 
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
 
   if (isLoggedIn) {
     navigate("/home");
@@ -49,12 +46,9 @@ export default function SignInPage() {
     } else if (!emailRegex.test(data.email)) {
       errors.email = "Invalid email format";
     }
-
-    if (!data.password) {
-      errors.password = "Password is required";
-    } else if (data.password.length < 6) {
-      errors.password = "Password must be at least 6 characters long";
-    }
+ if (!data.password) {
+   errors.password = "Password is required";
+ }
 
     return errors;
   };
@@ -172,9 +166,7 @@ export default function SignInPage() {
 
         <div className={css.navigationLinks}>
 
-          <Link to="/forgot-password" className={css.navLink}>
-            Forgot your password?
-          </Link>
+      
           <Link to="/signup" className={css.navLink}>
             Sign Up
           </Link>
