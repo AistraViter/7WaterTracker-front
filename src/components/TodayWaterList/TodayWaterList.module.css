@@ -38,7 +38,7 @@
   height: 26px;
   margin: 0px;
   text-align: center;
-  stroke: #407bff;
+  fill: #407bff;
 }
 
 .con1 {
@@ -72,6 +72,13 @@
   align-items: center;
 }
 
+.add:hover {
+  color: #ff9d43;
+  font-size: 18px;
+  line-height: 24px;
+  transition: width 0.3s ease;
+}
+
 .amount {
   font-family: Roboto;
   font-size: 18px;
@@ -90,7 +97,7 @@
   color: #2f2f2f;
 }
 
-.edit {
+/* .edit {
   width: 16px;
   height: 16px;
   border: none;
@@ -102,6 +109,76 @@
   height: 16px;
   border: none;
   background-color: transparent;
+}
+
+.editicon {
+  margin: 0px;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  transform: translate(-45%, -15%);
+  align-self: center;
+}
+
+.deleteicon {
+  margin: 0px;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  transform: translate(-40%, -15%);
+  align-self: center;
+} */
+
+.edit,
+.delete {
+  width: 16px;
+  height: 16px;
+  border: none;
+  background-color: transparent;
+  position: relative; /* Встановлюємо відносне позиціонування для кнопки */
+}
+
+.editicon,
+.deleteicon {
+  margin: 0px;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  align-self: center;
+  /* Забираємо трансформацію, щоб іконки не зміщувались */
+  transform: none;
+}
+
+/* Псевдоелемент для підкреслення */
+.edit::after {
+  content: "";
+  position: absolute;
+  bottom: -4px; /* Розташування лінії під іконкою */
+  left: 50%;
+  transform: translateX(-15%);
+  width: 0%; /* Початково лінія непомітна */
+  height: 1px; /* Товщина лінії */
+  background-color: #9ebbff; /* Колір лінії */
+  border-radius: 4px; /* Робимо кінці округлими */
+  transition: width 0.3s ease; /* Анімація появи */
+}
+.delete::after {
+  content: "";
+  position: absolute;
+  bottom: -4px; /* Розташування лінії під іконкою */
+  left: 50%;
+  transform: translateX(-15%);
+  width: 0%; /* Початково лінія непомітна */
+  height: 1px; /* Товщина лінії */
+  background-color: #ef5050; /* Колір лінії */
+  border-radius: 4px; /* Робимо кінці округлими */
+  transition: width 0.3s ease; /* Анімація появи */
+}
+
+/* Поява лінії при наведенні */
+.edit:hover::after,
+.delete:hover::after {
+  width: 16px; /* Збільшуємо довжину лінії на 100% при наведенні */
 }
 
 /* Кастомізація скролу */
@@ -120,20 +197,10 @@
   border-radius: 8px;
 }
 
-.editicon {
-  margin: 0px;
-  width: 16px;
-  height: 16px;
-  position: relative;
-  transform: translate(-50%, -15%);
-  align-self: center;
-}
-
-.deleteicon {
-  margin: 0px;
-  width: 16px;
-  height: 16px;
-  position: relative;
-  transform: translate(-50%, -15%);
-  align-self: center;
+@media (min-width: 768px) {
+  .listitem {
+    gap: 390px;
+    justify-content: space-between;
+    padding-right: 5px;
+  }
 }

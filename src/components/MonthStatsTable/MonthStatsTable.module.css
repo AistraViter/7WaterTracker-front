@@ -6,7 +6,8 @@
 
 .top {
   display: flex;
-  gap: 66px;
+  justify-content: space-between;
+  margin-bottom: 16px;
 }
 .title {
   font-family: Roboto;
@@ -15,6 +16,7 @@
   line-height: 30px;
   text-align: left;
   color: #2f2f2f;
+  margin: 0px 0px;
 }
 
 .month {
@@ -24,6 +26,7 @@
   line-height: 20px;
   text-align: center;
   color: #407bff;
+  margin: 0px 0px;
 }
 
 .monthheader {
@@ -43,7 +46,7 @@
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  gap: 26px;
+  gap: 16px 26px;
   padding: 0px;
   margin: 0px;
   justify-content: space-between;
@@ -108,4 +111,21 @@
   height: 14px;
   position: relative;
   transform: translate(-51%, -23%);
+}
+
+@media (min-width: 768px) {
+  .monthstatstable {
+    gap: 20px 34px;
+    justify-content: flex-start;
+  }
+  .daynumber {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .monthstatstable {
+    gap: 20px 22px;
+  }
 }

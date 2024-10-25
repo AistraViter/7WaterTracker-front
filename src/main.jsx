@@ -10,13 +10,14 @@ import App from "./components/App.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
-          <HelmetProvider>
+
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <HelmetProvider>
             <App />
-          </HelmetProvider>
-        </BrowserRouter>
-      </PersistGate>
+        </HelmetProvider>
+      </BrowserRouter>
+    </PersistGate>
     </Provider>
   </React.StrictMode>
 );
