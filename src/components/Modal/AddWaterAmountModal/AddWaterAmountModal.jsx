@@ -61,7 +61,7 @@ const AddWaterAmountModal = ({ isOpen, onClose, previousAmount, previousTime, wa
     <div className={css.modalOverlay}>
       <div className={css.modalWindow}>
         <div className={css.headerDiv}>
-          <p className={css.headerTitle}>add the entered amount of water</p>
+          <p className={css.headerTitle}>Add water</p>
           <button className={css.closeButton} onClick={onClose}>
               <svg className={css.closeIcon} aria-label="menu close icon">
                 <use href={`${sprite}#icon-x-mark`}></use>
@@ -82,7 +82,7 @@ const AddWaterAmountModal = ({ isOpen, onClose, previousAmount, previousTime, wa
             >
           {({values, setFieldValue, setFieldTouched }) => (
             <Form className={css.customForm}>
-              <div className={css.statusLine}>
+              {/* <div className={css.statusLine}>
                 <svg className={css.statusLineIcon} >
                   <use href={`${sprite}#icon-group-glass`}></use>
                 </svg>
@@ -90,9 +90,9 @@ const AddWaterAmountModal = ({ isOpen, onClose, previousAmount, previousTime, wa
                     <span className={css.statusLineWaterAmount}>{values.waterAmount}ml</span>
                     {formatTimeToAMPM(values.time)}
                 </p>
-              </div>
+              </div> */}
               <div className={css.amountControls}>
-                <p className={css.sectionTitle}>Correct entered data: </p>
+                <p className={css.sectionTitle}>Choose a value: </p>
                 <div>
                   <p className={css.fieldTitle}>Amount of water:</p>
                   <div className={css.amountControlsRow}>
