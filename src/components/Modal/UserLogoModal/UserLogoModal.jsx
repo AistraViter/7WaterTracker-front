@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { HiCog6Tooth } from "react-icons/hi2";
 import { HiOutlineLogout } from "react-icons/hi";
 import css from "./UserLogoModal.module.css";
-// import UserLogoutModal from "../UserLogoutModal/UserLogoutModal";
-// import SettingModal from "../SettingModal/SettingModal";
+import UserLogoutModal from "../UserLogoutModal/UserLogoutModal";
+import SettingModal from "../SettingModal/SettingModal";
+
 
 const UserLogoModal = () => {
   const modalRef = useRef(null);
+
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(true);
@@ -55,13 +57,11 @@ const UserLogoModal = () => {
           </button>
         </div>
       )}
-      {isSettingsModalOpen && <div>Settings modal</div>}
+      {/* Display SettingModal if open */}
+      {isSettingsModalOpen && (<SettingModal onClose={() => setIsSettingsModalOpen(false)}/>)}
+      {/* <SettingModal/> */}
       {/* компонент SettingModal містить редірект на домашню сторінку.  */}
-      {isLogoutModalOpen && <div>Logout modal</div>}
-      {/* в консолі
-      помилка Uncaught SyntaxError: The requested module
-      '/src/redux/auth/operations.js?t=1729871944280' does not provide an export
-      named 'logOut' (at UserLogoutModal.jsx:3:10) */}
+      {isLogoutModalOpen && (<UserLogoutModal onClose={() => setIsLogoutModalOpen(false)} />)}
     </>
   );
 };

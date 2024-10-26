@@ -1,47 +1,121 @@
-.mainContainer {
-    box-sizing: border-box;
-    align-items: center;
-    margin-top: 24px;
-    margin-bottom: 40px;
+
+.bkgContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  margin: 0 -20px;
+  padding-bottom: 40px;
 }
 
-body {
+.mainContainer {
+  box-sizing: border-box;
+  margin-top: 24px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.bkg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+/*body {
     background-image: url("/images/BkgMobile.png");
     background-size: contain;
-    background-position: bottom center;
+    background-position: bottom center; /* Sticks the image to the bottom and centers it 
     background-repeat: no-repeat;
     background-attachment: scroll;
 }
+*/
 
 /* Media Queries for Tablet (768px) */
 @media (min-width: 768px) {
-    .mainContainer {
-        margin-top: 40px;
-    }
+  .bkgContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+    margin: 0 -32px;
+    padding-bottom: 40px;
+  }
 
-    body {
+  .mainContainer {
+    box-sizing: border-box;
+    margin-top: 40px;
+    width: 704px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: flex-start;
+    position: relative;
+    z-index: 1; /* Залишаємо для правильного порядку */
+  }
+
+  .bkg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0; /* Переносимо фон на задній план */
+  }
+
+  /* body {
         background-image: url("/images/BkgTablet.png");
-        background-size: auto;
-        background-position: bottom center;
+        background-size: auto; /* Keeps the image at its original size 
+        background-position: bottom center; /* Sticks the image to the bottom and centers it 
         background-repeat: no-repeat;
         background-attachment: scroll;
-    }
+    }*/
 }
 
 /* Media Queries for Web (1440px) */
 @media (min-width: 1440px) {
-    .mainContainer {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-end;
-        gap: 80px;
-        padding: 0;
-        margin: 80px 103px;
-        max-width: 1440px;
-    }
+  .bkgContainer {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0 -112px;
+  }
 
-    body {
-        background-image: url("/images/BkgWeb.png");
-    }
+  .mainContainer {
+    box-sizing: border-box;
+    width: 1014px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-start;
+    position: relative;
+    margin: 0;
+    margin-top: 80px;
+    z-index: 1; /* Залишаємо для правильного порядку */
+  }
+
+  .bkg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0; /* Переносимо фон на задній план */
+  }
 }
