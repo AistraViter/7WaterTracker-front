@@ -16,6 +16,7 @@
     color: #407bff;
     max-height: 200px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .listitem {
@@ -62,7 +63,17 @@
     font-weight: 500;
     line-height: 20px;
     text-align: left;
+cursor: pointer;
 }
+
+.add:hover{
+  color: #ff9d43;
+}
+
+.add:hover .addicon{
+  stroke: #ff9d43;
+}
+
 
 .amount {
     font-family: Roboto;
@@ -87,6 +98,41 @@
     height: 16px;
     font-size: 12px;
     text-align: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.editicon {
+  margin: 0px;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  transform: translate(-50%, -15%);
+  align-self: center;
+  padding-bottom: 1px;
+  border-bottom: 1px solid transparent; 
+  transition: border-color 0.3s ease; 
+}
+
+.deleteicon {
+  margin: 0px;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  transform: translate(-50%, -15%);
+  align-self: center;
+  padding-bottom: 1px;
+  border-bottom: 1px solid transparent; 
+  transition: border-color 0.3s ease; 
+}
+
+.edit:hover .editicon{
+  border-bottom-color: #9EBBFF; 
+}
+
+.delete:hover .deleteicon{
+  border-bottom-color: #EF5050; 
 }
 
 .delete {
@@ -94,6 +140,9 @@
     height: 16px;
     font-size: 12px;
     text-align: center;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 /* Кастомізація скролу */

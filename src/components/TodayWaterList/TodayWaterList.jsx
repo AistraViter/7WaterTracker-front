@@ -64,8 +64,21 @@ const TodayWaterList = () => {
         ))}
       </ul>
       <button onClick={handleAddWater} className={css.add}>
-        <svg width="16" height="16" className={css.addicon}>
-          <use href="/sprite.svg#icon-smallplus" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 32 32"
+          fill="none"
+          className={css.addicon}
+        >
+          <path
+            stroke="#407bff"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 6V18M18 12H6"
+            className={css.addicon}
+          />
         </svg>
         Add Water
       </button>
