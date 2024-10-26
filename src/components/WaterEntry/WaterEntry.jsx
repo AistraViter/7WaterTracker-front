@@ -1,6 +1,6 @@
 import css from "../TodayWaterList/TodayWaterList.module.css";
 
-const WaterEntry = ({ dailyNorm, time, id, onEdit, onDelete }) => {
+const WaterEntry = ({ waterVolume, time, id, onEdit, onDelete }) => {
   return (
     <li className={css.listitem}>
       <div className={css.con1}>
@@ -10,7 +10,7 @@ const WaterEntry = ({ dailyNorm, time, id, onEdit, onDelete }) => {
           </svg>
         </p>
         <div className={css.numbers}>
-          <span className={css.amount}>{dailyNorm} ml</span>
+          <span className={css.amount}>{waterVolume} ml</span>
           <span className={css.time}>{time}</span>
         </div>
       </div>
