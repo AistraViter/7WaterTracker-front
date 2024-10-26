@@ -92,7 +92,7 @@
   border: 1px solid #ff9d43;
 }
 .daycell {
-  width: 10%;
+  width: 32px;
   flex: 0 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -120,7 +120,6 @@ fill:#ff9d43;
 }
 
 
-
 .rightarrow {
   width: 14px;
   height: 14px;
@@ -137,6 +136,10 @@ fill:#ff9d43;
   .daynumber {
     width: 34px;
     height: 34px;
+  }
+
+  .daycell{
+    width: 34px;
   }
 }
 

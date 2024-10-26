@@ -4,10 +4,49 @@
 @media (min-width: 1440px) {
 } */
 
-body {
-  background-image: url("./image/mobile/BackgroundMob.png");
+.homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  background-image: url("/src/pages/HomePage/image/mobile/bkg.png");
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
+  background-position-y: -10%;
+  background-size: auto;
+  margin: 0 -20px;
+  padding: 0 20px;
+  padding-bottom: 40px;
+}
+
+.bottle {
+  max-width: 250px;
+ padding: 8px 0 16px 0;
+}
+.topAligned {
+  align-self: flex-start;
+}
+
+.btlPan{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+
+.centeredContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.picture{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .stats {
@@ -17,20 +56,48 @@ body {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  padding: 24px 8px;
 }
 
-
 @media (min-width: 768px) {
-  body {
-    background-image: url("./image/tablet/BackgroundTab.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 23px 28px;
-  }
-
   .homepage {
-    margin: 0px 0px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  background-image: url("/src/pages/HomePage/image/tablet/BackgroundTab.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-position-y: -10%;
+  background-size: auto;
+  margin: 0 -32px;
+  padding: 0 32px;
+  padding-bottom: 44px;
+}
+
+.topAligned {
+  position: absolute; 
+  z-index: 0; 
+}
+
+.bottle {
+  max-width: 518px; 
+  z-index: -1;
+  position: relative;
+  display: block; 
+  margin: 0 auto; 
+  transform: translateY(30px);
+   margin-bottom: 20px;
+}
+
+.centeredContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+   margin-top: 20px;
+}
 
   .stats {
     padding: 32px 24px;
@@ -38,16 +105,38 @@ body {
 }
 
 @media (min-width: 1440px) {
-  body {
-    background-image: url("./image/desctop/BackgroundDesc.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 23px 28px;
-    width: 738px;
-    height: 548px;
-    top: 82px;
-    left: 38.67px;
-    gap: 0px;
-    opacity: 0px;
-  }
+  .homepage {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  background-image: url("/src/pages/HomePage/image/desktop/BackgroundDesc.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-position-y: -10%;
+  background-size: auto;
+  margin: 0 -112px;
+  padding: 0 112px;
+}
+
+.centeredContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 auto;
+   margin-top: 20px;
+   gap: 32px;
+}
+
+.btlPan{
+  gap: 24px;
+}
+
+.stats{
+  max-width: 592px;
+  height: 100%;
+}
+
 }
