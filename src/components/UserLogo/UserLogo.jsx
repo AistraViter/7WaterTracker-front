@@ -27,8 +27,9 @@ export default function UserLogo({ user = {} }) {
           )}
         </div>
         <HiOutlineChevronDown className={css.dropdownIcon} />
+        {isModalOpen && <UserLogoModal closeModal={closeModal} />}
       </div>
-      {isModalOpen && <UserLogoModal closeModal={closeModal} />}
+
     </>
   );
 }
