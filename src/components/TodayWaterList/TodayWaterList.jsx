@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TodayListModal from "../TodayListModal/TodayListModal.jsx";
 import EditWaterAmountModal from "../Modal/EditWaterAmountModal/EditWaterAmountModal.jsx";
 import WaterEntry from "../WaterEntry/WaterEntry.jsx";
 import formatTo12HourTime from "../../utils/formatTo12HourTime.js"
+import filterTodayEntries from "../../utils/filterTodayEntries.js"
 import css from "./TodayWaterList.module.css";
 
 const TodayWaterList = () => {
@@ -14,6 +15,14 @@ const TodayWaterList = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+    // Виконуємо фільтрацію і сортування при завантаженні компонента
+    useEffect(() => {
+      const todayEntries = filterTodayEntries(waterEntries);
+      const sortedEntries = todayEntries.sort((a, b) => new Date(a.date) - new Date(b.date));
+      setWaterEntries(sortedEntries);
+    }, []);
+  
 
   const handleAddWater = () => {
     setIsModalOpen(true);
