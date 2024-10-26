@@ -1,27 +1,35 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import TodayListModal from "../TodayListModal/TodayListModal.jsx";
 import EditWaterAmountModal from "../Modal/EditWaterAmountModal/EditWaterAmountModal.jsx";
 import WaterEntry from "../WaterEntry/WaterEntry.jsx";
-import formatTo12HourTime from "../../utils/formatTo12HourTime.js"
-import filterTodayEntries from "../../utils/filterTodayEntries.js"
+import formatTo12HourTime from "../../utils/formatTo12HourTime.js";
+import {getWaterNotes} from "../../redux/water/operations.js"
 import css from "./TodayWaterList.module.css";
 
 const TodayWaterList = () => {
-  const [waterEntries, setWaterEntries] = useState([
-    { id: "15", dailyNorm: 250, date: "2024-10-26T10:59:33.361Z" },
-    { id: "17", dailyNorm: 220, date: "2024-10-26T20:59:33.361Z" },
-    { id: "25", dailyNorm: 200, date: "2024-10-25T00:59:33.361Z" },
-  ]);
-
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token); // Отримання токена з Redux
+  const [waterEntries, setWaterEntries] = useState([]); // Порожній масив як початковий стан
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    // Виконуємо фільтрацію і сортування при завантаженні компонента
-    useEffect(() => {
-      const todayEntries = filterTodayEntries(waterEntries);
-      const sortedEntries = todayEntries.sort((a, b) => new Date(a.date) - new Date(b.date));
-      setWaterEntries(sortedEntries);
-    }, []);
+
+  useEffect(() => {
+    const fetchWaterNotes = async () => {
+      try {
+        const data = await dispatch(getWaterNotes(token)).unwrap();
+        const todayEntries = data.filter(entry => new Date(entry.date).toISOString().startsWith(new Date().toISOString().split("T")[0]));
+        const sortedEntries = todayEntries.sort((a, b) => new Date(a.date) - new Date(b.date));
+        setWaterEntries(sortedEntries);
+      } catch (error) {
+        console.error("Error fetching water notes:", error); // Логування помилки
+      }
+    };
+
+    fetchWaterNotes();
+  }, [dispatch, token]); // Залежності
   
 
   const handleAddWater = () => {
@@ -32,9 +40,9 @@ const TodayWaterList = () => {
     setIsModalOpen(false);
   };
 
-  const handleDelete = (indexToDelete) => {
+  const handleDelete = (idToDelete) => {
     setWaterEntries((prevEntries) =>
-      prevEntries.filter((_, index) => index !== indexToDelete)
+      prevEntries.filter((waterEntries) => waterEntries.id !== idToDelete)
     );
   };
 

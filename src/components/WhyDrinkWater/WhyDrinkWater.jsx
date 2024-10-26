@@ -1,5 +1,4 @@
 import css from "../WhyDrinkWater/WhyDrinkWater.module.css";
-import React from "react";
 
 export const WhyDrinkWater = () => {
     return (
