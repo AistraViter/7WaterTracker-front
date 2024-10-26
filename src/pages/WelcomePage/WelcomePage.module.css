@@ -1,13 +1,16 @@
 .mainContainer {
+    box-sizing: border-box;
+    align-items: center;
     margin-top: 24px;
+    margin-bottom: 40px;
 }
 
 body {
-    background-image: url("./images/BkgMobile.png");
+    background-image: url("/images/BkgMobile.png");
     background-size: contain;
     background-position: bottom center; /* Sticks the image to the bottom and centers it */
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: scroll;
 }
 
 /* Media Queries for Tablet (768px) */
@@ -17,23 +20,28 @@ body {
     }
 
     body {
-        background-image: url("./images/BkgTablet.png");
+        background-image: url("/images/BkgTablet.png");
         background-size: auto; /* Keeps the image at its original size */
         background-position: bottom center; /* Sticks the image to the bottom and centers it */
         background-repeat: no-repeat;
-        background-attachment: fixed;
+        background-attachment: scroll;
     }
 }
 
-/* Media Queries for Desktop (1440px) */
+/* Media Queries for Web (1440px) */
 @media (min-width: 1440px) {
     .mainContainer {
         display: flex;
         flex-direction: row;
-        /* gap: 80px; */
-        margin-top: 80px;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 80px;
+        padding: 0;
+        margin: 80px 103px;
+        max-width: 1440px;
     }
+
     body {
-        background-image: url("./images/BkgWeb.png");
+        background-image: url("/images/BkgWeb.png");
     }
 }
