@@ -1,14 +1,14 @@
 import { useState } from "react";
 import TodayListModal from "../TodayListModal/TodayListModal.jsx";
-import EditWaterAmountModal from '../Modal/EditWaterAmountModal/EditWaterAmountModal.jsx';
-import WaterEntry from '../WaterEntry/WaterEntry.jsx';
+import EditWaterAmountModal from "../Modal/EditWaterAmountModal/EditWaterAmountModal.jsx";
+import WaterEntry from "../WaterEntry/WaterEntry.jsx";
 import css from "./TodayWaterList.module.css";
 
 const TodayWaterList = () => {
   const [waterEntries, setWaterEntries] = useState([
-    { amount: 250, time: "7:00 AM" },
-    { amount: 220, time: "11:00 AM" },
-    { amount: 200, time: "2:00 PM" },
+    { id: "15", dailyNorm: 250, time: "7:00 AM" },
+    { id: "17", dailyNorm: 220, time: "11:00 AM" },
+    { id: "25", dailyNorm: 200, time: "2:00 PM" },
   ]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,13 +35,13 @@ const TodayWaterList = () => {
     <div className={css.todaywaterlist}>
       <h3 className={css.title}>Today</h3>
       <ul className={css.list}>
-        {waterEntries.map((entry, index) => (
-          <WaterEntry 
-            key={index} 
-            entry={entry} 
-            index={index} 
-            onEdit={openEditWaterModal} 
-            onDelete={handleDelete} 
+        {waterEntries.map((waterEntries) => (
+          <WaterEntry
+            key={waterEntries.id} // використання унікального id для ключа
+            dailyNorm={waterEntries.dailyNorm} // передаємо значення dailyNorm
+            time={waterEntries.time} // передаємо значення часу
+            onEdit={openEditWaterModal}
+            onDelete={() => handleDelete(waterEntries.id)}
           />
         ))}
       </ul>
@@ -52,7 +52,12 @@ const TodayWaterList = () => {
         Add Water
       </button>
       {isModalOpen && <TodayListModal closeModal={closeModal} />}
-      {isEditModalOpen && <EditWaterAmountModal isOpen={isEditModalOpen} onClose={closeEditWaterModal} />}
+      {isEditModalOpen && (
+        <EditWaterAmountModal
+          isOpen={isEditModalOpen}
+          onClose={closeEditWaterModal}
+        />
+      )}
     </div>
   );
 };
