@@ -39,8 +39,8 @@ export default function DailyNormaModal({ isOpen, onRequestClose }) {
 
   const handleSubmit = async (_, actions) => {
     await dispatch(updateUserDailyNorm(dailyNorma));
-
     actions.resetForm();
+    onRequestClose();
   };
 
   const handleCloseModal = () => {
