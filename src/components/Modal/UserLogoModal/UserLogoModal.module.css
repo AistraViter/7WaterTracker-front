@@ -8,8 +8,9 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.2);
   position: absolute;
-  top: 64px;
-  right: 20px;
+  top: 100%;
+  left: 0;
+  transform: translateY(8px);
   z-index: 2;
 }
 
@@ -44,14 +45,14 @@
 }
 
 @media screen and (min-width: 768px) {
-  .dropdownMenu {
+  /* .dropdownMenu {
     right: 32px;
-  }
+  } */
 }
 
 @media screen and (min-width: 1440px) {
-  .dropdownMenu {
+  /* .dropdownMenu {
     top: 68px;
     right: 112px;
-  }
+  } */
 }
