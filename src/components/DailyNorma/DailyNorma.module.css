@@ -53,6 +53,11 @@
   text-align: left;
   color: #8baeff;
   margin: 0px;
+  cursor: pointer;
+}
+
+.btn:hover{
+  color: #FF9D43;
 }
 
 @media (min-width: 768px) {
