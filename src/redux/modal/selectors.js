@@ -1,3 +1,7 @@
-export const selectLogOutModal = (state) => state.modal.islogOutModal;
-export const selectIsSettingModalOpen = (state) =>
-  state.modal.isSettingModalOpen;
+export const selectLogOutModal = (state) => {
+  console.log('Redux State:', state);
+  return state.modal.isLogOutModal;
+};
+export const selectIsSettingModalOpen = (state) => {
+  return state.modal.isSettingModalOpen;
+};
