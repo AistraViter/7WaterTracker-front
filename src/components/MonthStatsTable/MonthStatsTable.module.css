@@ -4,6 +4,7 @@
 @media (min-width: 1440px) {
 } */
 
+
 .top {
   display: flex;
   justify-content: space-between;
@@ -105,12 +106,27 @@
   height: 14px;
   position: relative;
   transform: translate(-51%, -23%);
+  cursor: pointer;
 }
+
+.leftarrow:hover path{
+stroke: #ff9d43;
+fill:#ff9d43;
+}
+
+.rightarrow:hover path{
+stroke: #ff9d43;
+fill:#ff9d43;
+}
+
+
+
 .rightarrow {
   width: 14px;
   height: 14px;
   position: relative;
   transform: translate(-51%, -23%);
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {
