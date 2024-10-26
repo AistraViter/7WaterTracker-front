@@ -5,7 +5,7 @@ import css from "./UserLogoModal.module.css";
 import UserLogoutModal from "../UserLogoutModal/UserLogoutModal";
 import SettingModal from "../SettingModal/SettingModal";
 import { useDispatch } from "react-redux";
-import { logOutModal } from "../../../redux/modal/slice";
+import { logOutModal, settingModal } from "../../../redux/modal/slice";
 
 
 const UserLogoModal = () => {
@@ -13,7 +13,7 @@ const UserLogoModal = () => {
   const dispatch = useDispatch();
 
   // const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+  // const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(true);
 
   const handleLogoutClick = (event) => {
@@ -26,14 +26,15 @@ const UserLogoModal = () => {
 
   const handleSettingsClick = (event) => {
     event.stopPropagation();
-    setIsSettingsModalOpen(true);
+    dispatch(settingModal());
+    // setIsSettingsModalOpen(true);
   };
 
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
       setIsDropdownOpen(false);
       // setIsLogoutModalOpen(false);
-      setIsSettingsModalOpen(false);
+      // setIsSettingsModalOpen(false);
     }
   };
 
@@ -41,7 +42,7 @@ const UserLogoModal = () => {
     if (event.key === "Escape") {
       setIsDropdownOpen(false);
       // setIsLogoutModalOpen(false);
-      setIsSettingsModalOpen(false);
+      // setIsSettingsModalOpen(false);
     }
   };
 
@@ -70,7 +71,8 @@ const UserLogoModal = () => {
         </div>
       )}
       {/* Display SettingModal if open */}
-      {isSettingsModalOpen && (<SettingModal onClose={() => setIsSettingsModalOpen(false)}/>)}
+      {/* {isSettingsModalOpen && (<SettingModal onClose={() => setIsSettingsModalOpen(false)}/>)} */}
+      <SettingModal/>
       {/* <SettingModal/> */}
       {/* компонент SettingModal містить редірект на домашню сторінку.  */}
       {/* {isLogoutModalOpen && (<UserLogoutModal onClose={() => setIsLogoutModalOpen(false)} />)} */}
