@@ -31,10 +31,10 @@ const SettingModal = () => {
   const [isSubmitBlocked, setIsSubmitBlocked] = useState(false);
 
   const initialValues = {
-    email: user.email || "",
-    name: user.name || "",
-    gender: user.gender,
-    avatar: user.avatar || "",
+    email: user ? user.email : "", 
+    name: user ? user.name: "",
+    gender: user ? user.gender: "",
+    avatar: user ? user.avatar : "",
     outdatedPassword: "",
     password: "",
     repeatPassword: "",
@@ -216,7 +216,7 @@ const SettingModal = () => {
             }}
           >
             <YourPhoto
-              avatar={user.avatar}
+              avatar={user?.avatar || ""}
               isSubmitBlocked={isSubmitBlocked}
               handleAvatarChange={handleAvatarChange}
             />
