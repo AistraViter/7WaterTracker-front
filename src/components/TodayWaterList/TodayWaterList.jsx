@@ -2,13 +2,14 @@ import { useState } from "react";
 import TodayListModal from "../TodayListModal/TodayListModal.jsx";
 import EditWaterAmountModal from "../Modal/EditWaterAmountModal/EditWaterAmountModal.jsx";
 import WaterEntry from "../WaterEntry/WaterEntry.jsx";
+import formatTo12HourTime from "../../utils/formatTo12HourTime.js"
 import css from "./TodayWaterList.module.css";
 
 const TodayWaterList = () => {
   const [waterEntries, setWaterEntries] = useState([
-    { id: "15", dailyNorm: 250, time: "7:00 AM" },
-    { id: "17", dailyNorm: 220, time: "11:00 AM" },
-    { id: "25", dailyNorm: 200, time: "2:00 PM" },
+    { id: "15", dailyNorm: 250, date: "2024-10-26T10:59:33.361Z" },
+    { id: "17", dailyNorm: 220, date: "2024-10-26T20:59:33.361Z" },
+    { id: "25", dailyNorm: 200, date: "2024-10-25T00:59:33.361Z" },
   ]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,7 +40,7 @@ const TodayWaterList = () => {
           <WaterEntry
             key={waterEntries.id} // використання унікального id для ключа
             dailyNorm={waterEntries.dailyNorm} // передаємо значення dailyNorm
-            time={waterEntries.time} // передаємо значення часу
+            time={formatTo12HourTime(waterEntries.date)} // передаємо значення часу
             onEdit={openEditWaterModal}
             onDelete={() => handleDelete(waterEntries.id)}
           />
