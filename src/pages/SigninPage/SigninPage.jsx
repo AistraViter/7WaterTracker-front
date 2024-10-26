@@ -43,8 +43,6 @@ export default function SignInPage() {
 
     if (!data.password) {
       errors.password = "Password is required";
-    } else if (data.password.length < 6) {
-      errors.password = "Password must be at least 6 characters long";
     }
 
     return errors;
@@ -88,7 +86,9 @@ export default function SignInPage() {
               value={formData.email}
               onChange={handleChange}
               placeholder="E-mail"
-              className={`${css.inputField} ${errors.email ? css.invalid : ""}`}
+              className={`${css.inputField} ${
+                errors.email ? css.inputError : ""
+              }`}
             />
             {errors.email && <p className={css.error}>{errors.email}</p>}
           </div>
@@ -102,9 +102,11 @@ export default function SignInPage() {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Password"
-                className={`${css.inputField} ${errors.password ? css.invalid : ""}`}
+                className={`${css.inputField} ${
+                  errors.password ? css.inputError : ""
+                }`}
               />
-               <span
+              <span
                 onClick={togglePasswordVisibility}
                 className={css.passwordToggleIcon}
               >
@@ -157,9 +159,6 @@ export default function SignInPage() {
         </form>
 
         <div className={css.navigationLinks}>
-          <Link to="/forgot-password" className={css.navLink}>
-            Forgot your password?
-          </Link>
           <Link to="/signup" className={css.navLink}>
             Sign Up
           </Link>
