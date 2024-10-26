@@ -16,7 +16,6 @@ const HomePage = () => {
   return (
     <div className={css.homepage}>
       <DocumentTitle>Home</DocumentTitle>
-
       <DailyNorma />
       {/* <div className={css.bottleimg}></div> */}
       <WaterRatioPanel />

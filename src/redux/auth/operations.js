@@ -4,7 +4,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 axios.defaults.baseURL = "https://sevenwatertracker-back-1.onrender.com";
 
 const setAuthHeader = (token) => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 const clearAuthHeader = () => {
@@ -40,7 +41,9 @@ export const signin = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const response = await axios.post("/auth/login", credentials);
-      setAuthHeader(response.data.data.accessToken);
+    const token = setAuthHeader(response.data.data.accessToken);
+      console.log("Токен після реєстрації:", token);
+
       return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

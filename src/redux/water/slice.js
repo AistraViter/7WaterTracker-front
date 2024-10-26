@@ -7,11 +7,12 @@ import {
   getWaterToday,
   getWaterMonth
  } from "./operations.js";
+
 const waterSlice = createSlice({
     name: 'water',
     initialState: {
-        notes: [ ], // для зберігання даних про воду
-        monthlyData: [ ], // для зберігання даних за місяць
+        notes: [], // для зберігання даних про воду
+        monthlyData: [], // для зберігання даних за місяць
         percentage: 0, // для зберігання проценту спожитої води за сьогодні
         loading: false,
         error: null,
@@ -26,7 +27,7 @@ const waterSlice = createSlice({
       .addCase(getWaterNotes.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.notes = action.payload;
+        state.notes = action.payload?.data || []; // Перевірка наявності `data`
       })
       .addCase(getWaterNotes.rejected, (state, action) => {
         state.loading = false;
@@ -40,7 +41,7 @@ const waterSlice = createSlice({
       .addCase(postWaterNote.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.notes.push(action.payload); 
+        state.notes.push(action.payload?.data || {}); // Перевірка наявності `data`
       })
       .addCase(postWaterNote.rejected, (state, action) => {
         state.loading = false;
@@ -54,9 +55,10 @@ const waterSlice = createSlice({
       .addCase(updateWaterNote.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        const index = state.notes.findIndex(note => note._id === action.payload._id);
+        const updatedNote = action.payload?.data || {}; // Перевірка наявності `data`
+        const index = state.notes.findIndex(note => note._id === updatedNote._id);
         if (index !== -1) {
-          state.notes[index] = action.payload;
+          state.notes[index] = updatedNote;
         }
       })
       .addCase(updateWaterNote.rejected, (state, action) => {
@@ -85,8 +87,8 @@ const waterSlice = createSlice({
       .addCase(getWaterToday.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.notes = action.payload.notes; // Оновлюємо записи про воду
-        state.percentage = action.payload.percentage; // Виводимо відсотки
+        state.notes = action.payload?.data?.notes || []; // Перевірка наявності `data.notes`
+        state.percentage = action.payload?.data?.percentage || 0; // Перевірка наявності `data.percentage`
       })
       .addCase(getWaterToday.rejected, (state, action) => {
         state.loading = false;
@@ -100,13 +102,13 @@ const waterSlice = createSlice({
       .addCase(getWaterMonth.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.monthlyData = action.payload;
+        state.monthlyData = action.payload?.data || []; // Перевірка наявності `data`
       })
       .addCase(getWaterMonth.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      })
+      });
     },
   });
-  
-  export const waterReducer = waterSlice.reducer;
+
+export const waterReducer = waterSlice.reducer;

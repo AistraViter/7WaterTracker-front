@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
 
-import { timeOptions, formatTimeToAMPM, getCurrentTime, fetchWaterData, handleTimeFocus } from './editWaterDataUtils';
+import { timeOptions, formatTimeToAMPM, getCurrentTime, fetchWaterData, handleTimeFocus } from './addWaterDataUtils';
 import sprite from './img/icons/symbol-defs.svg';
-import css from './EditWaterAmountModal.module.css';
+import css from './AddWaterAmountModal.module.css';
 
-const EditWaterAmountModal = ({ isOpen, onClose, previousAmount, previousTime, waterId }) => {
+const AddWaterAmountModal = ({ isOpen, onClose, previousAmount, previousTime, waterId }) => {
 
     const validationSchema = Yup.object().shape({
         waterAmount: Yup.number()
@@ -61,7 +61,7 @@ const EditWaterAmountModal = ({ isOpen, onClose, previousAmount, previousTime, w
     <div className={css.modalOverlay}>
       <div className={css.modalWindow}>
         <div className={css.headerDiv}>
-          <p className={css.headerTitle}>Edit the entered amount of water</p>
+          <p className={css.headerTitle}>add the entered amount of water</p>
           <button className={css.closeButton} onClick={onClose}>
               <svg className={css.closeIcon} aria-label="menu close icon">
                 <use href={`${sprite}#icon-x-mark`}></use>
@@ -194,7 +194,7 @@ const EditWaterAmountModal = ({ isOpen, onClose, previousAmount, previousTime, w
   )
 } 
 
-EditWaterAmountModal.propTypes = {
+AddWaterAmountModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   previousAmount: PropTypes.number,
@@ -202,4 +202,4 @@ EditWaterAmountModal.propTypes = {
   waterId: PropTypes.string // .isRequired // add after debugging
 }
 
-export default EditWaterAmountModal
+export default AddWaterAmountModal

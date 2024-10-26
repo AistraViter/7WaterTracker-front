@@ -1,8 +1,9 @@
 {
-  "name": "goit-react-hw-06",
+  "name": "watertracker-front",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "proxy": "https://sevenwatertracker-back-1.onrender.com",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import EditWaterAmountModal from "../Modal/EditWaterAmountModal/EditWaterAmountModal.jsx";
+import AddWaterAmountModal from "../Modal/AddWaterAmountModal/AddWaterAmountModal.jsx";
 import { useSelector } from "react-redux";
 import { selectWaterPercentage } from "../../redux/water/selectors.js";
 
@@ -66,17 +66,20 @@ const WaterRatioPanel = () => {
               style={{ left: `${waterPercantage}%` }}
             ></div>
           </div>
-        </div> {/* Закриваючий тег для блоку data */}
-
+        </div>{" "}
+        {/* Закриваючий тег для блоку data */}
         <button onClick={handleAddWater} className={css.btn}>
           <svg width="24" height="24" className={css.plusicon}>
             <use href="/sprite.svg#icon-add" />
           </svg>
           Add Water
         </button>
-
-        <EditWaterAmountModal isOpen={isModalOpen} onCloseRequest={closeModal} />
-      </div> {/* Закриваючий тег для блоку container */}
+        <AddWaterAmountModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+        />
+        
+      </div>
     </div>
   );
 };

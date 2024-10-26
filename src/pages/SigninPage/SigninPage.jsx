@@ -77,6 +77,8 @@ export default function SignInPage() {
       <div className={css.formWrapper}>
         <h1>Sign In</h1>
         {error && <p className={css.error}>{error}</p>}
+
+        {/* Форма для логінізації */}
         <form onSubmit={handleSubmit} className={css.authForm}>
           <div className={css.formGroup}>
             <label className={css.label}>Enter your email</label>
