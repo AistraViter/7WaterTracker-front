@@ -43,6 +43,7 @@ const EditWaterAmountModal = ({ isOpen, onClose, previousAmount, previousTime, w
     };
   
     useEffect (() => {
+      console.log('Water ID:', waterId);
       const getWaterData = async () => {
         if (waterId) {
           try {
