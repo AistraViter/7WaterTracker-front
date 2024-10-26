@@ -42,7 +42,7 @@ const TodayWaterList = () => {
 
   const handleDelete = (idToDelete) => {
     setWaterEntries((prevEntries) =>
-      prevEntries.filter((waterEntries) => waterEntries.id !== idToDelete)
+      prevEntries.filter((waterEntries) => waterEntries._id !== idToDelete)
     );
   };
 
@@ -55,11 +55,11 @@ const TodayWaterList = () => {
       <ul className={css.list}>
         {waterEntries.map((waterEntries) => (
           <WaterEntry
-            key={waterEntries.id} // використання унікального id для ключа
+            key={waterEntries._id} // використання унікального id для ключа
             dailyNorm={waterEntries.dailyNorm} // передаємо значення dailyNorm
             time={formatTo12HourTime(waterEntries.date)} // передаємо значення часу
             onEdit={openEditWaterModal}
-            onDelete={() => handleDelete(waterEntries.id)}
+            onDelete={() => handleDelete(waterEntries._id)}
           />
         ))}
       </ul>
