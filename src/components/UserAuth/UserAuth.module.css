@@ -4,11 +4,11 @@
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 18px;
-  color: #407bff;
+  color: #407BFF;
 }
 
 .signup:hover {
-  color: #ff9d43;
+  color: #FF9D43;
 }
 
 .link {
@@ -19,5 +19,5 @@
 
 .icon {
   fill: none;
-  stroke: black;
+  stroke: black
 }
