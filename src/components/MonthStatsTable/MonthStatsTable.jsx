@@ -60,6 +60,10 @@ const MonthStatsTable = () => {
     );
   };
 
+   const handleClose = () => {
+     setSelectedDay(null); // Закриваємо панель
+   };
+
   return (
     <div className={css.monthstatscontainer}>
       <div className={css.top}>
@@ -117,7 +121,7 @@ const MonthStatsTable = () => {
             </div>
             <div className={css.progresspercentage}>{day.progress}%</div>
             {selectedDay && selectedDay.date === day.date && (
-              <DaysGeneralStats dayData={selectedDay} />
+              <DaysGeneralStats dayData={selectedDay} onClose={handleClose} />
             )}
           </li>
         ))}
