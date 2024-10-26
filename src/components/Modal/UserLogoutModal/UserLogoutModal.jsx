@@ -8,6 +8,7 @@ import { closeModal } from "../../../redux/modal/slice";
 export default function UserLogoutModal() {
   const dispatch = useDispatch();
   const modalIsOpen = useSelector(selectLogOutModal);
+  console.log("Modal is open:", modalIsOpen);
 
   return (
     <ModalContainer
@@ -16,9 +17,12 @@ export default function UserLogoutModal() {
       buttonClassLogout={true}
       className={css.modalContent}
     >
-      <div className={css.modal}>
-        <h2 className={css.title}>Log out</h2>
-        <h3 className={css.text}>Do you really want to leave?</h3>
+    {modalIsOpen && ( 
+      <div className={css.modalUserLogout}>
+        <div className={css.textBlock}>
+          <h2 className={css.title}>Log out</h2>
+          <h3 className={css.text}>Do you really want to leave?</h3>
+        </div>
         <div className={css.modalButtons}>
           <button
             className={css.buttonCancel}
@@ -37,6 +41,7 @@ export default function UserLogoutModal() {
           </button>
         </div>
       </div>
+    )}
     </ModalContainer>
   );
 }

@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const modalSlice = createSlice({
-  name: "modal",
+  name: 'modal',
   initialState: {
     isModalOpen: false,
     isSettingModalOpen: false,
-    islogOutModal: false,
+    isLogOutModal: false,
   },
   reducers: {
     openModal: (state) => {
@@ -14,13 +14,13 @@ const modalSlice = createSlice({
     closeModal: (state) => {
       state.isModalOpen = false;
       state.isSettingModalOpen = false;
-      state.islogOutModal = false;
+      state.isLogOutModal = false;
     },
     settingModal: (state) => {
       state.isSettingModalOpen = true;
     },
     logOutModal: (state) => {
-      state.islogOutModal = true;
+      state.isLogOutModal = true;
     },
   },
 });
