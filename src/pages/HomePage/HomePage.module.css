@@ -4,17 +4,21 @@
 @media (min-width: 1440px) {
 } */
 
-
+body {
+  background-image: url("./image/mobile/BackgroundMob.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
 .stats {
-  max-width: 100%;
+  /* max-width: 100%; */
   background-color: #ecf2ff;
   box-shadow: 0px 4px 14px 0px #407bff4d;
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding: 24px 8px;
 }
+
 
 @media (min-width: 768px) {
   body {
@@ -39,5 +43,11 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 23px 28px;
+    width: 738px;
+    height: 548px;
+    top: 82px;
+    left: 38.67px;
+    gap: 0px;
+    opacity: 0px;
   }
 }
