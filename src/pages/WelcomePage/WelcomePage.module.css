@@ -8,7 +8,7 @@
 body {
     background-image: url("/images/BkgMobile.png");
     background-size: contain;
-    background-position: bottom center; /* Sticks the image to the bottom and centers it */
+    background-position: bottom center;
     background-repeat: no-repeat;
     background-attachment: scroll;
 }
@@ -21,8 +21,8 @@ body {
 
     body {
         background-image: url("/images/BkgTablet.png");
-        background-size: auto; /* Keeps the image at its original size */
-        background-position: bottom center; /* Sticks the image to the bottom and centers it */
+        background-size: auto;
+        background-position: bottom center;
         background-repeat: no-repeat;
         background-attachment: scroll;
     }
