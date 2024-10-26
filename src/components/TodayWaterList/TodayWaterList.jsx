@@ -56,7 +56,7 @@ const TodayWaterList = () => {
         {waterEntries.map((waterEntries) => (
           <WaterEntry
             key={waterEntries._id} // використання унікального id для ключа
-            dailyNorm={waterEntries.dailyNorm} // передаємо значення dailyNorm
+            waterVolume={waterEntries.waterVolume} // передаємо значення dailyNorm
             time={formatTo12HourTime(waterEntries.date)} // передаємо значення часу
             onEdit={openEditWaterModal}
             onDelete={() => handleDelete(waterEntries._id)}
