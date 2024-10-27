@@ -21,7 +21,7 @@ const DailyNorma = () => {
     <div className={css.dailynorma}>
       <h3 className={css.title}>My daily norma</h3>
       <div className={css.data}>
-        <p className={css.norma}>{dailyNorm} L</p>
+        <p className={css.norma}>{(dailyNorm / 1000).toFixed(1)} L</p>
         <button onClick={handleEditClick} className={css.btn}>
           Edit
         </button>
