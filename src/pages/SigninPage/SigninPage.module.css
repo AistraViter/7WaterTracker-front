@@ -7,7 +7,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-position-y: -6%;
+  background-position-y: -5.36%;
   background-size: auto;
   margin: 0 -20px;
 }
@@ -93,9 +93,9 @@ h1 {
 }
 
 .bottle {
-  max-width: 280px;
+  max-width: 250px;
   position: absolute;
-  bottom: -48%;
+  top: 93%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
@@ -167,8 +167,7 @@ h1 {
 }
 
 .navLink:hover {
-  text-decoration: underline;
-  color: #0056b3; /* Цвет ссылки при наведении */
+  color: #ff9d43;
 }
 
 @media (min-width: 768px) {
@@ -179,14 +178,14 @@ h1 {
     flex-direction: row;
     justify-content: flex-start;
     background-image: url("/src/pages/SignupPage/image/circlesTablet.png");
-    background-position-y: -90%;
+    background-position-y: -18.5%;
     margin: 0 -32px;
   }
 
   .bottle {
-    max-width: 660px;
+     max-width: 640px;
     position: absolute;
-    bottom: -27%;
+    top: 0%;
     left: 57%;
     transform: translateX(-50%);
     z-index: 1;
@@ -211,10 +210,10 @@ h1 {
   }
 
   .bottle {
-    max-width: 916px;
+    max-width: 870px;
     position: absolute;
     bottom: 0%;
-    left: 32%;
+    left: 34%;
     transform: translateX(-50%);
     z-index: 1;
   }
