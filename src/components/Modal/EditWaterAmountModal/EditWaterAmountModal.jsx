@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import EditWaterAmountForm from "../../EditWaterAmountForm/EditWaterAmountForm.jsx";
+import convertTo24HourFormat from "../../../utils/convertTo24HourFormat.js";
+import formatDate  from "../../../utils/formatDate.js";
 import {
   fetchWaterData,
   getCurrentTime,
@@ -9,26 +11,6 @@ import {
 import css from "./EditWaterAmountModal.module.css";
 import sprite from "./img/icons/symbol-defs.svg";
 import { updateWaterNote } from "../../../redux/water/operations.js";
-
-const formatTimeToDate = (time) => {
-  const [timePart, modifier] = time.split(" ");
-  let [hours, minutes] = timePart.split(":").map(Number);
-
-  if (modifier === "PM" && hours < 12) {
-    hours += 12;
-  }
-  if (modifier === "AM" && hours === 12) {
-    hours = 0;
-  }
-
-  const today = new Date();
-  today.setHours(hours);
-  today.setMinutes(minutes);
-  today.setSeconds(0);
-  today.setMilliseconds(0);
-
-  return today.toISOString(); // Повертаємо у форматі ISO 8601
-};
 
 const EditWaterAmountModal = ({
   isOpen,
@@ -46,11 +28,13 @@ const EditWaterAmountModal = ({
   const [selectedTime, setSelectedTime] = useState("");
 
   const handleSave = async (waterVolume, time) => {
-    const formattedDate = formatTimeToDate(time);
-  
-    const payload = { _id: waterId, waterVolume, date: formattedDate };
+    const formattedTime = convertTo24HourFormat(time);
+    const formattedDate = formatDate(new Date());
+
+
+    const payload = { _id: waterId, waterVolume, time: formattedTime, date: formattedDate };
     console.log("Payload being sent:", payload);
-  
+
     try {
       const response = await dispatch(updateWaterNote(payload)).unwrap();
       console.log("WaterNote successfully saved:", response);
@@ -59,7 +43,7 @@ const EditWaterAmountModal = ({
       console.error("Error on saving data:", error);
     }
   };
-  
+
   // useEffect для отримання даних
   useEffect(() => {
     const getWaterData = async () => {
