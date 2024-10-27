@@ -31,7 +31,7 @@ const AddWaterAmountModal = ({ isOpen, onClose, previousAmount, previousTime, wa
 
     const handleSave = async (amount, time) => { 
       try {
-        const response = await axios.patch(`/api/water/note/${waterId}`, {
+        const response = await axios.post(`/api/water/note`, {
           amount: amount,
           time: time,
         })
@@ -80,7 +80,7 @@ const AddWaterAmountModal = ({ isOpen, onClose, previousAmount, previousTime, wa
             await handleSave(values.waterAmount, values.time)
           }}
             >
-          {({values, setFieldValue, setFieldTouched }) => (
+          {({values, setFieldValue, setFieldTouched, errors, touched }) => (
             <Form className={css.customForm}>
               {/* <div className={css.statusLine}>
                 <svg className={css.statusLineIcon} >
@@ -169,7 +169,7 @@ const AddWaterAmountModal = ({ isOpen, onClose, previousAmount, previousTime, wa
                     name='waterAmount'
                     id='amount'
                     value={values.waterAmount}
-                    className = {css.inputField}
+                    className = {`${css.inputField} ${touched.waterAmount && errors.waterAmount ? css.inputError : ''}`}
                     onChange={(e) => {
                       const value = parseInt(e.target.value, 10);
                       if (!isNaN(value)) {
@@ -179,11 +179,14 @@ const AddWaterAmountModal = ({ isOpen, onClose, previousAmount, previousTime, wa
                       }
                     }}
                     onBlur={() => setFieldTouched('waterAmount', true)}
-                  />
+                    />
+                    {touched.waterAmount && errors.waterAmount && (
+                      <div className={css.errorText}>{errors.waterAmount}</div>
+                    )}
               </div>
               <div className={css.submitButtonSection}>
                 <p className={css.submitButtonAmount}>{values.waterAmount}ml</p>
-                <button type='submit' className={css.saveButton}>Save</button>
+                <button type='submit' className={css.saveButton} onClick={onClose}>Save</button>
               </div>
             </Form>
           )}

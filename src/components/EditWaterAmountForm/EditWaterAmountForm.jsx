@@ -38,7 +38,7 @@ const EditWaterAmountForm = ({
           validateOnChange={true}
           onSubmit={onSubmit}
               >
-            {({ values, setFieldValue, setFieldTouched }) => (
+            {({ values, setFieldValue, setFieldTouched, errors, touched }) => (
               <Form className={css.customForm}>
                 <div className={css.statusLine}>
                   <svg className={css.statusLineIcon}>
@@ -144,7 +144,7 @@ const EditWaterAmountForm = ({
                     name="waterVolume"
                     id="amount"
                     value={values.waterVolume}
-                    className={css.inputField}
+                    className={`${css.inputField} ${touched.waterVolume && errors.waterVolume ? css.inputError : ''}`}
                     onChange={(e) => {
                       const value = parseInt(e.target.value, 10);
                       if (!isNaN(value)) {
@@ -155,6 +155,9 @@ const EditWaterAmountForm = ({
                     }}
                     onBlur={() => setFieldTouched("waterVolumewaterVolume", true)}
                   />
+                  {errors.waterVolume && touched.waterVolume && (
+                    <div className={css.errorText}>{errors.waterVolume}</div>
+                  )}
                 </div>
                 <div className={css.submitButtonSection}>
                   <p className={css.submitButtonAmount}>
