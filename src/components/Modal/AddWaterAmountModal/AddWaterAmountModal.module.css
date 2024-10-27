@@ -221,6 +221,7 @@ input:focus {
     margin: 0px 7px;
     border-radius: 40px;
     background-color: rgb(215, 227, 255);
+    white-space: nowrap;
 
     color: rgb(64, 123, 255);
     font-family: Roboto;
@@ -267,6 +268,18 @@ input:focus {
 .fieldValue {
     width: 50px;
     color: blue;
+}
+
+.errorText {
+    color: #EF5050;
+    display: flex;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.inputError {
+    border: 1px solid #EF5050;
+    color: #EF5050;
 }
 
 .adjustWaterAmount {

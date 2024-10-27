@@ -226,6 +226,7 @@ input:focus {
     font-weight: 700;
     line-height: 24px;
     text-align: center;
+    white-space: nowrap;
 }
 
 .recordingTime {
@@ -265,6 +266,18 @@ input:focus {
 .fieldValue {
     width: 50px;
     color: blue;
+}
+
+.errorText {
+    color: #EF5050;
+    display: flex;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.inputError {
+    border: 1px solid #EF5050;
+    color: #EF5050;
 }
 
 .adjustWaterAmount {
