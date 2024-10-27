@@ -1,13 +1,13 @@
 // цей компонент бути як і на сторінці реєстрації та і на сторінці логіну (немає відокремлення)
 
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signup, signin } from "../../redux/auth/operations.js";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import css from "./AuthForm.module.css";
 import * as Yup from "yup";
 import { notification } from "antd";
-
+import { selectLoading } from "../../redux/auth/selectors";
 
 export default function AuthForm({ isSignUp, onSuccess }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +22,7 @@ export default function AuthForm({ isSignUp, onSuccess }) {
     password: "",
     repeatPassword: isSignUp ? "" : "",
   };
-
+const loading = useSelector(selectLoading);
   const validationSchema = Yup.object({
     email: Yup.string()
       .email("Invalid email address")
@@ -252,8 +252,14 @@ export default function AuthForm({ isSignUp, onSuccess }) {
               </>
             )}
 
-            <button type="submit" className={css.addBtn}>
-              {isSignUp ? "Sign Up" : "Login"}
+            <button type="submit" className={css.addBtn} disabled={loading}>
+              {loading
+                ? isSignUp
+                  ? "Signing up..."
+                  : "Signing in..."
+                : isSignUp
+                ? "Sign Up"
+                : "Login"}
             </button>
           </Form>
         )}
