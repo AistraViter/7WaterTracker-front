@@ -12,10 +12,11 @@ import bottleTabletRetina from "./image/bottleTablet2x.png";
 import bottleDesktopRetina from "./image/bottleDesktop2x.png";
 import AuthForm from "../../components/AuthForm/AuthForm";
 
+
 export default function SignUpPage() {
   const navigate = useNavigate();
  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
+  
  const handleSignupSuccess = () => {
    navigate("/home");
  };
