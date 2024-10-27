@@ -36,9 +36,18 @@ export default function DailyNormaModal({ isOpen, onRequestClose }) {
     }
     return 0;
   };
+  // const payload = { dailyNorm: dailyNorma};
+  // console.log("dailyNorma being sent:", payload);
+
 
   const handleSubmit = async (_, actions) => {
-    await dispatch(updateUserDailyNorm(dailyNorma));
+    const convertedDailyNorma = (Number(dailyNorma) * 1000).toFixed(0);
+    const payload = { dailyNorm: convertedDailyNorma }; // новий формат для відправки на бекенд
+      console.log("dailyNorma being sent in milliliters:", payload);
+  
+    const response = await dispatch(updateUserDailyNorm(payload));
+    console.log("dailyNorma successfully saved:", response);
+
     actions.resetForm();
     onRequestClose();
   };
