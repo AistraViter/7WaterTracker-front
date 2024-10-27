@@ -4,32 +4,45 @@ import { HiOutlineLogout } from "react-icons/hi";
 import css from "./UserLogoModal.module.css";
 import UserLogoutModal from "../UserLogoutModal/UserLogoutModal";
 import SettingModal from "../SettingModal/SettingModal";
+import { useDispatch } from "react-redux";
+import { logOutModal, settingModal } from "../../../redux/modal/slice";
 
 
 const UserLogoModal = () => {
   const modalRef = useRef(null);
+  const dispatch = useDispatch();
 
-  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+  // const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  // const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(true);
 
-  const handleLogoutClick = () => {
-    setIsLogoutModalOpen(true);
+  const handleLogoutClick = (event) => {
+    event.stopPropagation();
+    console.log("Logout button clicked!");
+    // setIsLogoutModalOpen(true);
+    dispatch(logOutModal());
+    console.log("isLogoutModalOpen:", true);
   };
 
-  const handleSettingsClick = () => {
-    setIsSettingsModalOpen(true);
+  const handleSettingsClick = (event) => {
+    event.stopPropagation();
+    dispatch(settingModal());
+    // setIsSettingsModalOpen(true);
   };
 
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
       setIsDropdownOpen(false);
+      // setIsLogoutModalOpen(false);
+      // setIsSettingsModalOpen(false);
     }
   };
 
   const handleKeyDown = (event) => {
     if (event.key === "Escape") {
       setIsDropdownOpen(false);
+      // setIsLogoutModalOpen(false);
+      // setIsSettingsModalOpen(false);
     }
   };
 
@@ -58,10 +71,12 @@ const UserLogoModal = () => {
         </div>
       )}
       {/* Display SettingModal if open */}
-      {isSettingsModalOpen && (<SettingModal onClose={() => setIsSettingsModalOpen(false)}/>)}
+      {/* {isSettingsModalOpen && (<SettingModal onClose={() => setIsSettingsModalOpen(false)}/>)} */}
+      <SettingModal/>
       {/* <SettingModal/> */}
       {/* компонент SettingModal містить редірект на домашню сторінку.  */}
-      {isLogoutModalOpen && (<UserLogoutModal onClose={() => setIsLogoutModalOpen(false)} />)}
+      {/* {isLogoutModalOpen && (<UserLogoutModal onClose={() => setIsLogoutModalOpen(false)} />)} */}
+      <UserLogoutModal/>
     </>
   );
 };

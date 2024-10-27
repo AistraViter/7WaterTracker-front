@@ -1,25 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
-axios.defaults.baseURL = "https://sevenwatertracker-back-1.onrender.com";
+import axios from "../../utils/axiosConfig";
 
 export const getWaterNotes = createAsyncThunk(
   "water/getWaterNotes",
-  async (token, thunkAPI) => {
-    // Очистка токена від зайвих лапок
-    const cleanedToken = token ? token.replace(/"/g, "") : null;
-    if (!cleanedToken) {
-      return thunkAPI.rejectWithValue("No token found");
-    }
-    // Встановлення заголовка
-    axios.defaults.headers.common.Authorization = `Bearer ${cleanedToken}`;
+  async (_, thunkAPI) => {
     try {
-      
-      const response = await axios.get("/water/note", {
-        headers: {
-          Authorization: `Bearer ${cleanedToken}`,
-        },
-      });
+      const response = await axios.get("/water/note", {});
       console.log("Response from backend:", response.data); // Діагностика
 
       return response.data.data; // приходить в об'єкт data: {}
@@ -36,7 +22,6 @@ export const postWaterNote = createAsyncThunk(
   async ({ date, waterVolume, time }, thunkAPI) => {
     try {
       const response = await axios.post("/water/note", {
-       
         date,
         waterVolume,
         time,
@@ -52,9 +37,9 @@ export const postWaterNote = createAsyncThunk(
 
 export const updateWaterNote = createAsyncThunk(
   "water/updateWaterNote",
-  async ({ id, data }, thunkAPI) => {
+  async ({ id, date, waterVolume, time }, thunkAPI) => {
     try {
-      const response = await axios.patch(`/water/note/${id}`, data);
+      const response = await axios.patch(`/water/note/${id}`, date, waterVolume, time);
       return response.data.data; // приходить в об'єкт data: {}
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -80,20 +65,9 @@ export const deleteWaterNote = createAsyncThunk(
 
 export const getWaterToday = createAsyncThunk(
   "water/getWaterToday",
-  async (token, thunkAPI) => {
-    // Очистка токена від зайвих лапок
-    const cleanedToken = token ? token.replace(/"/g, "") : null;
-    if (!cleanedToken) {
-      return thunkAPI.rejectWithValue("No token found");
-    }
-    // Встановлення заголовка
-    axios.defaults.headers.common.Authorization = `Bearer ${cleanedToken}`;
+  async (_, thunkAPI) => {
     try {
-      const response = await axios.get("/water/today", {
-        headers: {
-          Authorization: `Bearer ${cleanedToken}`,
-        },
-      });
+      const response = await axios.get("/water/today", {});
       console.log("Response from backend:", response.data); // Діагностика
       return response.data.data;
     } catch (error) {

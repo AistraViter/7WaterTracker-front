@@ -1,13 +1,9 @@
-import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-axios.defaults.baseURL = "https://sevenwatertracker-back-1.onrender.com";
+import axios from "../../utils/axiosConfig";
 
 const setAuthHeader = (token) => {
-  
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
-
 const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = "";
 };
@@ -41,7 +37,6 @@ export const signin = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const response = await axios.post("/auth/login", credentials);
-    
 
       return response.data.data;
     } catch (error) {
