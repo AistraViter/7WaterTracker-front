@@ -10,7 +10,27 @@ import css from "./EditWaterAmountModal.module.css";
 import sprite from "./img/icons/symbol-defs.svg";
 import { updateWaterNote } from "../../../redux/water/operations.js";
 
-const EditWaterAmountModal = ({ 
+const formatTimeToDate = (time) => {
+  const [timePart, modifier] = time.split(" ");
+  let [hours, minutes] = timePart.split(":").map(Number);
+
+  if (modifier === "PM" && hours < 12) {
+    hours += 12;
+  }
+  if (modifier === "AM" && hours === 12) {
+    hours = 0;
+  }
+
+  const today = new Date();
+  today.setHours(hours);
+  today.setMinutes(minutes);
+  today.setSeconds(0);
+  today.setMilliseconds(0);
+
+  return today.toISOString(); // Повертаємо у форматі ISO 8601
+};
+
+const EditWaterAmountModal = ({
   isOpen,
   onClose,
   previousAmount,
@@ -25,23 +45,16 @@ const EditWaterAmountModal = ({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedTime, setSelectedTime] = useState("");
 
-  const handleSave = async (waterVolume) => {
-    console.log("Water volume to be sent:", waterVolume);
+  const handleSave = async (waterVolume, time) => {
+    const formattedDate = formatTimeToDate(time);
+  
+    const payload = { _id: waterId, waterVolume, date: formattedDate };
+    console.log("Payload being sent:", payload);
   
     try {
-      const response = await dispatch(
-        updateWaterNote({ _id: waterId, waterVolume })
-      ).unwrap();
-  
+      const response = await dispatch(updateWaterNote(payload)).unwrap();
       console.log("WaterNote successfully saved:", response);
-  
-      // Оновлення локального стану після збереження
-      setWaterData({
-        waterVolume: response.waterVolume,
-        time: response.time || waterData.time
-      });
-  
-      onClose(); // Закриваємо модалку після успішного збереження
+      // Інші дії після збереження...
     } catch (error) {
       console.error("Error on saving data:", error);
     }
@@ -61,7 +74,7 @@ const EditWaterAmountModal = ({
     };
     getWaterData();
   }, [waterId]);
-  
+
   return (
     isOpen && (
       <div className={css.modalOverlay}>
@@ -83,7 +96,8 @@ const EditWaterAmountModal = ({
             onSubmit={async (values) => {
               console.log("Submitted values:", values); // Додайте цей лог
 
-              await handleSave(values.waterVolume); // Передача форматованого часу
+              // Передайте значення часу в handleSave
+              await handleSave(values.waterVolume, values.time);
             }}
             onClose={onClose}
             isDropdownOpen={isDropdownOpen}
