@@ -18,7 +18,7 @@ const EditWaterAmountForm = ({
 }) => {
   const validationSchema = Yup.object().shape({
     waterVolume: Yup.number()
-      .min(0, "Amount of water should be positive")
+      .min(1, "The amount of water must exceed 0")
       .max(15000, "Amount of water should not exceed 15000 ml")
       .required("Amount of water is required"),
     time: Yup.string().required("Time is required"),
@@ -153,7 +153,7 @@ const EditWaterAmountForm = ({
                         setFieldValue("waterVolume", 0);
                       }
                     }}
-                    onBlur={() => setFieldTouched("waterVolumewaterVolume", true)}
+                    onBlur={() => setFieldTouched("waterVolume", true)}
                   />
                   {errors.waterVolume && touched.waterVolume && (
                     <div className={css.errorText}>{errors.waterVolume}</div>

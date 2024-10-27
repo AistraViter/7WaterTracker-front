@@ -13,7 +13,7 @@ const AddWaterAmountModal = ({ isOpen, onClose, previousAmount, previousTime, wa
 
     const validationSchema = Yup.object().shape({
         waterAmount: Yup.number()
-            .min(0, 'Amount of water should be positive')
+            .min(1, 'The amount of water must exceed 0')
             .max(15000, 'Amount of water should not exceed 15000 ml')
             .required('Amount of water is required'),
         time: Yup.string().required('Time is required')
@@ -35,11 +35,11 @@ const AddWaterAmountModal = ({ isOpen, onClose, previousAmount, previousTime, wa
           amount: amount,
           time: time,
         })
-        console.log('WaterNote successfully saved:', response.data);
-        onClose();
+        console.log('WaterNote successfully saved:', response.data);        
       } catch (error) {
         console.error('Error on saving data:', error)
       }
+      onClose();
     };
   
     useEffect (() => {
@@ -186,7 +186,7 @@ const AddWaterAmountModal = ({ isOpen, onClose, previousAmount, previousTime, wa
               </div>
               <div className={css.submitButtonSection}>
                 <p className={css.submitButtonAmount}>{values.waterAmount}ml</p>
-                <button type='submit' className={css.saveButton} onClick={onClose}>Save</button>
+                <button type='submit' className={css.saveButton}>Save</button>
               </div>
             </Form>
           )}
