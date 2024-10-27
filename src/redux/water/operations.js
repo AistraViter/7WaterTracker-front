@@ -37,9 +37,9 @@ export const postWaterNote = createAsyncThunk(
 
 export const updateWaterNote = createAsyncThunk(
   "water/updateWaterNote",
-  async ({ id, data }, thunkAPI) => {
+  async ({ id, date, waterVolume, time }, thunkAPI) => {
     try {
-      const response = await axios.patch(`/water/note/${id}`, data);
+      const response = await axios.patch(`/water/note/${id}`, date, waterVolume, time);
       return response.data.data; // приходить в об'єкт data: {}
     } catch (error) {
       return thunkAPI.rejectWithValue(

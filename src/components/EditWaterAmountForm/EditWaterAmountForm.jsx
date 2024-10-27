@@ -112,12 +112,10 @@ const EditWaterAmountForm = ({
                         setFieldTouched("time", true);
                       }}
                       value={selectedTime || formatTimeToAMPM(values.time)}
-                      // commented because of the changing to readOnly
-                      /* onChange={(e) => {   
+                     onChange={(e) => {   
                            setSelectedTime(e.target.value);
                            setFieldValue('time', e.target.value);
                          }} 
-                      */
                     />
                     {isDropdownOpen && (
                       <div className={css.dropdown}>

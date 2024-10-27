@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-
 import PropTypes from "prop-types";
-import EditWaterAmountForm from "../../EditWaterAmountForm/EditWaterAmountForm.jsx"; // імпорт нового компонента
-import { fetchWaterData, getCurrentTime } from "../../../utils/editWaterDataUtils.js";
+import { useDispatch } from "react-redux";
+import EditWaterAmountForm from "../../EditWaterAmountForm/EditWaterAmountForm.jsx";
+import {
+  fetchWaterData,
+  getCurrentTime,
+} from "../../../utils/editWaterDataUtils.js";
 import css from "./EditWaterAmountModal.module.css";
 import sprite from "./img/icons/symbol-defs.svg";
-import axios from "axios";
+import { updateWaterNote } from "../../../redux/water/operations.js";
 
 const EditWaterAmountModal = ({
   isOpen,
@@ -14,21 +17,21 @@ const EditWaterAmountModal = ({
   previousTime,
   waterId,
 }) => {
+  const dispatch = useDispatch();
   const [waterData, setWaterData] = useState({
-    amount: previousAmount,
+    waterVolume: previousAmount,
     time: previousTime,
   });
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedTime, setSelectedTime] = useState("");
 
-  const handleSave = async (amount, time) => {
+  const handleSave = async (waterVolume, time) => {
     try {
-      const response = await axios.patch(`/api/water/note/${waterId}`, {
-        amount: amount,
-        time: time,
-      });
-      console.log("WaterNote successfully saved:", response.data);
-      onClose();
+      const response = await dispatch(
+        updateWaterNote({ id: waterId, data: { waterVolume, date: time } })
+      ).unwrap();
+      console.log("WaterNote successfully saved:", response);
+      onClose(); // Закриваємо модалку після успішного збереження
     } catch (error) {
       console.error("Error on saving data:", error);
     }
@@ -39,7 +42,7 @@ const EditWaterAmountModal = ({
       if (waterId) {
         try {
           const data = await fetchWaterData(waterId);
-          setWaterData({ amount: data.amount, time: data.time });
+          setWaterData({ waterVolume: data.waterVolume, time: data.time });
         } catch (error) {
           console.error("Error fetching water data on mount:", error);
         }
@@ -62,11 +65,11 @@ const EditWaterAmountModal = ({
           </div>
           <EditWaterAmountForm
             initialValues={{
-              waterAmount: waterData.amount || 0,
+              waterAmount: waterData.waterVolume || 0,
               time: waterData.time || getCurrentTime(),
             }}
             onSubmit={async (values) => {
-              await handleSave(values.waterAmount, values.time);
+              await handleSave(values.waterVolume, values.time);
             }}
             onClose={onClose}
             isDropdownOpen={isDropdownOpen}
@@ -85,7 +88,7 @@ EditWaterAmountModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   previousAmount: PropTypes.number,
   previousTime: PropTypes.string,
-  waterId: PropTypes.string, // .isRequired // add after debugging
+  waterId: PropTypes.string,
 };
 
 export default EditWaterAmountModal;
