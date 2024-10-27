@@ -60,6 +60,7 @@ const TodayWaterList = () => {
   const closeEditWaterModal = () => {
     setIsEditModalOpen(false);
     setSelectedWaterEntry(null);
+     console.log("Closing edit modal: ",  setIsEditModalOpen(false));
   }
 
    // for AddWaterAmountModal

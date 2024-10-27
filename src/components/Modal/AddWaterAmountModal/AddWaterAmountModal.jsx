@@ -186,7 +186,7 @@ const AddWaterAmountModal = ({ isOpen, onClose, previousAmount, previousTime, wa
               </div>
               <div className={css.submitButtonSection}>
                 <p className={css.submitButtonAmount}>{values.waterAmount}ml</p>
-                <button type='submit' className={css.saveButton}>Save</button>
+                <button type='submit' className={css.saveButton} onClick={onClose}>Save</button>
               </div>
             </Form>
           )}

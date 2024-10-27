@@ -82,6 +82,7 @@ const EditWaterAmountModal = ({
 
               // Передайте значення часу в handleSave
               await handleSave(values.waterVolume, values.time);
+              onClose();
             }}
             onClose={onClose}
             isDropdownOpen={isDropdownOpen}

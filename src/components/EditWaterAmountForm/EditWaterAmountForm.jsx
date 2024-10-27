@@ -144,7 +144,7 @@ const EditWaterAmountForm = ({
                     name="waterVolume"
                     id="amount"
                     value={values.waterVolume}
-                    className={`${css.inputField} ${touched.waterAmount && errors.waterAmount ? css.inputError : ''}`}
+                    className={`${css.inputField} ${touched.waterVolume && errors.waterVolume ? css.inputError : ''}`}
                     onChange={(e) => {
                       const value = parseInt(e.target.value, 10);
                       if (!isNaN(value)) {
