@@ -12,7 +12,6 @@ export const getWaterNotes = createAsyncThunk(
     // Встановлення заголовка
     axios.defaults.headers.common.Authorization = `Bearer ${cleanedToken}`;
     try {
-      
       const response = await axios.get("/water/note", {
         headers: {
           Authorization: `Bearer ${cleanedToken}`,
@@ -34,7 +33,7 @@ export const postWaterNote = createAsyncThunk(
   async ({ date, waterVolume, time }, thunkAPI) => {
     try {
       const response = await axios.post("/water/note", {
-       
+
         date,
         waterVolume,
         time,

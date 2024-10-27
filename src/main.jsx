@@ -6,18 +6,23 @@ import { PersistGate } from "redux-persist/integration/react";
 import { HelmetProvider } from "react-helmet-async";
 import { store, persistor } from "./redux/store.js";
 import App from "./components/App.jsx";
+import { configureAxios } from "./utils/axiosConfig"; // Імпорт configureAxios
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <Provider store={store}>
+// Викликаємо configureAxios у фоновому режимі, без await
+configureAxios();
 
-    <PersistGate loading={null} persistor={persistor}>
-      <BrowserRouter>
-        <HelmetProvider>
-          <App />
-        </HelmetProvider>
-      </BrowserRouter>
-    </PersistGate>
-    </Provider>
-  </React.StrictMode>
-);
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter>
+            <HelmetProvider>
+              <App />
+            </HelmetProvider>
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
+    </React.StrictMode>
+  );
+
+
