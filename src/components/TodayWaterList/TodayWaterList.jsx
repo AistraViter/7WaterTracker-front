@@ -4,7 +4,10 @@ import EditWaterAmountModal from "../Modal/EditWaterAmountModal/EditWaterAmountM
 import AddWaterAmountModal from "../Modal/AddWaterAmountModal/AddWaterAmountModal.jsx";
 import WaterEntry from "../WaterEntry/WaterEntry.jsx";
 import formatTo12HourTime from "../../utils/formatTo12HourTime.js";
-import { getWaterNotes } from "../../redux/water/operations.js";
+import {
+  getWaterNotes,
+  deleteWaterNote,
+} from "../../redux/water/operations.js";
 import css from "./TodayWaterList.module.css";
 
 const TodayWaterList = () => {
@@ -15,7 +18,6 @@ const TodayWaterList = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false); // for EditWaterAmountModal
   const [isAddModalOpen, setIsAddModalOpen] = useState(false); // for AddWaterAmountModal
   const [selectedWaterEntry, setSelectedWaterEntry] = useState(null); // save water entry to state
-
 
   useEffect(() => {
     const fetchWaterNotes = async () => {
@@ -50,20 +52,27 @@ const TodayWaterList = () => {
     setWaterEntries((prevEntries) =>
       prevEntries.filter((waterEntries) => waterEntries._id !== idToDelete)
     );
+    try {
+      dispatch(deleteWaterNote(idToDelete)).unwrap(); // видалення на бекенді
+      setWaterEntries((prevEntries) =>
+        prevEntries.filter((waterEntry) => waterEntry._id !== idToDelete)
+      );
+    } catch (error) {
+      console.error("Error deleting water note:", error);
+    }
   };
 
   // for EditWaterAmountModal
   const openEditWaterModal = (WaterEntry) => {
-    setSelectedWaterEntry(WaterEntry)
+    setSelectedWaterEntry(WaterEntry);
     setIsEditModalOpen(true);
-  }
+  };
   const closeEditWaterModal = () => {
     setIsEditModalOpen(false);
     setSelectedWaterEntry(null);
-     console.log("Closing edit modal: ",  setIsEditModalOpen(false));
-  }
+  };
 
-   // for AddWaterAmountModal
+  // for AddWaterAmountModal
   const openAddWaterModal = () => setIsAddModalOpen(true);
   const closeAddWaterModal = () => setIsAddModalOpen(false);
 
@@ -71,16 +80,16 @@ const TodayWaterList = () => {
     <div className={css.todaywaterlist}>
       <h3 className={css.title}>Today</h3>
       <ul className={css.list}>
-          {waterEntries.length > 0 ? (
-            waterEntries.map((waterEntry) => (
-              <WaterEntry
-                key={waterEntry._id}
-                waterVolume={waterEntry.waterVolume}
-                time={formatTo12HourTime(waterEntry.date)}
-                onEdit={() => openEditWaterModal(waterEntry)}
-                onDelete={() => handleDelete(waterEntry._id)}
-              />
-            ))
+        {waterEntries.length > 0 ? (
+          waterEntries.map((waterEntry) => (
+            <WaterEntry
+              key={waterEntry._id}
+              waterVolume={waterEntry.waterVolume}
+              time={formatTo12HourTime(waterEntry.date)}
+              onEdit={() => openEditWaterModal(waterEntry)}
+              onDelete={() => handleDelete(waterEntry._id)}
+            />
+          ))
         ) : (
           <li className={css.noEntries}>No water entries for today.</li>
         )}
