@@ -14,6 +14,8 @@ const TodayWaterList = () => {
   // const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false); // for EditWaterAmountModal
   const [isAddModalOpen, setIsAddModalOpen] = useState(false); // for AddWaterAmountModal
+  const [selectedWaterEntry, setSelectedWaterEntry] = useState(null); // save water entry to state
+
 
   useEffect(() => {
     const fetchWaterNotes = async () => {
@@ -51,9 +53,16 @@ const TodayWaterList = () => {
   };
 
   // for EditWaterAmountModal
-  const openEditWaterModal = () => setIsEditModalOpen(true);
-  const closeEditWaterModal = () => setIsEditModalOpen(false);
-  // for AddWaterAmountModal
+  const openEditWaterModal = (WaterEntry) => {
+    setSelectedWaterEntry(WaterEntry)
+    setIsEditModalOpen(true);
+  }
+  const closeEditWaterModal = () => {
+    setIsEditModalOpen(false);
+    setSelectedWaterEntry(null);
+  }
+
+   // for AddWaterAmountModal
   const openAddWaterModal = () => setIsAddModalOpen(true);
   const closeAddWaterModal = () => setIsAddModalOpen(false);
 
@@ -61,15 +70,19 @@ const TodayWaterList = () => {
     <div className={css.todaywaterlist}>
       <h3 className={css.title}>Today</h3>
       <ul className={css.list}>
-        {waterEntries.map((waterEntries) => (
-          <WaterEntry
-            key={waterEntries._id} // використання унікального id для ключа
-            waterVolume={waterEntries.waterVolume} // передаємо значення dailyNorm
-            time={formatTo12HourTime(waterEntries.date)} // передаємо значення часу
-            onEdit={openEditWaterModal}
-            onDelete={() => handleDelete(waterEntries._id)}
-          />
-        ))}
+          {waterEntries.length > 0 ? (
+            waterEntries.map((waterEntry) => (
+              <WaterEntry
+                key={waterEntry._id}
+                waterVolume={waterEntry.waterVolume}
+                time={formatTo12HourTime(waterEntry.date)}
+                onEdit={() => openEditWaterModal(waterEntry)}
+                onDelete={() => handleDelete(waterEntry._id)}
+              />
+            ))
+        ) : (
+          <li className={css.noEntries}>No water entries for today.</li>
+        )}
       </ul>
       <button onClick={openAddWaterModal} className={css.add}>
         {/* instead of handleAddWater */}
@@ -102,6 +115,9 @@ const TodayWaterList = () => {
         <EditWaterAmountModal
           isOpen={isEditModalOpen}
           onClose={closeEditWaterModal}
+          previousAmount={selectedWaterEntry.waterVolume}
+          previousTime={formatTo12HourTime(selectedWaterEntry.date)}
+          waterId={selectedWaterEntry._id}
         />
       )}
     </div>
