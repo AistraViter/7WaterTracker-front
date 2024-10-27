@@ -13,22 +13,14 @@
 
 .modal {
   position: relative;
-  padding: 24px 12px;
+  padding: 32px 12px;
   border-radius: 10px;
   background-color: #ffffff;
   overflow: auto;
   max-height: 95%;
   scrollbar-width: none;
-}
-
-@media screen and (min-width: 768px) {
-  .modal {
-    padding: 32px 24px;
-  }
-}
-
-.no-scroll {
-  overflow: hidden;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
 }
 
 .close-button {
@@ -45,22 +37,19 @@
   outline: none;
 }
 
-@media screen and (min-width: 768px) {
-  .close-button {
-    top: 36px;
-    right: 24px;
-  }
-}
-
 .close-button:active {
   outline: none;
 }
 
-.close-icon {
+.closeIcon {
   width: 24px;
   height: 24px;
   fill: rgba(64, 123, 255, 1);
   stroke: rgba(64, 123, 255, 1);
+}
+
+.no-scroll {
+  overflow: hidden;
 }
 
 .button-class-logout {
@@ -72,3 +61,17 @@
   top: 36px;
   right: 12px;
 }
+
+@media screen and (min-width: 768px) {
+  .modal {
+    padding: 32px 24px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .close-button {
+    top: 36px;
+    right: 24px;
+  }
+}
+
