@@ -1,7 +1,7 @@
 import axios from "axios";
 // Основний і запасний бекенд
 const primaryBaseURL = "https://sevenwatertracker-back-1.onrender.com";
-const backupBaseURL = "http://localhost:52326";
+const backupBaseURL = "http://localhost:3000";
 
 async function checkServerAvailability(url) {
   try {
