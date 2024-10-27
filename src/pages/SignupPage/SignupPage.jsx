@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import DocumentTitle from "../../components/DocumentTitle";
 import css from "./SignupPage.module.css";
 import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import bottleMobile from "./image/bottleMobile.png";
 import bottleTablet from "./image/bottleTablet.png";
 import bottleDesktop from "./image/bottleDesktop.png";
@@ -15,7 +16,7 @@ import AuthForm from "../../components/AuthForm/AuthForm";
 
 export default function SignUpPage() {
   const navigate = useNavigate();
- const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   
  const handleSignupSuccess = () => {
    navigate("/home");

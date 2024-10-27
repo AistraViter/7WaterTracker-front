@@ -111,7 +111,7 @@ const loading = useSelector(selectLoading);
             <Field
               type="email"
               name="email"
-              autoComplete="off"
+              autoComplete={isSignUp ? "off" : "on"}
               className={`${css.input} ${
                 touched.email && errors.email ? css.inputError : ""
               }`}
@@ -259,7 +259,7 @@ const loading = useSelector(selectLoading);
                   : "Signing in..."
                 : isSignUp
                 ? "Sign Up"
-                : "Login"}
+                : "Sign In"}
             </button>
           </Form>
         )}
