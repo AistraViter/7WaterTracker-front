@@ -37,10 +37,14 @@ export const postWaterNote = createAsyncThunk(
 
 export const updateWaterNote = createAsyncThunk(
   "water/updateWaterNote",
-  async ({ id, date, waterVolume, time }, thunkAPI) => {
+  async ({ _id, waterVolume, time }, thunkAPI) => {
     try {
-      const response = await axios.patch(`/water/note/${id}`, date, waterVolume, time);
-      return response.data.data; // приходить в об'єкт data: {}
+      // Об'єкт даних, які ви хочете надіслати
+      const data = { waterVolume, time };
+
+      // Надсилаємо PATCH запит з даними
+      const response = await axios.patch(`/water/note/${_id}`, data);
+      return response.data.data; // Припускаємо, що дані приходять в об'єкті data: {}
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "Failed to update a water note"

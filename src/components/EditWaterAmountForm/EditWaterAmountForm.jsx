@@ -17,7 +17,7 @@ const EditWaterAmountForm = ({
   setSelectedTime,
 }) => {
   const validationSchema = Yup.object().shape({
-    waterAmount: Yup.number()
+    waterVolume: Yup.number()
       .min(0, "Amount of water should be positive")
       .max(15000, "Amount of water should not exceed 15000 ml")
       .required("Amount of water is required"),
@@ -46,7 +46,7 @@ const EditWaterAmountForm = ({
                   </svg>
                   <p className={css.statusLineP}>
                     <span className={css.statusLineWaterAmount}>
-                      {values.waterAmount}ml
+                      {values.waterVolume}ml
                     </span>
                     {formatTimeToAMPM(values.time)}
                   </p>
@@ -60,8 +60,8 @@ const EditWaterAmountForm = ({
                         type="button"
                         onClick={() =>
                           setFieldValue(
-                            "waterAmount",
-                            Math.max(0, values.waterAmount - 50)
+                            "waterVolume",
+                            Math.max(0, values.waterVolume - 50)
                           )
                         }
                         className={css.amountControlsButton}
@@ -71,14 +71,14 @@ const EditWaterAmountForm = ({
                         </svg>
                       </button>
                       <span className={css.amountControlsValue}>
-                        {values.waterAmount} ml
+                        {values.waterVolume} ml
                       </span>
                       <button
                         type="button"
                         onClick={() =>
                           setFieldValue(
-                            "waterAmount",
-                            Math.max(0, values.waterAmount + 50)
+                            "waterVolume",
+                            Math.max(0, values.waterVolume + 50)
                           )
                         }
                         className={css.amountControlsButton}
@@ -141,24 +141,24 @@ const EditWaterAmountForm = ({
                   </label>
                   <input
                     type="number"
-                    name="waterAmount"
+                    name="waterVolume"
                     id="amount"
-                    value={values.waterAmount}
+                    value={values.waterVolume}
                     className={css.inputField}
                     onChange={(e) => {
                       const value = parseInt(e.target.value, 10);
                       if (!isNaN(value)) {
-                        setFieldValue("waterAmount", value);
+                        setFieldValue("waterVolume", value);
                       } else {
-                        setFieldValue("waterAmount", 0);
+                        setFieldValue("waterVolume", 0);
                       }
                     }}
-                    onBlur={() => setFieldTouched("waterAmount", true)}
+                    onBlur={() => setFieldTouched("waterVolumewaterVolume", true)}
                   />
                 </div>
                 <div className={css.submitButtonSection}>
                   <p className={css.submitButtonAmount}>
-                    {values.waterAmount}ml
+                    {values.waterVolume}ml
                   </p>
                   <button type="submit" className={css.saveButton}>
                     Save
@@ -172,7 +172,7 @@ const EditWaterAmountForm = ({
 
 EditWaterAmountForm.propTypes = {
     initialValues: PropTypes.shape({
-        waterAmount: PropTypes.number.isRequired,
+      waterVolume: PropTypes.number.isRequired,
         time: PropTypes.string.isRequired,
       }).isRequired,
       onSubmit: PropTypes.func.isRequired,
