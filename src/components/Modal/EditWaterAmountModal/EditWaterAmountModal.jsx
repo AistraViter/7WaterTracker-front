@@ -81,7 +81,6 @@ const EditWaterAmountModal = ({
             }}
             onSubmit={async (values) => {
               console.log("Submitted values:", values); // Додайте цей лог
-
               // Передайте значення часу в handleSave
               await handleSave(values.waterVolume, values.time);
               onClose();
