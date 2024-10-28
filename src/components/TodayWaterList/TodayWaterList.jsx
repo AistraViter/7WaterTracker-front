@@ -11,6 +11,7 @@ import {
 } from "../../redux/water/operations.js";
 import css from "./TodayWaterList.module.css";
 
+
 const TodayWaterList = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -121,6 +122,13 @@ const TodayWaterList = () => {
           previousAmount={selectedWaterEntry.waterVolume}
           previousTime={formatTo12HourTime(selectedWaterEntry.date)}
           waterId={selectedWaterEntry._id}
+          onUpdate={(updatedEntry) =>  {     // updateWaterEntry
+            setWaterEntries((prevEntries) =>
+              prevEntries.map((entry) =>
+                entry._id === updatedEntry._id ? updatedEntry : entry
+              )
+            );
+          }}
         />
       )}
     </div>
