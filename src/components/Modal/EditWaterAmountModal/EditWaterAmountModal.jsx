@@ -18,6 +18,7 @@ const EditWaterAmountModal = ({
   previousAmount,
   previousTime,
   waterId,
+  onUpdate
 }) => {
   const dispatch = useDispatch();
   const [waterData, setWaterData] = useState({
@@ -31,13 +32,14 @@ const EditWaterAmountModal = ({
     const formattedTime = convertTo24HourFormat(time);
     const formattedDate = formatDate(new Date());
 
-
     const payload = { _id: waterId, waterVolume, time: formattedTime, date: formattedDate };
     console.log("Payload being sent:", payload);
 
     try {
       const response = await dispatch(updateWaterNote(payload)).unwrap();
       console.log("WaterNote successfully saved:", response);
+
+      onUpdate({ _id: waterId, waterVolume, time: formattedTime, date: formattedDate })
       // Інші дії після збереження...
     } catch (error) {
       console.error("Error on saving data:", error);
@@ -79,7 +81,6 @@ const EditWaterAmountModal = ({
             }}
             onSubmit={async (values) => {
               console.log("Submitted values:", values); // Додайте цей лог
-
               // Передайте значення часу в handleSave
               await handleSave(values.waterVolume, values.time);
               onClose();

@@ -10,16 +10,17 @@ import { timeOptions, formatTimeToAMPM, getCurrentTime, handleTimeFocus } from '
 import sprite from './img/icons/symbol-defs.svg';
 import css from './AddWaterAmountModal.module.css';
 
-const AddWaterAmountModal = ({ isOpen, onClose }) => {
+const AddWaterAmountModal = ({ isOpen, onClose}) => {
   const validationSchema = Yup.object().shape({
-    waterVolume: Yup.number()
-      .min(0, 'Amount of water should be positive')
+    waterAmount: Yup.number()
+      .min(1, 'The amount of water must exceed 0')
       .max(15000, 'Amount of water should not exceed 15000 ml')
       .required('Amount of water is required'),
     time: Yup.string().required('Time is required')
   });
 
   const dispatch = useDispatch();
+  // const [waterData, setWaterData] = useState({amount: previousAmount, time: previousTime})
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedTime, setSelectedTime] = useState("");
 
@@ -58,16 +59,18 @@ const AddWaterAmountModal = ({ isOpen, onClose }) => {
           </div>
           <Formik
             initialValues={{
-              waterVolume: 0,
+              waterAmount: 0,
               time: selectedTime || getCurrentTime(),
             }}
             validationSchema={validationSchema}
+            validateOnBlur={true} 
+            validateOnChange={true}
             onSubmit={async (values) => {
-              await handleSave(values.waterVolume, values.time);
+              await handleSave(values.waterAmount, values.time);
               onClose();
             }}
           >
-            {({ values, setFieldValue,}) => (
+            {({ values, setFieldValue, setFieldTouched, errors, touched }) => (
               <Form className={css.customForm}>
                 <div className={css.amountControls}>
                   <p className={css.sectionTitle}>Choose a value: </p>
@@ -76,17 +79,17 @@ const AddWaterAmountModal = ({ isOpen, onClose }) => {
                     <div className={css.amountControlsRow}>
                       <button
                         type='button'
-                        onClick={() => setFieldValue('waterVolume', Math.max(0, values.waterVolume - 50))}
+                        onClick={() => setFieldValue('waterAmount', Math.max(0, values.waterAmount - 50))}
                         className={css.amountControlsButton}
                       >
                         <svg className={css.amountControlsIcon}>
                           <use href={`${sprite}#icon-minus-small`}></use>
                         </svg>
                       </button>
-                      <span className={css.amountControlsValue}>{values.waterVolume} ml</span>
+                      <span className={css.amountControlsValue}>{values.waterAmount} ml</span>
                       <button
                         type='button'
-                        onClick={() => setFieldValue('waterVolume', Math.min(15000, values.waterVolume + 50))}
+                        onClick={() => setFieldValue('waterAmount', Math.min(15000, values.waterAmount + 50))}
                         className={css.amountControlsButton}
                       >
                         <svg className={css.amountControlsIcon}>
@@ -108,7 +111,14 @@ const AddWaterAmountModal = ({ isOpen, onClose }) => {
                       readOnly
                       autoComplete="off"
                       onFocus={() => handleTimeFocus(setIsDropdownOpen, values)}
-                      onBlur={() => setTimeout(() => setIsDropdownOpen(false), 100)}
+                      onBlur={() => {
+                          // timeout before closing to allow time for value selection
+                          setTimeout(() => {
+                            setIsDropdownOpen(false);
+                          }, 100); 
+                          setFieldTouched('time', true);
+                          
+                      }}
                       value={selectedTime || formatTimeToAMPM(values.time)}
                     />
                     {isDropdownOpen && (
@@ -117,6 +127,7 @@ const AddWaterAmountModal = ({ isOpen, onClose }) => {
                           <div
                             key={option}
                             className={css.dropdownItem}
+                            data-time={option}
                             onClick={() => handleTimeSelect(option, setFieldValue)}
                           >
                             {formatTimeToAMPM(option)}
@@ -126,8 +137,30 @@ const AddWaterAmountModal = ({ isOpen, onClose }) => {
                     )}
                   </div>
                 </div>
+                <div className={css.adjustWaterAmount}>
+                <label htmlFor='amount' className={css.sectionTitle}>Enter the value of the water used: </label>
+                <input
+                    type='number'
+                    name='waterAmount'
+                    id='amount'
+                    value={values.waterAmount}
+                    className = {`${css.inputField} ${touched.waterAmount && errors.waterAmount ? css.inputError : ''}`}
+                    onChange={(e) => {
+                      const value = parseInt(e.target.value, 10);
+                      if (!isNaN(value)) {
+                        setFieldValue('waterAmount', value);
+                      } else {
+                        setFieldValue('waterAmount', 0); 
+                      }
+                    }}
+                    onBlur={() => setFieldTouched('waterAmount', true)}
+                    />
+                    {touched.waterAmount && errors.waterAmount && (
+                      <div className={css.errorText}>{errors.waterAmount}</div>
+                    )}
+              </div>
                 <div className={css.submitButtonSection}>
-                  <p className={css.submitButtonAmount}>{values.waterVolume} ml</p>
+                  <p className={css.submitButtonAmount}>{values.waterAmount} ml</p>
                   <button type='submit' className={css.saveButton}>
                     Save
                   </button>
@@ -143,7 +176,7 @@ const AddWaterAmountModal = ({ isOpen, onClose }) => {
 
 AddWaterAmountModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
 };
 
 export default AddWaterAmountModal;
