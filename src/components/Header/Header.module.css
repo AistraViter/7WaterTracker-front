@@ -1,6 +1,22 @@
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    height: auto;
+    padding-bottom: 40px;
+    padding: 12px 0 24px 0;
+}
+/* Media Queries for Tablet (768px) */
+@media (min-width: 768px) {
+    .container {
+        padding: 12px 0 40px 0;
+    }
+}
+
+/* Media Queries for Tablet (1440px) */
+@media (min-width: 1440px) {
+    .container {
+        padding: 12px 0 80px 0;
+    }
 }
