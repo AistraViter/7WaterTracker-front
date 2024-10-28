@@ -21,14 +21,18 @@ async function checkServerAvailability(url) {
 // Функція для налаштування базового URL та додавання інтерсептора
 export async function configureAxios() {
   const isPrimaryAvailable = await checkServerAvailability(primaryBaseURL);
-  axiosInstance.defaults.baseURL = isPrimaryAvailable ? primaryBaseURL : backupBaseURL;
+  axiosInstance.defaults.baseURL = isPrimaryAvailable
+    ? primaryBaseURL
+    : backupBaseURL;
 
   // Додаємо інтерсептор для автоматичного додавання токена
   axiosInstance.interceptors.request.use(
     (config) => {
       const token = store.getState().auth.token;
+
       if (token) {
-        config.headers.Authorization = `Bearer ${token.replace(/"/g, "")}`;
+        config.headers.Authorization = `Bearer ${token}`;
+        console.log("Current token додано в Авторизацію:", token); // Додайте це
       }
       return config;
     },
