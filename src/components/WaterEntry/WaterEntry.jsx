@@ -1,6 +1,7 @@
 import css from "../TodayWaterList/TodayWaterList.module.css";
 
 const WaterEntry = ({ waterVolume, time, id, onEdit, onDelete }) => {
+  // console.log("WaterEntry time:", time);
   return (
     <li className={css.listitem}>
       <div className={css.con1}>
