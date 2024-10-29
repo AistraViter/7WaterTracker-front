@@ -1,40 +1,42 @@
 import css from "./DaysGeneralStats.module.css";
 import { useSelector } from "react-redux";
-import { selectWaterTodayPanel, selectWaterPercentage } from "../../redux/water/selectors";
+import {
+  selectWaterTodayPanel,
+  selectWaterPercentage,
+} from "../../redux/water/selectors";
 import { useEffect, useRef, useState } from "react";
-
 
 export default function DaysGeneralStats({ day, onClose }) {
   const waterItems = useSelector(selectWaterTodayPanel); // масив із записами на сьогодні
   const percentage = useSelector(selectWaterPercentage); // відсоток виконання норми
   const wrapperRef = useRef(null);
   const dayData = waterItems.find((data) => data.date === day); // шукаємо дані за вибрану дату
-const [alignRight, setAlignRight] = useState(false); // Стан вирівнювання
+  const [alignRight, setAlignRight] = useState(false); // Стан вирівнювання
 
-// Перевіряємо, чи елемент виходить за межі екрана
-useEffect(() => {
-  const handlePosition = () => {
-    if (wrapperRef.current) {
-      const rect = wrapperRef.current.getBoundingClientRect();
-      const isOverflowingLeft = rect.left < 0;
-      const isOverflowingRight = rect.right > window.innerWidth;
+  // Перевіряємо, чи елемент виходить за межі екрана
+  useEffect(() => {
+    const handlePosition = () => {
+      if (wrapperRef.current) {
+        const rect = wrapperRef.current.getBoundingClientRect();
+        const isOverflowingLeft = rect.left < 0;
+        const isOverflowingRight = rect.right > window.innerWidth;
 
-      // Вирівнюємо залежно від того, чи виходить компонент за межі
-      if (isOverflowingLeft) {
-        setAlignRight(true); // Вирівняти вправо
-      } else if (isOverflowingRight) {
-        setAlignRight(false); // Вирівняти вліво
+        // Вирівнюємо залежно від того, чи виходить компонент за межі
+        if (isOverflowingLeft) {
+          setAlignRight(true); // Вирівняти вправо
+        } else if (isOverflowingRight) {
+          setAlignRight(false); // Вирівняти вліво
+        }
       }
-    }
-  };
+    };
 
-  handlePosition(); // Викликаємо відразу після рендеру
-  window.addEventListener("resize", handlePosition); // Перевірка при зміні розміру вікна
+    handlePosition(); // Викликаємо відразу після рендеру
+    window.addEventListener("resize", handlePosition); // Перевірка при зміні розміру вікна
 
-  return () => {
-    window.removeEventListener("resize", handlePosition); // Очищення слухача подій
-  };
-}, []);
+    return () => {
+      window.removeEventListener("resize", handlePosition); // Очищення слухача подій
+    };
+  }, []);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -49,6 +51,11 @@ useEffect(() => {
     };
   }, [onClose]);
 
+
+  const consumptionCount = dayData ? dayData.consumptionCount : 0;
+  const dailyNorm = dayData ? dayData.dailyNorm : "2.0 L";
+   percentage === dayData ? dayData.percentage : "0%";
+
   return (
     <div
       className={`${css.dayStatusWrapper} ${alignRight ? css.alignRight : ""}`}
@@ -57,19 +64,15 @@ useEffect(() => {
       <ul className={css.dayStatus}>
         <li className={css.dayStatusDate}>{day}</li>
         <li className={css.dayStatusItem}>
-          Daily norma: <span className={css.textColorAccent}>1.5 L</span>
+        Daily norma: <span className={css.textColorAccent}>{dailyNorm}</span>
         </li>
         <li className={css.dayStatusItem}>
           Fulfillment of the daily norm:{" "}
-          <span className={css.textColorAccent}>
-            {dayData ? `${percentage}%` : "0%"}
-          </span>
+          <span className={css.textColorAccent}>{percentage}</span>
         </li>
         <li className={css.dayStatusItem}>
           How many servings of water:{" "}
-          <span className={css.textColorAccent}>
-            {dayData ? dayData.servings : "0"}
-          </span>
+          <span className={css.textColorAccent}>{consumptionCount}</span>
         </li>
       </ul>
     </div>

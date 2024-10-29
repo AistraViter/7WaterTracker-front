@@ -17,6 +17,7 @@ const MonthStatsTable = () => {
 
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
+  // const [showModal, setShowModal] = useState(false);
   const [monthData, setMonthData] = useState([]);
   const monthNames = [
     "January",
@@ -69,15 +70,16 @@ const MonthStatsTable = () => {
   }, [currentDate, token, dispatch]);
 
   ///// логіка календаря
-  const handleDayClick = (day) => {
-    setSelectedDay(day);
+  const handleDayClick = (dayData) => {
+    setSelectedDay(dayData);
+    // setShowModal(true); // Відкриваємо модалку
   };
 
   const getProgressClass = (progress) => {
-    return progress.length >= 4 ? staticStyles.achieved : staticStyles.notAchieved;
+    return progress.length >= 4
+      ? staticStyles.achieved
+      : staticStyles.notAchieved;
   };
-
-  
 
   const handlePrevMonth = () => {
     setCurrentDate(
@@ -150,9 +152,15 @@ const MonthStatsTable = () => {
             <div className={css.daynumber}>
               <span className={css.number}>{day.date}</span>
             </div>
-            <div className={css.progresspercentage}>{day.progress === 0 ? "0%" : day.progress}</div>
+            <div className={css.progresspercentage}>
+              {day.progress === 0 ? "0%" : day.progress}
+            </div>
             {selectedDay && selectedDay.date === day.date && (
-              <DaysGeneralStats dayData={selectedDay} onClose={handleClose} />
+              <DaysGeneralStats
+                // dayData={dayData}
+                // dayData={selectedDay}
+                onClose={handleClose}
+              />
             )}
           </li>
         ))}
@@ -162,5 +170,3 @@ const MonthStatsTable = () => {
 };
 
 export default MonthStatsTable;
-
-
