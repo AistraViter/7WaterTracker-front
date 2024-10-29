@@ -11,18 +11,16 @@ import { configureAxios } from "./utils/axiosConfig"; // Імпорт configureA
 // Викликаємо configureAxios у фоновому режимі, без await
 configureAxios();
 
-  ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter>
-            <HelmetProvider>
-              <App />
-            </HelmetProvider>
-          </BrowserRouter>
-        </PersistGate>
-      </Provider>
-    </React.StrictMode>
-  );
-
-
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <HelmetProvider>
+            <App />
+          </HelmetProvider>
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>
+);
