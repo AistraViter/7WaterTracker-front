@@ -10,7 +10,9 @@ import { timeOptions, formatTimeToAMPM, getCurrentTime, handleTimeFocus } from '
 import sprite from './img/icons/symbol-defs.svg';
 import css from './AddWaterAmountModal.module.css';
 
-const AddWaterAmountModal = ({ isOpen, onClose}) => {
+const AddWaterAmountModal = ({ isOpen, onClose, onAddWater }) => {
+  console.log("onAddWater in modal:", onAddWater);
+  
   const validationSchema = Yup.object().shape({
     waterAmount: Yup.number()
       .min(1, 'The amount of water must exceed 0')
@@ -31,6 +33,11 @@ const AddWaterAmountModal = ({ isOpen, onClose}) => {
   };
 
   const handleSave = async (waterVolume, time) => {
+    if (typeof onAddWater === 'function') {
+      onAddWater(waterVolume, formattedDate);
+    } else {
+      console.error("onAddWater is not a function");
+    }
     const formattedTime = convertTo24HourFormat(time);
     const formattedDate = formatDate(new Date());
     const payload = { date: formattedDate, waterVolume, time: formattedTime };
@@ -38,8 +45,11 @@ const AddWaterAmountModal = ({ isOpen, onClose}) => {
     
 
     try {
+      console.log("Calling onAddWater with:", waterVolume, formattedDate);
       await dispatch(postWaterNote(payload)); // Виклик Redux-екшена для додавання нотатки
       console.log("Note successfully added:", payload);
+      console.log("Calling onAddWater 2nd time with:", waterVolume, formattedDate);
+      onAddWater(waterVolume, formattedDate); 
     } catch (error) {
       console.error("Error on saving data:", error);
     }

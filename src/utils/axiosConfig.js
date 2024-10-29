@@ -1,9 +1,9 @@
-import axios from "axios";
-import { store } from "../redux/store.js"; // Імпорт store для доступу до токена з Redux
+import axios from 'axios';
+import { store } from '../redux/store.js'; // Імпорт store для доступу до токена з Redux
 
 // Основний і запасний бекенд
-const primaryBaseURL = "https://sevenwatertracker-back-1.onrender.com";
-const backupBaseURL = "http://localhost:54141";
+const primaryBaseURL = 'https://sevenwatertracker-back-1.onrender.com';
+const backupBaseURL = 'http://localhost:3000'; //'http://localhost:54141';
 
 // Створюємо екземпляр Axios
 const axiosInstance = axios.create();
@@ -32,11 +32,11 @@ export async function configureAxios() {
 
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
-        console.log("Current token додано в Авторизацію:", token); // Додайте це
+        console.log('Current token додано в Авторизацію:', token); // Додайте це
       }
       return config;
     },
-    (error) => Promise.reject(error)
+    (error) => Promise.reject(error),
   );
 }
 
