@@ -10,9 +10,7 @@ import { timeOptions, formatTimeToAMPM, getCurrentTime, handleTimeFocus } from '
 import sprite from './img/icons/symbol-defs.svg';
 import css from './AddWaterAmountModal.module.css';
 
-const AddWaterAmountModal = ({ isOpen, onClose, onAddWater }) => {
-  console.log("line onAddWater in modal:", onAddWater);
-  
+const AddWaterAmountModal = ({ isOpen, onClose}) => {
   const validationSchema = Yup.object().shape({
     waterAmount: Yup.number()
       .min(1, 'The amount of water must exceed 0')
@@ -40,15 +38,8 @@ const AddWaterAmountModal = ({ isOpen, onClose, onAddWater }) => {
     
 
     try {
-      // await dispatch(postWaterNote(payload)); // Виклик Redux-екшена для додавання нотатки
-      const newEntry = await dispatch(postWaterNote(payload)).unwrap();
+      await dispatch(postWaterNote(payload)); // Виклик Redux-екшена для додавання нотатки
       console.log("Note successfully added:", payload);
-
-      if (typeof onAddWater === 'function') {
-            onAddWater(newEntry); 
-          } else {
-            console.error("onAddWater is not a function");
-          }
     } catch (error) {
       console.error("Error on saving data:", error);
     }

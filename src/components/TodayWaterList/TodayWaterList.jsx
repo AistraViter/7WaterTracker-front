@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-
+//
 import EditWaterAmountModal from "../Modal/EditWaterAmountModal/EditWaterAmountModal.jsx";
 import AddWaterAmountModal from "../Modal/AddWaterAmountModal/AddWaterAmountModal.jsx";
 import DeleteEntryModal from "../Modal/DeleteEntryModal/DeleteEntryModal.jsx";
@@ -11,7 +11,7 @@ import formatTo12HourTime from "../../utils/formatTo12HourTime.js";
 import {
   getWaterNotes,
   deleteWaterNote,
-  // postWaterNote,
+  postWaterNote,
 } from "../../redux/water/operations.js";
 import css from "./TodayWaterList.module.css";
 
@@ -19,7 +19,6 @@ const TodayWaterList = () => {
   // Крок 1 доававання конастнт для використання токена вкомпоненті
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  const [waterEntries, setWaterEntries] = useState([]);
   
   const setAuthHeader = (token) => {
     if (token) {
@@ -38,15 +37,14 @@ const TodayWaterList = () => {
     }
   }, [token]);
   
-  // const [waterEntries, setWaterEntries] = useState([]); // Порожній масив як початковий стан
+  const [waterEntries, setWaterEntries] = useState([]); // Порожній масив як початковий стан
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteEntryModalOpen, setIsDeleteEntryModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedWaterEntry, setSelectedWaterEntry] = useState(null);
-  const [refresh, setRefresh] = useState(false);
+  const [refresh, setRefresh] = useState(false); // Додаємо змінну для контролю оновлення
 
   const fetchWaterNotes = async () => {
-    console.log("fetchWaterNotes invoked")
     setAuthHeader(token); // Крок 3 Встановлюємо заголовок перед запитом
     console.log ("Заголовок авторизації перед запитом:" )
 
@@ -57,13 +55,9 @@ const TodayWaterList = () => {
           .toISOString()
           .startsWith(new Date().toISOString().split("T")[0])
       );
-
       const sortedEntries = todayEntries.sort(
         (a, b) => new Date(a.date) - new Date(b.date)
-      ).map(entry => ({
-        ...entry,
-        formattedTime: formatTo12HourTime(entry.date) // add formatted time
-      }));
+      );
       setWaterEntries(sortedEntries);
     } catch (error) {
       console.error("Error fetching water notes:", error);
@@ -72,23 +66,19 @@ const TodayWaterList = () => {
 
   useEffect(() => {
     fetchWaterNotes();
-  }, [dispatch, token, refresh]);
+  }, [dispatch, refresh]); // Додаємо refresh до залежностей useEffect
 
   const handleDelete = async (idToDelete) => {
+    console.log("Trying to delete water note with ID:", idToDelete);
     try {
       await dispatch(deleteWaterNote(idToDelete)).unwrap();
       setWaterEntries((prevEntries) =>
-        prevEntries.filter((entry) => entry._id !== idToDelete)
+        prevEntries.filter((waterEntries) => waterEntries._id !== idToDelete)
       );
     } catch (error) {
       console.error("Error deleting water note:", error);
     }
   };
-
-const handleAddWaterEntry = (newEntry) => {
-    console.log("handleAddWaterEntry called with newEntry:", newEntry);
-  setWaterEntries((prevEntries) => [...prevEntries, newEntry]);
-};
 
   const openEditWaterModal = (waterEntry) => {
     setSelectedWaterEntry(waterEntry);
@@ -111,10 +101,8 @@ const handleAddWaterEntry = (newEntry) => {
           entry._id === updatedEntry._id ? updatedEntry : entry
         )
       );
-      
-      console.log("Updated entry:", updatedEntry);
     }
-    setRefresh((prev) => !prev);
+    setRefresh((prev) => !prev); // Тригеримо оновлення списку після редагування
   };
 
   const closeDeleteEntryWaterModal = () => {
@@ -122,15 +110,24 @@ const handleAddWaterEntry = (newEntry) => {
     setSelectedWaterEntry(null);
   };
 
-  const openAddWaterModal = () => {
-    console.log("Opening Add Water Modal - це працює linkbutton 'Add water' під списком ноутів");
-    setIsAddModalOpen(true);
-  };
+  const openAddWaterModal = () => setIsAddModalOpen(true);
 
   const closeAddWaterModal = (newEntry) => {
     setIsAddModalOpen(false);
+
     if (newEntry) {
-      setRefresh((prev) => !prev);
+      setRefresh((prev) => !prev); // Тригеримо оновлення списку після додавання
+    }
+  };
+
+  const handleAddWaterEntry = async (waterVolume, time) => {
+    try {
+      const newEntry = await dispatch(
+        postWaterNote({ waterVolume, date: time })
+      ).unwrap();
+      closeAddWaterModal(newEntry);
+    } catch (error) {
+      console.error("Error adding new water note:", error);
     }
   };
 
@@ -156,14 +153,11 @@ const handleAddWaterEntry = (newEntry) => {
         Add Water
       </button>
       {isAddModalOpen && (
-        <>
-          {console.log(" onAddWater prop in TodayWaterList:", handleAddWaterEntry)} 
-          <AddWaterAmountModal
-            isOpen={isAddModalOpen}
-            onClose={closeAddWaterModal}
-            onAddWater={handleAddWaterEntry}
-          />
-        </>
+        <AddWaterAmountModal
+          isOpen={isAddModalOpen}
+          onClose={closeAddWaterModal}
+          onAddWater={handleAddWaterEntry}
+        />
       )}
       {isEditModalOpen && selectedWaterEntry && (
         <EditWaterAmountModal
@@ -172,7 +166,7 @@ const handleAddWaterEntry = (newEntry) => {
           previousAmount={selectedWaterEntry.waterVolume}
           previousTime={formatTo12HourTime(selectedWaterEntry.date)}
           waterId={selectedWaterEntry._id}
-          onUpdate={(updatedEntry) => closeEditWaterModal(updatedEntry)}
+          onUpdate={(updatedEntry) => closeEditWaterModal(updatedEntry)} // update water entries
         />
       )}
       {isDeleteEntryModalOpen && selectedWaterEntry && (
