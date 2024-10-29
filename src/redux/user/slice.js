@@ -15,7 +15,7 @@ const userSlice = createSlice({
       email: "",
       gender: "",
       dailyNorm: 0,
-      photo: null,
+      avatar: null,
     },
     loading: false,
     error: null,
@@ -25,7 +25,6 @@ const userSlice = createSlice({
       //отримання інформації користувача
       .addCase(getUserInfo.pending, (state) => {
         state.loading = true;
-        state.error = null;
       })
       .addCase(getUserInfo.fulfilled, (state, action) => {
         state.loading = false;

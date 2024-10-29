@@ -1,5 +1,8 @@
+// Крок 0 доававання імпортів для встановлення токена
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+//
 import EditWaterAmountModal from "../Modal/EditWaterAmountModal/EditWaterAmountModal.jsx";
 import AddWaterAmountModal from "../Modal/AddWaterAmountModal/AddWaterAmountModal.jsx";
 import DeleteEntryModal from "../Modal/DeleteEntryModal/DeleteEntryModal.jsx";
@@ -8,15 +11,33 @@ import formatTo12HourTime from "../../utils/formatTo12HourTime.js";
 import {
   getWaterNotes,
   deleteWaterNote,
-  postWaterNote, // Додано для створення нового запису
+  postWaterNote,
 } from "../../redux/water/operations.js";
 import css from "./TodayWaterList.module.css";
 
-
 const TodayWaterList = () => {
+  // Крок 1 доававання конастнт для використання токена вкомпоненті
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  const [waterEntries, setWaterEntries] = useState([]); // Порожній масив як початковий стан
+  
+  const setAuthHeader = (token) => {
+    if (token) {
+      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+      console.log("Заголовок авторизації встановлено:", `Bearer ${token}`);
+    } else {
+      delete axios.defaults.headers.common.Authorization;
+      console.log("Токена немає");
+    }
+  };
+  
+  useEffect(() => {
+    setAuthHeader(token);
+    if (token) {
+      console.log("Токен отримано:", token);
+    }
+  }, [token]);
+  
+    const [waterEntries, setWaterEntries] = useState([]); // Порожній масив як початковий стан
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteEntryModalOpen, setIsDeleteEntryModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -24,6 +45,9 @@ const TodayWaterList = () => {
   const [refresh, setRefresh] = useState(false); // Додаємо змінну для контролю оновлення
 
   const fetchWaterNotes = async () => {
+    setAuthHeader(token); // Крок 3 Встановлюємо заголовок перед запитом
+    console.log ("Заголовок авторизації перед запитом:" )
+
     try {
       const data = await dispatch(getWaterNotes()).unwrap();
       const todayEntries = data.filter((entry) =>
@@ -42,7 +66,7 @@ const TodayWaterList = () => {
 
   useEffect(() => {
     fetchWaterNotes();
-  }, [dispatch, token, refresh]); // Додаємо refresh до залежностей useEffect
+  }, [dispatch, refresh]); // Додаємо refresh до залежностей useEffect
 
   const handleDelete = async (idToDelete) => {
     console.log("Trying to delete water note with ID:", idToDelete);
@@ -62,10 +86,10 @@ const TodayWaterList = () => {
   };
 
   const openDeleteEntryWaterModal = (waterEntry) => {
-      console.log("Selected water entry:", waterEntry);
+    console.log("Selected water entry:", waterEntry);
     setSelectedWaterEntry(waterEntry);
     setIsDeleteEntryModalOpen(true);
-  }
+  };
 
   const closeEditWaterModal = (updatedEntry) => {
     setIsEditModalOpen(false);
@@ -76,19 +100,18 @@ const TodayWaterList = () => {
         prevEntries.map((entry) =>
           entry._id === updatedEntry._id ? updatedEntry : entry
         )
-    );
-  }
-      setRefresh((prev) => !prev); // Тригеримо оновлення списку після редагування
-  }
+      );
+    }
+    setRefresh((prev) => !prev); // Тригеримо оновлення списку після редагування
+  };
 
   const closeDeleteEntryWaterModal = () => {
     setIsDeleteEntryModalOpen(false);
     setSelectedWaterEntry(null);
+  };
 
-  } 
+  const openAddWaterModal = () => setIsAddModalOpen(true);
 
-const openAddWaterModal = () => setIsAddModalOpen(true);
-  
   const closeAddWaterModal = (newEntry) => {
     setIsAddModalOpen(false);
 
