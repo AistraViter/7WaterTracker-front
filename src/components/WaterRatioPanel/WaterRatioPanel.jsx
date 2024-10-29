@@ -10,7 +10,7 @@ const WaterRatioPanel = () => {
   const dispatch = useDispatch();
   
   // Отримання percentage з Redux-стану за допомогою селектора
-  const waterPercentage = useSelector(selectWaterPercentage);
+  const waterPercentage = Math.min(useSelector(selectWaterPercentage), 100);
 
   // Виконання getWaterToday при монтуванні компонента
   useEffect(() => {

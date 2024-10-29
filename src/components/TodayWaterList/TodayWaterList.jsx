@@ -37,7 +37,7 @@ const TodayWaterList = () => {
     }
   }, [token]);
   
-    const [waterEntries, setWaterEntries] = useState([]); // Порожній масив як початковий стан
+  const [waterEntries, setWaterEntries] = useState([]); // Порожній масив як початковий стан
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteEntryModalOpen, setIsDeleteEntryModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
