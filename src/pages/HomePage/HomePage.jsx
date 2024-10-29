@@ -14,18 +14,18 @@ import bottleDescRetina from "./image/desktop/bottleRetina.png";
 import WaterRatioPanel from "../../components/WaterRatioPanel/WaterRatioPanel.jsx";
 import TodayWaterList from "../../components/TodayWaterList/TodayWaterList.jsx";
 import MonthStatsTable from "../../components/MonthStatsTable/MonthStatsTable.jsx";
-// import DailyNorma from "../../components/DailyNorma/DailyNorma.jsx";
+import DailyNorma from "../../components/DailyNorma/DailyNorma.jsx";
 import css from "./HomePage.module.css";
 
 const HomePage = () => {
   const imageSrc = bottleMob;
-
+  
   
   return (
     <div className={css.homepage}>
       <DocumentTitle>Home</DocumentTitle>
       <div className={css.topAligned}>
-        {/* <DailyNorma /> */}
+        <DailyNorma />
       </div>
       <div className={css.centeredContent}>
         <div className={css.btlPan}>

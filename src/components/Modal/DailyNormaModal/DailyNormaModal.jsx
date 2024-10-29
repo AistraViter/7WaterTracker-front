@@ -1,21 +1,45 @@
-import { useState } from "react";
 import ReactModal from "react-modal";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserDailyNorm } from "../../../redux/user/selectors";
+import { updateUserDailyNorm } from "../../../redux/user/operations";
+import { selectToken } from "../../../redux/auth/selectors"; // Додайте цей імпорт
 
 ReactModal.setAppElement("#root");
 
 import css from "./DailyNormaModal.module.css";
 
 import { updateDailyNorma } from "../../../utils/validations/dailyNormSchema";
-import { useDispatch, useSelector } from "react-redux";
-import { selectUserDailyNorm } from "../../../redux/user/selectors";
-import { updateUserDailyNorm } from "../../../redux/user/operations";
 
 export default function DailyNormaModal({ isOpen, onRequestClose }) {
   const userDailyNorma = useSelector(selectUserDailyNorm);
+  const token = useSelector(selectToken); // Отримання токена з auth state
+
+
+  const user = useSelector((state) => state.user.user);
+  console.log("User object:", user);
+
+  const dailyNorm = useSelector(selectUserDailyNorm);
+  
+  useEffect(() => {
+    console.log("Актуальний dailyNorm:", dailyNorm);
+  }, [dailyNorm]);
+
+
+
+
 
   const [dailyNorma, setDailyNorma] = useState(Number(0).toFixed(1));
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!token) {
+      console.log("Токен відсутній - немає доступу до dailyNorm.");
+      return;
+    }
+  }, [token]);
 
   const initialValues = {
     gender: "woman",
@@ -40,8 +64,8 @@ export default function DailyNormaModal({ isOpen, onRequestClose }) {
   const handleSubmit = async (_, actions) => {
     const convertedDailyNorma = (Number(dailyNorma) * 1000).toFixed(0);
     const payload = { dailyNorm: convertedDailyNorma }; // новий формат для відправки на бекенд
-      console.log("dailyNorma being sent in milliliters:", payload);
-  
+    console.log("dailyNorma being sent in milliliters:", payload);
+
     const response = await dispatch(updateUserDailyNorm(payload));
     console.log("dailyNorma successfully saved:", response);
 

@@ -37,7 +37,7 @@ const authSlice = createSlice({
         state.error = null;
           })
       .addCase(signin.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = action.payload.data.user;
         state.token = action.payload.data.accessToken;
         console.log("Токен збережений у стані:", state.token);
 

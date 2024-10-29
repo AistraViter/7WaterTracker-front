@@ -29,8 +29,11 @@ const userSlice = createSlice({
       .addCase(getUserInfo.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.items = action.payload;
-      })
+        // Зберігаємо інформацію користувача в state.user
+        state.user = action.payload.data; // Беремо дані з payload.data
+        console.log("Отримані дані користувача:", state.user); // Додайте лог для перевірки
+    })
+
       .addCase(getUserInfo.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
@@ -60,7 +63,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = null;
         if (state.user) {
-          state.user.photo = action.payload.photo;
+          state.user.avatar = action.payload.avatar;
         }
       })
       .addCase(updateUserAvatar.rejected, (state, action) => {
@@ -91,11 +94,12 @@ const userSlice = createSlice({
       .addCase(updateUserDailyNorm.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        if (state.user) {
-          state.user.dailyNorm = action.payload.dailyNorm;
-        }
+        console.log("Отримане action.payload:", action.payload); // Лог для перевірки
+        state.user.dailyNorm = action.payload.data.user.dailyNorm; // Зберігаємо dailyNorm
+        console.log("Збережений dailyNorm:", state.user.dailyNorm);
       })
       .addCase(updateUserDailyNorm.rejected, (state, action) => {
+        console.error("Помилка при оновленні dailyNorm:", action.error);
         state.loading = false;
         state.error = action.payload;
       })
