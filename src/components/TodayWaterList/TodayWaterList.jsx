@@ -8,7 +8,7 @@ import formatTo12HourTime from "../../utils/formatTo12HourTime.js";
 import {
   getWaterNotes,
   deleteWaterNote,
-  postWaterNote,
+  // postWaterNote,
 } from "../../redux/water/operations.js";
 import css from "./TodayWaterList.module.css";
 
@@ -59,17 +59,10 @@ const TodayWaterList = () => {
     }
   };
 
-  const handleAddWaterEntry = async (waterVolume, time) => {
-    console.log("Adding water entry:", waterVolume, time);
-    try {
-      const newEntry = await dispatch(
-        postWaterNote({ waterVolume, date: time })
-      ).unwrap();
-      closeAddWaterModal(newEntry);
-    } catch (error) {
-      console.error("Error adding new water note:", error);
-    }
-  };
+const handleAddWaterEntry = (newEntry) => {
+    console.log("handleAddWaterEntry called with newEntry:", newEntry);
+  setWaterEntries((prevEntries) => [...prevEntries, newEntry]);
+};
 
   const openEditWaterModal = (waterEntry) => {
     setSelectedWaterEntry(waterEntry);
@@ -103,7 +96,7 @@ const TodayWaterList = () => {
   };
 
   const openAddWaterModal = () => {
-    console.log("Opening Add Water Modal");
+    console.log("Opening Add Water Modal - це працює linkbutton 'Add water' під списком ноутів");
     setIsAddModalOpen(true);
   };
 
@@ -137,7 +130,7 @@ const TodayWaterList = () => {
       </button>
       {isAddModalOpen && (
         <>
-          {console.log("onAddWater prop:", handleAddWaterEntry)} {/* Лог для перевірки */}
+          {console.log(" onAddWater prop in TodayWaterList:", handleAddWaterEntry)} 
           <AddWaterAmountModal
             isOpen={isAddModalOpen}
             onClose={closeAddWaterModal}
