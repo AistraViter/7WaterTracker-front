@@ -1,13 +1,26 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../../utils/axiosConfig";
+import axios from "axios";
+axios.defaults.baseURL = "https://sevenwatertracker-back-1.onrender.com";
+// Функції для налаштування заголовків
+const setAuthHeader = (token) => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
+// Загальна функція для отримання токена та налаштування заголовка
+const configureAuthHeader = (thunkAPI) => {
+  const state = thunkAPI.getState();
+  const token = state.auth.token; // Отримуємо токен з authSlice
+  if (token) {
+    setAuthHeader(token); // Налаштовуємо заголовок з токеном
+  }
+};
 
 export const getWaterNotes = createAsyncThunk(
   "water/getWaterNotes",
   async (_, thunkAPI) => {
+    configureAuthHeader(thunkAPI); // Налаштовуємо заголовок авторизації
     try {
       const response = await axios.get("/water/note", {});
-      console.log("Response from backend:", response.data); // Діагностика
-
       return response.data.data; // приходить в об'єкт data: {}
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -20,6 +33,8 @@ export const getWaterNotes = createAsyncThunk(
 export const postWaterNote = createAsyncThunk(
   "water/postWaterNote",
   async ({ date, waterVolume, time }, thunkAPI) => {
+    configureAuthHeader(thunkAPI); // Налаштовуємо заголовок авторизації
+
     try {
       const response = await axios.post("/water/note", {
         date,
@@ -37,12 +52,11 @@ export const postWaterNote = createAsyncThunk(
 
 export const updateWaterNote = createAsyncThunk(
   "water/updateWaterNote",
-  async ({ _id, waterVolume, date, time, }, thunkAPI) => {
-    try {
-      // Об'єкт даних, які ви хочете надіслати
-      const data = { waterVolume, date, time, };
+  async ({ _id, waterVolume, date, time }, thunkAPI) => {
+    configureAuthHeader(thunkAPI); // Налаштовуємо заголовок авторизації
 
-      // Надсилаємо PATCH запит з даними
+    try {
+      const data = { waterVolume, date, time };
       const response = await axios.patch(`/water/note/${_id}`, data);
       return response.data.data; // Припускаємо, що дані приходять в об'єкті data: {}
     } catch (error) {
@@ -56,6 +70,8 @@ export const updateWaterNote = createAsyncThunk(
 export const deleteWaterNote = createAsyncThunk(
   "water/deleteWaterNote",
   async (id, thunkAPI) => {
+    configureAuthHeader(thunkAPI); // Налаштовуємо заголовок авторизації
+
     try {
       const response = await axios.delete(`/water/note/${id}`);
       return response.data;
@@ -70,10 +86,11 @@ export const deleteWaterNote = createAsyncThunk(
 export const getWaterToday = createAsyncThunk(
   "water/getWaterToday",
   async (_, thunkAPI) => {
+    configureAuthHeader(thunkAPI); // Налаштовуємо заголовок авторизації
+
     try {
       const response = await axios.get("/water/today", {});
-      console.log("Response from backend:", response.data); // Діагностика
-      return response.data.data;
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "Failed to get a water note for today"
@@ -85,6 +102,8 @@ export const getWaterToday = createAsyncThunk(
 export const getWaterMonth = createAsyncThunk(
   "water/getWaterMonth",
   async ({ month, year }, thunkAPI) => {
+    configureAuthHeader(thunkAPI); // Налаштовуємо заголовок авторизації
+
     try {
       const response = await axios.get(`/water/month`, {
         params: { month, year },

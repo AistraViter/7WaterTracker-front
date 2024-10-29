@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getWaterMonth } from "../../redux/water/operations.js";
 import DaysGeneralStats from "../DaysGeneralStats/DaysGeneralStats.jsx";
 import css from "./MonthStatsTable.module.css";
 
@@ -10,9 +12,13 @@ const staticStyles = {
 };
 
 const MonthStatsTable = () => {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
-
+  // const [showModal, setShowModal] = useState(false);
+  const [monthData, setMonthData] = useState([]);
   const monthNames = [
     "January",
     "February",
@@ -33,19 +39,46 @@ const MonthStatsTable = () => {
     currentDate.getFullYear()
   );
 
-  // Статичні дані для демонстрації
-  const monthData = Array.from({ length: daysInMonth }, (_, i) => ({
-    date: i + 1,
-    progress: Math.floor(Math.random() * 101),
-    achieved: Math.random() < 0.5,
-  }));
+  // Дані з бекенду
+  const fetchWaterMonth = async () => {
+    try {
+      const data = await dispatch(
+        getWaterMonth({
+          month: currentDate.getMonth() + 1,
+          year: currentDate.getFullYear(),
+        })
+      ).unwrap();
+      setMonthData(
+        Array.from({ length: daysInMonth }, (_, i) => {
+          const dayData = data.find(
+            (d) => new Date(d.date).getDate() === i + 1
+          );
+          return {
+            date: i + 1,
+            progress: dayData ? dayData.percentage : 0,
+            achieved: dayData ? dayData.percentage >= 100 : false,
+          };
+        })
+      );
+    } catch (error) {
+      console.error("Error fetching water notes:", error);
+    }
+  };
 
-  const handleDayClick = (day) => {
-    setSelectedDay(day);
+  useEffect(() => {
+    fetchWaterMonth();
+  }, [currentDate, token, dispatch]);
+
+  ///// логіка календаря
+  const handleDayClick = (dayData) => {
+    setSelectedDay(dayData);
+    // setShowModal(true); // Відкриваємо модалку
   };
 
   const getProgressClass = (progress) => {
-    return progress === 100 ? staticStyles.achieved : staticStyles.notAchieved;
+    return progress.length >= 4
+      ? staticStyles.achieved
+      : staticStyles.notAchieved;
   };
 
   const handlePrevMonth = () => {
@@ -60,9 +93,9 @@ const MonthStatsTable = () => {
     );
   };
 
-   const handleClose = () => {
-     setSelectedDay(null); // Закриваємо панель
-   };
+  const handleClose = () => {
+    setSelectedDay(null); // Закриваємо панель
+  };
 
   return (
     <div className={css.monthstatscontainer}>
@@ -119,9 +152,15 @@ const MonthStatsTable = () => {
             <div className={css.daynumber}>
               <span className={css.number}>{day.date}</span>
             </div>
-            <div className={css.progresspercentage}>{day.progress}%</div>
+            <div className={css.progresspercentage}>
+              {day.progress === 0 ? "0%" : day.progress}
+            </div>
             {selectedDay && selectedDay.date === day.date && (
-              <DaysGeneralStats dayData={selectedDay} onClose={handleClose} />
+              <DaysGeneralStats
+                // dayData={dayData}
+                // dayData={selectedDay}
+                onClose={handleClose}
+              />
             )}
           </li>
         ))}

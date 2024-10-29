@@ -88,9 +88,14 @@
   justify-content: center;
 }
 
-.notAchieved .daynumber {
+.achieved .daynumber {
   border: 1px solid #ff9d43;
 }
+
+.notAchieved .daynumber {
+  border: 1px solid #ffffff;
+}
+
 .daycell {
   width: 32px;
   flex: 0 0 auto;

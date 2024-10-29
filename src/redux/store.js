@@ -1,8 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { authReducer } from './auth/slice';
-import { userReducer } from './user/slice';
-import { waterReducer } from './water/slice';
-import { modalReducer } from './modal/slice';
+//// Store
+import { configureStore } from "@reduxjs/toolkit";
 import {
   persistStore,
   persistReducer,
@@ -12,22 +9,31 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { authReducer } from "./auth/slice";
+import { userReducer } from "./user/slice";
+import { waterReducer } from "./water/slice";
+import { modalReducer } from "./modal/slice";
 
 const authPersistConfig = {
-  key: 'auth',
+  key: "auth",
   storage,
-  whitelist: ['token'],
+  whitelist: ["token"],
 };
 
 const userPersistConfig = {
-  key: 'user',
+  key: "user",
   storage,
 };
 
 const waterPersistConfig = {
-  key: 'water',
+  key: "water",
+  storage,
+};
+
+const modalPersistConfig = {
+  key: "modal",
   storage,
 };
 
@@ -36,7 +42,7 @@ export const store = configureStore({
     auth: persistReducer(authPersistConfig, authReducer),
     user: persistReducer(userPersistConfig, userReducer),
     water: persistReducer(waterPersistConfig, waterReducer),
-    modal: modalReducer,
+    modal: persistReducer(modalPersistConfig, modalReducer),
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

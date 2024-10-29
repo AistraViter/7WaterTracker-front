@@ -1,5 +1,8 @@
+// Крок 0 доававання імпортів для встановлення токена
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+
 import EditWaterAmountModal from "../Modal/EditWaterAmountModal/EditWaterAmountModal.jsx";
 import AddWaterAmountModal from "../Modal/AddWaterAmountModal/AddWaterAmountModal.jsx";
 import DeleteEntryModal from "../Modal/DeleteEntryModal/DeleteEntryModal.jsx";
@@ -13,9 +16,29 @@ import {
 import css from "./TodayWaterList.module.css";
 
 const TodayWaterList = () => {
+  // Крок 1 доававання конастнт для використання токена вкомпоненті
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const [waterEntries, setWaterEntries] = useState([]);
+  
+  const setAuthHeader = (token) => {
+    if (token) {
+      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+      console.log("Заголовок авторизації встановлено:", `Bearer ${token}`);
+    } else {
+      delete axios.defaults.headers.common.Authorization;
+      console.log("Токена немає");
+    }
+  };
+  
+  useEffect(() => {
+    setAuthHeader(token);
+    if (token) {
+      console.log("Токен отримано:", token);
+    }
+  }, [token]);
+  
+  // const [waterEntries, setWaterEntries] = useState([]); // Порожній масив як початковий стан
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteEntryModalOpen, setIsDeleteEntryModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -24,6 +47,9 @@ const TodayWaterList = () => {
 
   const fetchWaterNotes = async () => {
     console.log("fetchWaterNotes invoked")
+    setAuthHeader(token); // Крок 3 Встановлюємо заголовок перед запитом
+    console.log ("Заголовок авторизації перед запитом:" )
+
     try {
       const data = await dispatch(getWaterNotes()).unwrap();
       const todayEntries = data.filter((entry) =>
@@ -70,6 +96,7 @@ const handleAddWaterEntry = (newEntry) => {
   };
 
   const openDeleteEntryWaterModal = (waterEntry) => {
+    console.log("Selected water entry:", waterEntry);
     setSelectedWaterEntry(waterEntry);
     setIsDeleteEntryModalOpen(true);
   };

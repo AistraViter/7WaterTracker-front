@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signup, signin, logout } from "./operations";
+import { signup, signin, logout,refresh } from "./operations";
 
 const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: {
-      password: null,
       email: null,
     },
     token: null,
@@ -17,69 +16,75 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(signup.pending, (state) => {
+        state.isRefreshing = true;
         state.loading = true;
         state.error = null;
-        state.isLoggedIn = false;
-      })
+          })
       .addCase(signup.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.accessToken;
         state.isLoggedIn = true;
-        state.error = null;
         state.loading = false;
-      })
+        state.isRefreshing = false;
+          })
       .addCase(signup.rejected, (state, action) => {
-        state.loading = false;
+        state.isRefreshing = false;
         state.error = action.payload;
-        state.isLoggedIn = false;
       })
       .addCase(signin.pending, (state) => {
+        state.isRefreshing = true;
         state.loading = true;
         state.error = null;
-        state.isLoggedIn = false;
-      })
+          })
       .addCase(signin.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.token = action.payload.accessToken;
+        state.token = action.payload.data.accessToken;
+        console.log("Токен збережений у стані:", state.token);
+
         state.isLoggedIn = true;
-        state.error = null;
         state.loading = false;
-      })
+        state.isRefreshing = false;
+          })
+
+
       .addCase(signin.rejected, (state, action) => {
-        state.loading = false;
+        state.isRefreshing = false;
         state.error = action.payload;
-        state.isLoggedIn = false;
       })
       .addCase(logout.pending, (state) => {
+        state.isRefreshing = true;
         state.loading = true;
         state.error = null;
-      })
+          })
       .addCase(logout.fulfilled, (state) => {
-        state.user = { password: null, email: null };
+        state.user = { email: null };
         state.token = null;
         state.isLoggedIn = false;
+        state.loading = false;
+        state.isRefreshing = false;
+      })
+      .addCase(logout.rejected, (state) => {
+        state.isRefreshing = true;
+        state.loading = false; 
         state.error = null;
+            })
+      .addCase(refresh.pending, (state) => {
+        state.isRefreshing = true; 
+        state.loading = true;
+        state.error = null;
+          })
+      .addCase(refresh.fulfilled, (state, action) => {
+        state.user = action.payload.user; 
+        state.isLoggedIn = true;
         state.loading = false;
+        state.isRefreshing = false;
+    
       })
-      .addCase(logout.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
-      // .addCase(refresh.pending, (state) => {
-      //   state.isRefreshing = true; // Set refreshing state to true
-      // })
-      // .addCase(refresh.fulfilled, (state, action) => {
-      //   state.user = action.payload.user; // Update user data
-      //   state.token = action.payload.accessToken; // Update token if necessary
-      //   state.isRefreshing = false; // Reset refreshing state
-      // })
-      // .addCase(refresh.rejected, (state, action) => {
-      //   state.isRefreshing = false; // Reset refreshing state
-      //   state.error = action.payload; // Set the error if refresh fails
-      // });
+      .addCase(refresh.rejected, (state, action) => {
+        state.isRefreshing = false; 
+        state.error = action.payload; 
+      });
   },
 });
 
 export const authReducer = authSlice.reducer;
-
-

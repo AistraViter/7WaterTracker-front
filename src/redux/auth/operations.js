@@ -1,6 +1,7 @@
+//// Operations auth
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../../utils/axiosConfig";
-
+import axios from "axios";
+axios.defaults.baseURL = "https://sevenwatertracker-back-1.onrender.com";
 const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
@@ -37,8 +38,8 @@ export const signin = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const response = await axios.post("/auth/login", credentials);
-
-      return response.data.data;
+      setAuthHeader(response.data.data.accessToken); // Додайте налаштування заголовка
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -48,8 +49,8 @@ export const signin = createAsyncThunk(
 export const refresh = createAsyncThunk("auth/refresh", async (_, thunkAPI) => {
   try {
     const response = await axios.post("/auth/refresh");
-    setAuthHeader(response.data.data.accessToken);
-    return response.data.data;
+    setAuthHeader(response.data.accessToken);
+    return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
@@ -63,15 +64,3 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
-// export const refresh = createAsyncThunk(
-//   'auth/refresh',
-//   async (_, thunkAPI) => {
-//     try {
-//       const response = await axios.post("/auth/refresh");
-//       setAuthHeader(response.data.data.accessToken);
-//       return response.data.data;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
