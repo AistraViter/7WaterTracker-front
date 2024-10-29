@@ -1,0 +1,23 @@
+.signup {
+  display: flex;
+  padding-right: 8px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: #407BFF;
+}
+
+.signup:hover {
+  color: #FF9D43;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.icon {
+  fill: none;
+  stroke: black
+}

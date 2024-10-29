@@ -1,0 +1,69 @@
+/* 320 */
+
+.section {
+    width: 100%;
+    border-radius: 10px;
+    padding: 24px 16px;
+    height: 100%;
+    box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.3);
+    background: #ecf2ff;
+}
+
+.h3 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.11111;
+    color: #2f2f2f;
+    margin: 0;
+    margin-bottom: 12px;
+}
+
+.benefitsList {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.25;
+    color: #2f2f2f;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-left: 16px;
+}
+
+.benefitsList li {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.25;
+    color: #2f2f2f;
+    list-style-type: disc;
+}
+
+.benefitsList li::marker {
+    color: #407bff;
+    font-size: 16px;
+}
+
+/* Media Queries for Tablet (768px) */
+@media (min-width: 768px) {
+    .section {
+        padding: 32px 24px;
+        width: 70%;
+    }
+
+    .benefitsList li {
+        white-space: nowrap;
+    }
+}
+/* Media Queries for Desktop (1440px) */
+@media (min-width: 1440px) {
+    .section {
+        border-radius: 10px;
+        width: 80%;
+        flex: 0 1 auto;
+        max-width: 600px;
+    }
+}

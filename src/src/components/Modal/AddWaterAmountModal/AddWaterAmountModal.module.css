@@ -1,0 +1,372 @@
+/* =========================  Common styles  ========================== */
+.amountControlsButton,
+.saveButton,
+.closeIcon {
+    transition: box-shadow 250ms linear;
+}
+
+.amountControlsButton:hover,
+.saveButton:hover,
+.closeIcon:hover {
+    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+}
+
+.amountControlsButton:active,
+.saveButton:active {
+    box-shadow: none;
+}
+
+input,
+input:active,
+input:focus {
+    outline: none;
+}
+
+/* =========================  Recording Time drop-down list  ========================== */
+.dropdownContainer {
+    position: relative;
+}
+
+.dropdown {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    z-index: 1000;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+}
+
+.dropdownItem {
+    padding: 10px;
+    cursor: pointer;
+    /* color: rgb(64, 123, 255); */
+}
+
+.dropdownItem:hover {
+    background-color: rgb(236, 242, 255);
+}
+
+
+/*============================= max-width: 767px =====================================*/
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.modalWindow {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    left: 20px;
+    top: 40px;
+    width: 280px;
+    height: 540px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    padding: 24px 12px;
+    border-radius: 10px;
+    background: rgb(255, 255, 255);
+}
+
+.customForm {
+    width: 100%;
+}
+
+.headerDiv {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.headerTitle {
+    color: rgb(47, 47, 47);
+    font-family: Roboto;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 32px;
+    text-align: left;
+    margin: 0;
+}
+
+.closeButton {
+    background-color: transparent;
+    border: none;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.closeIcon {
+    width: 12px;
+    height: 12px;
+}
+
+.statusLine {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 8px 24px 8px 24px;
+    margin: 24px 0px;
+    border-radius: 10px;
+    background-color: rgb(236, 242, 255);
+}
+
+.statusLineIcon {
+    width: 22.69px;
+    height: 29.74px;
+    margin-right: 19.05px;
+}
+
+.statusLineP {
+    color: rgb(47, 47, 47);
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+.statusLineWaterAmount {
+    color: rgb(64, 123, 255);
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    display: inline-block;
+    margin-right: 16px;
+}
+
+.amountControls {
+    /* tbd */
+}
+
+.sectionTitle {
+    color: rgb(47, 47, 47);
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: left;
+    margin: 0;
+    margin-bottom: 16px;
+    display: inline-block;
+}
+
+.fieldTitle {
+    color: rgb(47, 47, 47);
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    margin: 0;
+    margin-bottom: 12px;
+}
+
+.amountControls {
+    margin-bottom: 24px;
+}
+
+.amountControlsRow {
+    position: static;
+    display: flex;
+    /* flex-direction: row; */
+    /* justify-content: center; */
+    align-items: center;
+    gap: 10;
+}
+
+.amountControlsButton {
+    width: 44px;
+    height: 44px;
+    /* Auto layout */
+    box-sizing: border-box;
+    border: 1px solid rgb(158, 187, 255);
+    border-radius: 50%;
+    box-shadow: 0px 2px 4px 0px rgba(64, 123, 255, 0.2);
+    background: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.amountControlsIcon {
+    /* position: absolute; */
+    width: 13.5px;
+    height: 13.5px;
+    left: 5.25px;
+    top: 11.25px;
+}
+
+.amountControlsValue {
+    width: 92px;
+    height: 36px;
+    padding: 6px 10px;
+    margin: 0px 7px;
+    border-radius: 40px;
+    background-color: rgb(215, 227, 255);
+    white-space: nowrap;
+
+    color: rgb(64, 123, 255);
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: center;
+}
+
+.recordingTime {
+    position: static;
+    width: 256px;
+    height: 76px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 12;
+    padding: 0px;
+    margin: 24px 0px;
+}
+
+.inputField {
+    box-sizing: border-box;
+    border: 1px solid rgb(215, 227, 255);
+    border-radius: 6px;
+    width: 100%;
+    height: 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 12px 10px;
+    /* margin: 12px 0px; */
+
+    color: rgb(64, 123, 255);
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0%;
+    text-align: left;
+}
+
+.fieldValue {
+    width: 50px;
+    color: blue;
+}
+
+.errorText {
+    color: #EF5050;
+    display: flex;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.inputError {
+    border: 1px solid #EF5050;
+    color: #EF5050;
+}
+
+.adjustWaterAmount {
+    margin-bottom: 24px;
+}
+
+.submitButtonSection {
+    display: flex;
+    flex-direction: column;
+}
+
+.submitButtonAmount {
+    color: rgb(64, 123, 255);
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-align: center;
+    margin: 0;
+}
+
+.saveButton {
+    width: 100%;
+    padding: 8px 30px 8px 30px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
+    background: rgb(64, 123, 255);
+    cursor: pointer;
+    margin-top: 16px;
+    color: rgb(255, 255, 255);
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/*============================= min-width: 768px =====================================*/
+@media only screen and (min-width: 768px) {
+
+    .dropdown {
+        width: 50%;
+    }
+
+    .modalWindow {
+        /* position: absolute; */
+        width: 704px;
+        height: 504px;
+        padding: 32px 24px 32px 24px;
+    }
+
+    .headerDiv {
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .statusLine {
+        width: 254px;
+    }
+
+    .inputField {
+        width: 544px;
+    }
+
+    .submitButtonSection {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .saveButton {
+        margin: 0;
+        margin-left: 24px;
+        width: 160px;
+        font-size: 18px;
+    }
+}
+
+/*============================= min-width: 1280px =====================================*/
+@media only screen and (min-width: 1280px) {
+
+    .modalWindow {
+        width: 592px;
+        height: 504px;
+    }
+
+}

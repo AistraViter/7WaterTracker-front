@@ -1,0 +1,120 @@
+.modalUserLogout {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: flex-start;
+}
+
+.modalContent {
+  padding: 32px 24px;
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  line-height: 1.33;
+  flex-direction: column-reverse;
+  gap: 24px;
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  font-size: 26px;
+  line-height: 1.23;
+  font-weight: 500;
+  color: rgba(47, 47, 47, 1);
+  margin: 0;
+  display: inline-block;
+}
+
+.text {
+  font-size: 18px;
+  line-height: 1.11;
+  margin: 0;
+  display: inline-block;
+}
+
+.buttonCancel {
+  border-radius: 10px;
+  padding: 10px 30px;
+  width: 160px;
+  height: 44px;
+  background: rgba(215, 227, 255, 1);
+  color: rgba(64, 123, 255, 1);
+  width: 100%;
+  border: none;
+}
+
+.buttonLogout {
+  border-radius: 10px;
+  padding: 10px 30px;
+  width: 160px;
+  height: 44px;
+  background: rgba(239, 80, 80, 1);
+  color: rgba(255, 255, 255, 1);
+  width: 100%;
+  border: none;
+}
+
+.buttonCancel:hover,
+.buttonLogout:hover {
+  box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 1);
+}
+
+.buttonLogout:active,
+.buttonCancel:active {
+  box-shadow: none;
+}
+
+.buttonCancel:focus,
+.buttonLogout:focus {
+  outline: transparent;
+}
+
+@media screen and (max-width: 768px) {
+  .modal {
+    width: 232px;
+    height: 196px;
+  }
+
+  .modalButtons {
+    flex-direction: column-reverse;
+    gap: 24px;
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  .buttonCancel {
+    padding: 8px 30px;
+    width: 100%;
+    height: 36px;
+  }
+
+  .buttonLogout {
+    padding: 8px 30px;
+    width: 100%;
+    height: 36px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .modalButtons {
+    width: 344px;
+  }
+}
+
+/* @media screen and (min-width: 769px) and (max-width: 1439px) {
+  .modalButtons {
+    align-self: flex-end;
+  }
+}
+
+*/
