@@ -1,4 +1,4 @@
-import css from "../WaterСonsumptionTracker/WaterСonsumptionTracker.module.css";
+import css from "../WaterConsumptionTracker/WaterConsumptionTracker.module.css";
 import { Link } from "react-router-dom";
 
 export const WaterConsumptionTracker = () => {

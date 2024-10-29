@@ -6,8 +6,6 @@ export const getWaterNotes = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get("/water/note", {});
-      console.log("Response from backend:", response.data); // Діагностика
-
       return response.data.data; // приходить в об'єкт data: {}
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -39,11 +37,8 @@ export const updateWaterNote = createAsyncThunk(
   "water/updateWaterNote",
   async ({ _id, waterVolume, date, time, }, thunkAPI) => {
     try {
-      // Об'єкт даних, які ви хочете надіслати
       const data = { waterVolume, date, time, };
-
-      // Надсилаємо PATCH запит з даними
-      const response = await axios.patch(`/water/note/${_id}`, data);
+     const response = await axios.patch(`/water/note/${_id}`, data);
       return response.data.data; // Припускаємо, що дані приходять в об'єкті data: {}
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -72,8 +67,7 @@ export const getWaterToday = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get("/water/today", {});
-      console.log("Response from backend:", response.data); // Діагностика
-      return response.data.data;
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "Failed to get a water note for today"

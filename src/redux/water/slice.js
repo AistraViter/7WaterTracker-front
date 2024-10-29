@@ -87,10 +87,10 @@ const waterSlice = createSlice({
       .addCase(getWaterToday.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.notes = action.payload?.data?.notes || []; // Перевірка наявності `data.notes`
-        state.percentage = action.payload?.data?.percentage || 0; // Перевірка наявності `data.percentage`
-      })
-      .addCase(getWaterToday.rejected, (state, action) => {
+        state.notes = action.payload?.notes || []; 
+        state.percentage = action.payload?.percentage || 0; 
+    })
+          .addCase(getWaterToday.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
@@ -111,4 +111,5 @@ const waterSlice = createSlice({
     },
   });
 
+  
 export const waterReducer = waterSlice.reducer;

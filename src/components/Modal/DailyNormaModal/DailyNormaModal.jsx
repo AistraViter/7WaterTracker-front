@@ -36,9 +36,6 @@ export default function DailyNormaModal({ isOpen, onRequestClose }) {
     }
     return 0;
   };
-  // const payload = { dailyNorm: dailyNorma};
-  // console.log("dailyNorma being sent:", payload);
-
 
   const handleSubmit = async (_, actions) => {
     const convertedDailyNorma = (Number(dailyNorma) * 1000).toFixed(0);
