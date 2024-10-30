@@ -95,7 +95,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = null;
         console.log("Отримане action.payload:", action.payload); // Лог для перевірки
-        state.user.dailyNorm = action.payload.data.user.dailyNorm; // Зберігаємо dailyNorm
+        state.user.dailyNorm = action.payload.user.user.dailyNorm; // Зберігаємо dailyNorm
         console.log("Збережений dailyNorm:", state.user.dailyNorm);
       })
       .addCase(updateUserDailyNorm.rejected, (state, action) => {
