@@ -1,17 +1,18 @@
 import css from "./DaysGeneralStats.module.css";
-import { useSelector } from "react-redux";
-import {
-  selectWaterTodayPanel,
-  selectWaterPercentage,
-} from "../../redux/water/selectors";
 import { useEffect, useRef, useState } from "react";
 
-export default function DaysGeneralStats({ day, onClose }) {
-  const waterItems = useSelector(selectWaterTodayPanel); // масив із записами на сьогодні
-  const percentage = useSelector(selectWaterPercentage); // відсоток виконання норми
-  const wrapperRef = useRef(null);
-  const dayData = waterItems.find((data) => data.date === day); // шукаємо дані за вибрану дату
+// import { useSelector } from "react-redux";
+// import {
+//   selectWaterTodayPanel,
+//   selectWaterPercentage,
+// } from "../../redux/water/selectors";
+
+export default function DaysGeneralStats({  dayInfo, onClose }) {
   const [alignRight, setAlignRight] = useState(false); // Стан вирівнювання
+  const wrapperRef = useRef(null);
+  // const waterItems = useSelector(selectWaterTodayPanel); // масив із записами на сьогодні
+  // const percentage = useSelector(selectWaterPercentage); // відсоток виконання норми
+  // const dayData = waterItems.find((data) => data.date === day); // шукаємо дані за вибрану дату
 
   // Перевіряємо, чи елемент виходить за межі екрана
   useEffect(() => {
@@ -51,24 +52,23 @@ export default function DaysGeneralStats({ day, onClose }) {
     };
   }, [onClose]);
 
-
-  const consumptionCount = dayData ? dayData.consumptionCount : 0;
-  const dailyNorm = dayData ? dayData.dailyNorm : "2.0 L";
-   percentage === dayData ? dayData.percentage : "0%";
-
+  // Витягуємо необхідні дані з пропсів
+  const { date, dailyNorm, progress, consumptionCount, month } = dayInfo;
+  
+  
   return (
     <div
       className={`${css.dayStatusWrapper} ${alignRight ? css.alignRight : ""}`}
       ref={wrapperRef}
     >
       <ul className={css.dayStatus}>
-        <li className={css.dayStatusDate}>{day}</li>
+        <li className={css.dayStatusDate}>{date}{", "}{month}</li>
         <li className={css.dayStatusItem}>
-        Daily norma: <span className={css.textColorAccent}>{dailyNorm}</span>
+          Daily norma: <span className={css.textColorAccent}>{dailyNorm}</span>
         </li>
         <li className={css.dayStatusItem}>
           Fulfillment of the daily norm:{" "}
-          <span className={css.textColorAccent}>{percentage}</span>
+          <span className={css.textColorAccent}>{progress}</span>
         </li>
         <li className={css.dayStatusItem}>
           How many servings of water:{" "}

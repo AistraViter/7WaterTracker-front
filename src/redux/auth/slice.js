@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signup, signin, logout,refresh } from "./operations";
+import { signup, signin, logout, refresh } from "./operations";
 
 const authSlice = createSlice({
   name: "auth",
@@ -9,7 +9,7 @@ const authSlice = createSlice({
     },
     token: null,
     isLoggedIn: false,
-    isRefreshing: false, 
+    isRefreshing: false,
     loading: false,
     error: null,
   },
@@ -19,14 +19,14 @@ const authSlice = createSlice({
         state.isRefreshing = true;
         state.loading = true;
         state.error = null;
-          })
+      })
       .addCase(signup.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.accessToken;
         state.isLoggedIn = true;
         state.loading = false;
         state.isRefreshing = false;
-          })
+      })
       .addCase(signup.rejected, (state, action) => {
         state.isRefreshing = false;
         state.error = action.payload;
@@ -35,7 +35,7 @@ const authSlice = createSlice({
         state.isRefreshing = true;
         state.loading = true;
         state.error = null;
-          })
+      })
       .addCase(signin.fulfilled, (state, action) => {
         state.user = action.payload.data.user;
         state.token = action.payload.data.accessToken;
@@ -44,8 +44,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.loading = false;
         state.isRefreshing = false;
-          })
-
+      })
 
       .addCase(signin.rejected, (state, action) => {
         state.isRefreshing = false;
@@ -55,7 +54,7 @@ const authSlice = createSlice({
         state.isRefreshing = true;
         state.loading = true;
         state.error = null;
-          })
+      })
       .addCase(logout.fulfilled, (state) => {
         state.user = { email: null };
         state.token = null;
@@ -64,27 +63,27 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(logout.rejected, (state) => {
-        state.isRefreshing = true;
-        state.loading = false; 
-        state.error = null;
-            })
+        state.isRefreshing = false; // Встановлюємо в false при помилці
+        state.loading = false;
+        state.error = "Logout failed"; // За потреби можна встановити опис помилки
+      })
       .addCase(refresh.pending, (state) => {
-        state.isRefreshing = true; 
+        state.isRefreshing = true;
         state.loading = true;
         state.error = null;
-          })
+      })
       .addCase(refresh.fulfilled, (state, action) => {
-        state.user = action.payload.user; 
+        state.user = action.payload.user;
         state.isLoggedIn = true;
         state.loading = false;
         state.isRefreshing = false;
-    
       })
       .addCase(refresh.rejected, (state, action) => {
-        state.isRefreshing = false; 
-        state.error = action.payload; 
+        state.isRefreshing = false;
+        state.error = action.payload;
       });
   },
 });
+export const { loginSuccess, loginFail, logoutSuccess } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

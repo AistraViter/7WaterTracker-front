@@ -5,9 +5,6 @@ axios.defaults.baseURL = "https://sevenwatertracker-back-1.onrender.com";
 const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
-const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = "";
-};
 
 export const signup = createAsyncThunk(
   "auth/signup",
@@ -56,11 +53,38 @@ export const refresh = createAsyncThunk("auth/refresh", async (_, thunkAPI) => {
   }
 });
 
+
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+  
+  const token = thunkAPI.getState().auth.token; // Отримуємо токен з Redux стану
+  console.log("Токен перед логаутом:", token); // Лог токена перед запитом
+
+  if (!token) {
+    console.log("Токен не знайдено перед логаутом.");
+    return thunkAPI.rejectWithValue("Токен не знайдено.");
+  }
+
+  setAuthHeader(token); // Встановлюємо заголовок авторизації
+
   try {
-    await axios.post("/auth/logout");
-    clearAuthHeader();
+    console.log("Логаут запит надсилається...");
+    await axios.post("/auth/logout", {}, {
+      headers: {
+        Authorization: `Bearer ${token}` // Передача токена безпосередньо в запиті
+      }
+    });
+    
+    clearAuthHeader(); // Очищення заголовка авторизації після логауту
+    return true;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+    console.log(`Помилка логауту: ${error.message}`);
+    return thunkAPI.rejectWithValue(error.message); // Обробка помилки
   }
 });
+
+// Функція для очищення заголовка
+const clearAuthHeader = () => {
+  delete axios.defaults.headers.common.Authorization;
+};
+
+

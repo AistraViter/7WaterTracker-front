@@ -57,6 +57,8 @@ const MonthStatsTable = () => {
             date: i + 1,
             progress: dayData ? dayData.percentage : 0,
             achieved: dayData ? dayData.percentage >= 100 : false,
+            dailyNorm: dayData ? dayData.dailyNorm : "2.0 L", // Норматив
+            consumptionCount: dayData ? dayData.consumptionCount : 0, // Кількість споживань
           };
         })
       );
@@ -72,7 +74,6 @@ const MonthStatsTable = () => {
   ///// логіка календаря
   const handleDayClick = (dayData) => {
     setSelectedDay(dayData);
-    // setShowModal(true); // Відкриваємо модалку
   };
 
   const getProgressClass = (progress) => {
@@ -96,6 +97,9 @@ const MonthStatsTable = () => {
   const handleClose = () => {
     setSelectedDay(null); // Закриваємо панель
   };
+
+  const month = monthNames[currentDate.getMonth()]; // Тут отримуємо назву місяця
+
 
   return (
     <div className={css.monthstatscontainer}>
@@ -155,10 +159,19 @@ const MonthStatsTable = () => {
             <div className={css.progresspercentage}>
               {day.progress === 0 ? "0%" : day.progress}
             </div>
+            {/* Модалка */}
             {selectedDay && selectedDay.date === day.date && (
+              
               <DaysGeneralStats
-                // dayData={dayData}
-                // dayData={selectedDay}
+                dayData={selectedDay}
+                dayInfo={{
+                  date: selectedDay.date,
+                  dailyNorm: day.dailyNorm,
+                  progress: day.progress,
+                  consumptionCount: day.consumptionCount,
+                  month, // Передаємо місяць тут
+
+                }}
                 onClose={handleClose}
               />
             )}
