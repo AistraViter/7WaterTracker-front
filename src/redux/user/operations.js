@@ -54,10 +54,19 @@ export const updateUserAvatar = createAsyncThunk(
   async (newAvatar, thunkAPI) => {
     configureAuthHeader(thunkAPI); // Налаштовуємо заголовок авторизації
 
+    const formData = new FormData();
+    formData.append("avatar", newAvatar);
+    console.log("FormData content:", formData.get("avatar"));
+
     try {
-      const response = await axios.patch("/user/avatar", newAvatar);
-      return response.data.data;
+      const response = await axios.patch("/user/avatar", formData);
+
+      return response.data.data; // Повертаємо лінк на Cloudinary
     } catch (error) {
+      for (let pair of formData.entries()) {
+        console.log(`${pair[0]}: ${pair[1]}`);
+        console.log("Тип newAvatar:", newAvatar instanceof File); // має повернути true
+      }
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "Failed to update avatar"
       );
