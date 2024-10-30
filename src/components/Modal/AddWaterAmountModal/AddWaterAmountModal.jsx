@@ -36,10 +36,10 @@ const AddWaterAmountModal = ({ isOpen, onClose}) => {
     const payload = { date: formattedDate, waterVolume, time: formattedTime };
     console.log("Payload being sent to Redux action:", payload);
     
-
     try {
-      await dispatch(postWaterNote(payload)); // Виклик Redux-екшена для додавання нотатки
-      console.log("Note successfully added:", payload);
+      const newEntry = await dispatch(postWaterNote(payload));  // тут потрібен newEntry щоб передати його в onClose
+      console.log("Note successfully added:", newEntry);
+      onClose(newEntry);
     } catch (error) {
       console.error("Error on saving data:", error);
     }
