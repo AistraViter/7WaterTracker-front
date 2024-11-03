@@ -32,7 +32,7 @@ const userSlice = createSlice({
         // Зберігаємо інформацію користувача в state.user
         state.user = action.payload.data; // Беремо дані з payload.data
         console.log("Отримані дані користувача:", state.user); // Додайте лог для перевірки
-    })
+      })
 
       .addCase(getUserInfo.rejected, (state, action) => {
         state.loading = false;
@@ -94,12 +94,15 @@ const userSlice = createSlice({
       .addCase(updateUserDailyNorm.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        console.log("Отримане action.payload:", action.payload); // Лог для перевірки
-        state.user.dailyNorm = action.payload.user.user.dailyNorm; // Зберігаємо dailyNorm
-        console.log("Збережений dailyNorm:", state.user.dailyNorm);
+        if (state.user) {
+          state.user.dailyNorm = action.payload.dailyNorm;
+        }
+        
+        // console.log("Денна норма збережена у стані:", state.user);
+
       })
       .addCase(updateUserDailyNorm.rejected, (state, action) => {
-        console.error("Помилка при оновленні dailyNorm:", action.error);
+        console.error("Помилка при оновленні dailyNorm:", action.payload);
         state.loading = false;
         state.error = action.payload;
       })

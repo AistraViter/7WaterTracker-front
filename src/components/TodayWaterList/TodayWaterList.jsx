@@ -22,22 +22,10 @@ const TodayWaterList = () => {
   const [waterEntries, setWaterEntries] = useState([]);
   
   const setAuthHeader = (token) => {
-    if (token) {
-      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-      console.log("Заголовок авторизації встановлено:", `Bearer ${token}`);
-    } else {
-      delete axios.defaults.headers.common.Authorization;
-      console.log("Токена немає");
-    }
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   };
   
-  useEffect(() => {
-    setAuthHeader(token);
-    if (token) {
-      console.log("Токен отримано:", token);
-    }
-  }, [token]);
-  
+ 
   // const [waterEntries, setWaterEntries] = useState([]); // Порожній масив як початковий стан
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteEntryModalOpen, setIsDeleteEntryModalOpen] = useState(false);
@@ -46,10 +34,7 @@ const TodayWaterList = () => {
   const [refresh, setRefresh] = useState(false);
 
   const fetchWaterNotes = async () => {
-    console.log("fetchWaterNotes invoked")
     setAuthHeader(token); // Крок 3 Встановлюємо заголовок перед запитом
-    console.log ("Заголовок авторизації перед запитом:" )
-
     try {
       const data = await dispatch(getWaterNotes()).unwrap();
       const todayEntries = data.filter((entry) =>

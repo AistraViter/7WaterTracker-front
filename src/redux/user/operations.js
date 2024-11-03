@@ -91,17 +91,13 @@ export const updateUserEmail = createAsyncThunk(
 );
 
 export const updateUserDailyNorm = createAsyncThunk(
-  "user/updateDailyNorm",
+  'user/updateDailyNorm',
   async (dailyNorm, thunkAPI) => {
-    configureAuthHeader(thunkAPI); // Налаштовуємо заголовок авторизації
-
     try {
-      const response = await axios.put("/user/daily-norm", dailyNorm);
-      return response.data.data;
+      const response = await axios.put('/user/daily-norm', dailyNorm);
+      return response.data; 
     } catch (error) {
-      return thunkAPI.rejectWithValue(
-        error.response?.data?.message || "Failed to update daily norm"
-      );
+      return thunkAPI.rejectWithValue(error.response?.data?.message || 'Failed to update daily norm');
     }
   }
 );

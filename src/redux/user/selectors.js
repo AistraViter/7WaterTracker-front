@@ -1,3 +1,5 @@
 export const selectCurrentUserInfo = (state) => state.user.user;
-export const selectUserDailyNorm = (state) => state.user.user ? state.user.user.dailyNorm : null;
+export const selectUserDailyNorm = (state) => state.user?.dailyNorm ?? 2000;
 export const selectIsUserLoading = (state) => state.user.loading;
+
+//1234qwerASDF!@#$

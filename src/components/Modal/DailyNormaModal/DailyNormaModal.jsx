@@ -1,20 +1,22 @@
 import ReactModal from "react-modal";
-import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserDailyNorm } from "../../../redux/user/operations.js";
-import { selectToken } from "../../../redux/auth/selectors.js"; 
+import axios from "axios";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 ReactModal.setAppElement("#root");
-import css from "./DailyNormaModal.module.css";
 import { updateDailyNorma } from "../../../utils/validations/dailyNormSchema.js";
+import { updateUserDailyNorm } from "../../../redux/user/operations.js";
+// import { selectUserDailyNorm } from "../../../redux/user/selectors";
+import css from "./DailyNormaModal.module.css";
 
 export default function DailyNormaModal({ isOpen, onRequestClose }) {
-  const token = useSelector(selectToken);
-  console.log("Токен з дейлі норм:", token);
-  const user = useSelector((state) => state.user.user);
-  console.log("User object:", user);
+  const token = useSelector((state) => state.auth.token);
+  const setAuthHeader = (token) => {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  };
+  // const userDailyNorma = useSelector(selectUserDailyNorm);
   
-  const [dailyNorm, setDailyNorm] = useState(Number(0).toFixed(1)); // змінив назву змінної
+  const [dailyNorma, setDailyNorma] = useState(Number(0).toFixed(1));
   const dispatch = useDispatch();
 
   const initialValues = {
@@ -24,7 +26,7 @@ export default function DailyNormaModal({ isOpen, onRequestClose }) {
     drink: 0,
   };
 
-  const calculateDailyNorm = (weight, activeTime, gender) => { // змінив calculateDailyNorma на calculateDailyNorm
+  const calculateDailyNorma = (weight, activeTime, gender) => {
     const parsedWeight = isNaN(Number(weight)) ? 0 : Number(weight);
     const parsedActiveTime = isNaN(Number(activeTime)) ? 0 : Number(activeTime);
 
@@ -38,19 +40,20 @@ export default function DailyNormaModal({ isOpen, onRequestClose }) {
   };
 
   const handleSubmit = async (_, actions) => {
-    const convertedDailyNorm = (dailyNorm * 1000).toFixed(0); // правильне використання dailyNorm
-    const payload = { dailyNorm: convertedDailyNorm };
-    console.log("dailyNorm being sent in milliliters:", payload);
+    setAuthHeader(token); // Крок 3 Встановлюємо заголовок перед запитом
+    const convertedDailyNorma = (Number(dailyNorma) * 1000).toFixed(0);
+    const payload = { dailyNorm: convertedDailyNorma }; // новий формат для відправки на бекенд
+      console.log("dailyNorma being sent in milliliters:", payload);
 
     const response = await dispatch(updateUserDailyNorm(payload));
-    console.log("dailyNorm successfully saved:", response);
+    console.log("dailyNorma successfully saved:", response);
 
     actions.resetForm();
     onRequestClose();
   };
 
   const handleCloseModal = () => {
-    setDailyNorm(Number(0).toFixed(1)); // змінив dailyNorm на setDailyNorm
+    setDailyNorma(Number(0).toFixed(1)); // змінив dailyNorm на setDailyNorm
     onRequestClose();
   };
 
@@ -104,12 +107,12 @@ export default function DailyNormaModal({ isOpen, onRequestClose }) {
                   value="woman"
                   onChange={(e) => {
                     handleChange(e);
-                    const newNorm = calculateDailyNorm(
+                    const newNorm = calculateDailyNorma(
                       values.weight,
                       values.activeTime,
                       e.target.value
                     );
-                    setDailyNorm(newNorm); // використав setDailyNorm
+                    setDailyNorma(newNorm); // використав setDailyNorm
                   }}
                 />
                 For Woman
@@ -121,12 +124,12 @@ export default function DailyNormaModal({ isOpen, onRequestClose }) {
                   value="man"
                   onChange={(e) => {
                     handleChange(e);
-                    const newNorm = calculateDailyNorm(
+                    const newNorm = calculateDailyNorma(
                       values.weight,
                       values.activeTime,
                       e.target.value
                     );
-                    setDailyNorm(newNorm); // використав setDailyNorm
+                    setDailyNorma(newNorm); // використав setDailyNorm
                   }}
                 />
                 For Man
@@ -145,12 +148,12 @@ export default function DailyNormaModal({ isOpen, onRequestClose }) {
               className={css.input}
               onChange={(e) => {
                 handleChange(e);
-                const newNorm = calculateDailyNorm(
+                const newNorm = calculateDailyNorma(
                   e.target.value,
                   values.activeTime,
                   values.gender
                 );
-                setDailyNorm(newNorm); // використав setDailyNorm
+                setDailyNorma(newNorm); // використав setDailyNorm
               }}
             />
             <ErrorMessage name="weight" className={css.error} component="div" />
@@ -167,12 +170,12 @@ export default function DailyNormaModal({ isOpen, onRequestClose }) {
               className={css.input}
               onChange={(e) => {
                 handleChange(e);
-                const newNorm = calculateDailyNorm(
+                const newNorm = calculateDailyNorma(
                   values.weight,
                   e.target.value,
                   values.gender
                 );
-                setDailyNorm(newNorm); // використав setDailyNorm
+                setDailyNorma(newNorm); // використав setDailyNorm
               }}
             />
             <ErrorMessage
@@ -183,7 +186,7 @@ export default function DailyNormaModal({ isOpen, onRequestClose }) {
 
             <div className={css.requiredAmount}>
               <span>The required amount of water in liters per day:</span>
-              <span>{dailyNorm !== 0.0 ? dailyNorm : "0.0"} L</span>
+              <span>{dailyNorma !== 0.0 ? dailyNorma : 1000} L</span>
             </div>
 
             <label className={css.additional} htmlFor="drink">
