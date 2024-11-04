@@ -29,9 +29,7 @@ const userSlice = createSlice({
       .addCase(getUserInfo.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        // Зберігаємо інформацію користувача в state.user
-        state.user = action.payload.data; // Беремо дані з payload.data
-        console.log("Отримані дані користувача:", state.user); // Додайте лог для перевірки
+        state.items = action.payload;
       })
 
       .addCase(getUserInfo.rejected, (state, action) => {

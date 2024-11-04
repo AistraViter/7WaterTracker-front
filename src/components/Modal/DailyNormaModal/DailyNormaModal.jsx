@@ -46,7 +46,7 @@ export default function DailyNormaModal({ isOpen, onRequestClose }) {
       console.log("dailyNorma being sent in milliliters:", payload);
 
     const response = await dispatch(updateUserDailyNorm(payload));
-    console.log("dailyNorma successfully saved:", response);
+    console.log("dailyNorm successfully saved:", response);
 
     actions.resetForm();
     onRequestClose();
